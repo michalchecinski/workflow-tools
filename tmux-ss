@@ -1,6 +1,9 @@
 #!/bin/bash
-
 HTOP_HIEGHT=15
+
+if [ "$1" != "" ]; then
+  cd $1
+fi
 
 tmux new-session \; \
   setw -ag window-status-current-style "bg=red" \; \
@@ -36,26 +39,3 @@ tmux new-session \; \
   send-keys -t 0 'watch docker ps -a' C-m \; \
   \
   select-window -t 0 \;
-
-
-
-#################################
-#                               #
-#   Pass in Working Directory   #
-#                               #
-#################################
-
-
-#if [ "$1" != "" ]; then
-#  WORKING_DIR=$1
-#else
-#  WORKING_DIR=~/
-#fi
-#
-#echo $WORKING_DIR
-#cd $WORKING_DIR
-#
-#  set-window-option -g window-status-current-bg red \; \
-#  set-option -g pane-active-border-fg red \; \
-#  send-keys 'cd $WORKING_DIR' C-m \; \
-#  send-keys 'clear' C-m \; \
