@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  workspace:
+    image: workspace:0.0.1  
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Pull in project into the workspace. Check branch before exiting? Auto commit? Or just wing it and be careful with `docker-compose down -v`?
+      - workspace:/home/joseph/
+    ports:
+      - "2222:22"
+
+
+volumes:
+  workspace:
