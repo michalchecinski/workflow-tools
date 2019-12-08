@@ -5,7 +5,7 @@ if [ "$1" != "" ]; then
   cd $1
 fi
 
-tmux new-session \; \
+tmux new-session -s ss\; \
   setw -ag window-status-current-style "bg=red" \; \
   set-option -ag pane-active-border-style "fg=red" \; \
   split-window -v \; \
