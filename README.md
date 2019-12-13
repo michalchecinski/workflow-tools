@@ -22,17 +22,17 @@ with the security risk? Will I be using this in an environment that cannot have
 security risks?). Maybe LXD is the way to go? This should be compatible with all
 Linux computers/servers (maybe even chromebooks some day?).
 
-  Cloud based VM
-  - Could provide a powerful computer environment for a thin not-powerful laptop
-  - Always needs to be connected to the internet
-  - Could experience connection lag depending on local network (coffee shop)
-  - Security concerns connecting from public networks (solution: VPN, but lag)
+  - Cloud based VM
+    - Could provide a powerful computer environment for a thin not-powerful laptop
+    - Always needs to be connected to the internet
+    - Could experience connection lag depending on local network (coffee shop)
+    - Security concerns connecting from public networks (solution: VPN, but lag)
 
-  Container
-  - Theoretically, performance grows with the machine it is on if resources are
+  - Container
+    - Theoretically, performance grows with the machine it is on if resources are
 not limited by the orchestrator.
-  - Theoretically does everything a VM does with less overhead
-  - Decouples DevEnv from the internet if desired
+    - Theoretically does everything a VM does with less overhead
+    - Decouples DevEnv from the internet if desired
 
 2. tmux-archive - I discovered tmux a couple of years ago and immediately 
 incorporated it into my daily workflow. I was creating a bunch of SSH tunnels
