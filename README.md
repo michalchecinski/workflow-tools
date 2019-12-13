@@ -57,6 +57,8 @@ about the same as tmuxp; however, I am partial to python and tools written in
 python and because python is found already installed on most *NIX servers (not that
 you couldn't install Ruby, but less hassle and mess?).
 
+--- 
+
 #### Future Work
 
 I am still looking for that perfect computer-agnostic development environment 
