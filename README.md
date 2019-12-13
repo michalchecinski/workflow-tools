@@ -3,7 +3,7 @@
 This is a collection of tools and configs to ease my devlopment workflow and/or
 my tech workflow.
 
-1. _docker_ - I have a dream of being computer agnostic when it comes to my
+1. **docker** - I have a dream of being computer agnostic when it comes to my
 development environment. I switch between multiple computers on a weekly basis; 
 a powerful workstation with multiple monitors at home or work and a thin sleek
 long-battery-life laptop on the move. I would like to seemlessly switch between
@@ -34,7 +34,7 @@ not limited by the orchestrator.
     - Theoretically does everything a VM does with less overhead
     - Decouples DevEnv from the internet if desired
 
-2. _tmux-archive_ - I discovered tmux a couple of years ago and immediately 
+2. **tmux-archive** - I discovered tmux a couple of years ago and immediately 
 incorporated it into my daily workflow. I was creating a bunch of SSH tunnels
 to a single machine just to have the connections all crash for some reason and I
 would lose all of my workspace setup. Using tmux that is built ontop of screen 
@@ -45,7 +45,7 @@ containers can be memory hogs), all of the current docker containers, as well as
 the code editor and some other random shells. tmux-archive contains the first
 iteration of saving tmux window/pane layouts. 
 
-3. _tmuxp_ - I found that writing a bunch of bash to get a specific layout that 
+3. **tmuxp** - I found that writing a bunch of bash to get a specific layout that 
 would change with screen size was pretty annoying especially when I had to go
 and guess what size the panes were. I was going to write my own python wrapper
 for the bash tmux, but I used one of the most important lessons that I have 
