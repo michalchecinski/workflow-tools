@@ -21,13 +21,11 @@ container? If not set up correctly, does this lead to a security risk? Am I ok
 with the security risk? Will I be using this in an environment that cannot have 
 security risks?). Maybe LXD is the way to go? This should be compatible with all
 Linux computers/servers (maybe even chromebooks some day?).
-
   - Cloud based VM
     - Could provide a powerful computer environment for a thin not-powerful laptop
     - Always needs to be connected to the internet
     - Could experience connection lag depending on local network (coffee shop)
     - Security concerns connecting from public networks (solution: VPN, but lag)
-
   - Container
     - Theoretically, performance grows with the machine it is on if resources are
 not limited by the orchestrator.
