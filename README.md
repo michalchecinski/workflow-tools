@@ -34,6 +34,13 @@ not limited by the orchestrator.
 - Theoretically does everything a VM does with less overhead
 - Decouples DevEnv from the internet if desired
 
+Thoughts: Create a LXD container with vim and tmuxp as the dev environment that
+connects to a remote docker cluster (swarm or machine?) to run any other 
+development containers (ex. run a python container on the docker cluster if
+developing in python and run the scripts in the container. Could use aliases if
+absolutely necessary for faster program execution `dpython3 hello.py` instead of 
+`docker run --rm -it python:3.7.5-slim-buster python hello.py`)
+
 **2. tmux-archive** - I discovered tmux a couple of years ago and immediately 
 incorporated it into my daily workflow. I was creating a bunch of SSH tunnels
 to a single machine just to have the connections all crash for some reason and I
