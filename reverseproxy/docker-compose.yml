@@ -1,0 +1,13 @@
+# https://github.com/jwilder/nginx-proxy
+
+version: '3'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports: 
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    environment:
+      - DEFAULT_HOST=respokane.staging
