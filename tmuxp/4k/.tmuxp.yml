@@ -1,4 +1,4 @@
-session_name: dev
+session_name: 4k
 global_options:
   pane-active-border-style: "fg=red"
   window-status-current-style: "bg=red"
@@ -10,8 +10,8 @@ windows:
   - htop
   - watch docker ps -a
   - focus: 'true'
-    shell_command: bash
-  - bash
-  - bash
-  start_directory: /home/joseph/workflow-tools
+    shell_command: ''
+  - ''
+  - ''
+  start_directory: "${PWD}"
   window_name: bash
