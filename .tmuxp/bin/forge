@@ -1,0 +1,150 @@
+#!/bin/bash
+
+PROJECT_NAME="project_name"
+
+DOCKER_FRONTEND_IMAGE="localhost:5000/${PROJECT_NAME}_frontend:dev.react-pdf.dev"
+DOCKER_BACKEND_IMAGE="localhost:5000/${PROJECT_NAME}_backend:dev.react-pdf.dev"
+
+URL="test.url.api.com"
+
+SID=""
+CMD_NAME=$1
+TARGET=$2
+
+
+build_backend () {
+  echo "[+] Building docker image $DOCKER_BACKEND_IMAGE"
+  docker build -t $DOCKER_BACKEND_IMAGE ./backend > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    echo "[+] done building image"
+    docker push $DOCKER_BACKEND_IMAGE
+  else
+    echo "[!] Docker image build failed!"
+  fi
+  echo "----------------------"
+}
+
+build_frontend () {
+  echo "[+] Building docker image $DOCKER_FRONTEND_IMAGE"
+  docker build --build-arg DEPLOY="test" -t $DOCKER_FRONTEND_IMAGE ./frontend > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    echo "[+] done building image"
+    docker push $DOCKER_FRONTEND_IMAGE
+  else
+    echo "[!] Docker image build failed!"
+  fi
+  echo "----------------------"
+}
+
+run_backend () {
+  docker run -it --rm --env-file backend/.env -p 3081:3081 -v $(pwd)/backend/src/:/app/src --name "${PROJECT_NAME}_backend" $DOCKER_BACKEND_IMAGE
+}
+
+run_frontend () {
+  docker run -it --rm --env-file frontend/.env -p 80:80 -v $(pwd)/frontend/src/:/build/src --name "${PROJECT_NAME}_frontend" $DOCKER_FRONTEND_IMAGE
+}
+
+eslint_frontend () {
+  docker run -it --rm -v $(pwd)/frontend/src:/build/src $DOCKER_FRONTEND_IMAGE npx eslint /build/src --fix
+}
+
+eslint_backend () {
+  docker run -it --rm -v $(pwd)/backend/src/:/app/src $DOCKER_BACKEND_IMAGE npx eslint /app/src --fix
+}
+
+delete () {
+  kubectl delete -f deploy/manifest.local.yml | awk '{print "[-] " $0}'
+  rm -rf /tmp/backend-build-docs/
+  echo "[-] Reset the backend volume"
+}
+
+deploy () {
+  kubectl apply -f deploy/manifest.local.yml | awk '{print "[+] " $0}'
+}
+
+test_doc () {
+    
+  LITTLE_SID=$(echo $SID | awk '{print tolower($0)}')
+  JSON_DATA="{}"
+  echo -e "[+] Submitting test doc for: $SID\n\nHTTP Response:\n"
+  curl -i -X POST -H "Content-Type: application/json" -d "$JSON_DATA" "$URL/api/save/jf4"
+}
+
+get_status () {
+  curl --connect-timeout 2 "$URL/api/status" > /dev/null 2>&1
+  if [ $? -eq 0 ]; then 
+    echo "[+] up"
+  else
+    echo "[-] down"
+  fi
+}
+
+print_help () {
+  echo -e "Forge Build Help\n\n"
+  echo -e " - build <backend/frontend>: build and push docker image to local registry\n"
+  echo -e " - run <backend/frontend>: runs the docker container specified\n"
+  echo -e " - delete: delete kubernetes deploy/manifest.local.yml and removes the DB file\n"
+  echo -e " - deploy: deploy kubernetes deploy/manifest.local.yml\n"
+  echo -e " - test_doc: Curls the backend api with a json object to semi-automate testing\n"
+  echo -e " - help, -h: prints this out\n"
+
+  echo -e "\n\n"
+}
+
+cmd_param_checker () {
+  case $TARGET in
+    frontend | backend)
+      ;;
+    "")
+      echo -e "[!] No $CMD_NAME target specified\n"
+      ;;
+    *)
+      echo -e "[!] Do not recognize the $CMD_NAME target: $TARGET\n"
+      exit 1
+      ;;
+  esac
+}
+
+case $CMD_NAME in
+  -h | --help) print_help
+    ;;
+  build)
+    cmd_param_checker
+    if [ $TARGET ]; then build_$TARGET; fi
+    ;;
+  run)
+    cmd_param_checker
+    if [ $TARGET ]; then run_$TARGET; fi
+    ;;
+  eslint)
+    cmd_param_checker
+    if [ $TARGET ]; then eslint_$TARGET; fi
+    ;;
+  delete) delete
+    ;;
+  deploy) deploy
+    ;;
+  test_doc)
+    if [ $TARGET ]; then
+      SID=$(echo $TARGET | awk '{print toupper($0)}')
+    else
+      echo -e "[!] No SID provided! Exiting...\n"
+      exit 1
+    fi
+    echo -e "[!] This is not working right now. When submitting a test for jf1, a jf4 branch is created"
+    #test_doc
+    ;;
+  status) get_status
+    ;;
+  "") print_help
+    ;;
+  *)
+    echo -e "[!] Do not recognize command: $CMD_NAME\n"
+    ;;
+esac
+      
+
+# TODO:
+# - Add verbosity flag
+#   - This will probably require a rework of how the arguements and params are parsed
+#   - Better yet, a python click application

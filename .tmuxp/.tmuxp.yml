@@ -1,0 +1,30 @@
+session_name: nike_forge
+start_directory: ${PWD}
+shell_command_before: 
+- export PATH=$PATH:$PWD/.tmuxp/bin
+- clear
+windows:
+- layout: df14,139x95,0,0[139x9,0,0,1,139x17,0,10,2,139x49,0,28{69x49,0,28,4,69x49,70,28,19},139x17,0,78,5]
+  options:
+    automatic-rename: 'off'
+  focus: 'true'
+  panes:
+  - htop 
+  - watch docker ps -a
+  -
+  -
+  -
+  window_name: doc
+- layout: e38f,139x95,0,0[139x8,0,0,6,139x19,0,9,10,139x25,0,29,11,139x24,0,55,18,139x15,0,80,13]
+  options: {}
+  panes:
+  - htop
+  - watch docker ps -a
+  - start_directory: ${PWD}/deploy
+    focus: 'true'
+    shell_command:
+    -
+  - 
+  - kubectl proxy
+  window_name: kube
+- window_name: bash

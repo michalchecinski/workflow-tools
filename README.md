@@ -41,7 +41,48 @@ developing in python and run the scripts in the container. Could use aliases if
 absolutely necessary for faster program execution `dpython3 hello.py` instead of 
 `docker run --rm -it python:3.7.5-slim-buster python hello.py`)
 
-**2. tmux-archive** - I discovered tmux a couple of years ago and immediately 
+**2. .tmuxp** - I have always been interested in aliases for different tasks that
+I do a lot. However, early on in my career, aliases were one of factors in me
+deleting a website from production. Since then, they have left a bad taste in my
+mouth. Recently I have wanted to have directory specific aliases so that there 
+would be protection against running commands on a global scale. The 
+[funky](https://github.com/bbugyi200/funky) project could be a good way to do so,
+however, I am not sold on the idea as of yet (maybe if I look into is more in the 
+future). Really, with my little knowledge of build systems, I may just be after a
+language agnostic build system framework. I really don't know.
+
+In light of this need, because I use tmuxp, I disovered a way to add in local 
+aliases to the tmuxp sessions that I am using. This folder is the file structure
+that I use to do so. 
+
+Dependencies:
+- tmux
+- [tmuxp](https://github.com/tmux-python/tmuxp)
+
+To deploy, copy this .tmuxp folder into the project and add
+the following to your `.bash_profile` or `.bashrc` (change accordingly for other
+shells):
+```
+function mtmx () {
+  if [ $1 ]; then
+    echo "params: $#"
+    echo "file: $1"
+  else
+    tmuxp load .tmuxp/
+  fi
+}
+```
+
+Any shell script that is added to `.tmuxp/bin` will now be an executable in your
+tmuxp session as long as it is an executable. Honestly, this is still a work in 
+progress. I would like to make this more generic since it is currently very project 
+specific. I will contiune to update it as a have more ideas.
+
+---
+
+#### Archive
+
+**1. tmux** - I discovered tmux a couple of years ago and immediately 
 incorporated it into my daily workflow. I was creating a bunch of SSH tunnels
 to a single machine just to have the connections all crash for some reason and I
 would lose all of my workspace setup. Using tmux that is built ontop of screen 
@@ -52,7 +93,7 @@ containers can be memory hogs), all of the current docker containers, as well as
 the code editor and some other random shells. tmux-archive contains the first
 iteration of saving tmux window/pane layouts. 
 
-**3. tmuxp** - I found that writing a bunch of bash to get a specific layout that 
+**2. tmuxp** - I found that writing a bunch of bash to get a specific layout that 
 would change with screen size was pretty annoying especially when I had to go
 and guess what size the panes were. I was going to write my own python wrapper
 for the bash tmux, but I used one of the most important lessons that I have 
