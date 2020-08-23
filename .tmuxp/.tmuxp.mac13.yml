@@ -1,5 +1,7 @@
 session_name: '1'
-shell_command_before: "export PATH=$PATH:/Users/jflin2/Documents/ae-tools/nike_forge/.joe_bin && clear"
+shell_command_before: 
+- export PATH=$PATH:$PWD/.tmuxp/bin
+- clear
 windows:
 - layout: 7001,204x52,0,0[204x8,0,0,6,204x17,0,9,8,204x25,0,27{102x25,0,27,7,101x25,103,27,10}]
   options: 
@@ -11,8 +13,7 @@ windows:
   - focus: 'true'
     shell_command: 
     -
-  - 
-  start_directory: /Users/jflin2/Documents/ae-tools/nike_forge
+  - start_directory: ${PWD}/deploy
   window_name: stats
 - layout: 43ca,204x52,0,0[204x13,0,0,11,204x38,0,14{77x38,0,14,12,126x38,78,14,14}]
   options: {}
@@ -22,5 +23,5 @@ windows:
   - focus: 'true'
     shell_command: 
     -
-  start_directory: /Users/jflin2/Documents/ae-tools/nike_forge
+  start_directory: ~/
   window_name: dev

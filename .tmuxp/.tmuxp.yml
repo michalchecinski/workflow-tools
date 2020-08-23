@@ -1,4 +1,4 @@
-session_name: nike_forge
+session_name: forge
 start_directory: ${PWD}
 shell_command_before: 
 - export PATH=$PATH:$PWD/.tmuxp/bin
