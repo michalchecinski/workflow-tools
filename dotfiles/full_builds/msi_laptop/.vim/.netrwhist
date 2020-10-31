@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/joseph/Documents/projects/perispect_site/magento/app/code/local/Perispect/Alacarte'
+let g:netrw_dirhist_2='/home/joseph/Documents/projects/perispect_site/magento/app/code/local/Perispect/Alacarte/Model'
+let g:netrw_dirhist_3='/home/joseph/Documents/projects/perispect_site/magento/app/code'
+let g:netrw_dirhist_4='/home/joseph/Documents/projects/perispect_site/magento/app'
+let g:netrw_dirhist_5='/home/joseph/Documents/projects/perispect_site/magento'
+let g:netrw_dirhist_6='/home/joseph/Documents/projects/perispect_site'
+let g:netrw_dirhist_7='/home/joseph/Documents/projects'
+let g:netrw_dirhist_8='/home/joseph/Documents/projects/perispect_site/magento'

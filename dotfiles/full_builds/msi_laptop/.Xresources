@@ -1,0 +1,78 @@
+! ~/.Xdefaults
+! xhh config for terminals e.g. urxvt
+! For the latest version, check
+! http://github.com/cooky/dotfiles_archlinux/blob/master/.Xdefaults
+ 
+! normal settings
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:      	rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+! terminal color scheme
+*foreground:     rgb:dd/dd/dd
+*background:     rgb:22/22/22
+
+!black
+*color0:         rgb:19/19/19
+*color8:         rgb:25/25/25
+
+!red
+*color1:         rgb:80/32/32
+*color9:         rgb:98/2b/2b
+
+!green
+*color2:         rgb:5b/76/2f
+*color10:        rgb:89/b8/3f
+
+!brown/yellow
+*color3:         rgb:aa/99/43
+*color11:        rgb:ef/ef/60
+
+!blue
+*color4:         rgb:32/4c/80
+*color12:        rgb:2b/4f/98
+
+!magenta
+*color5:         rgb:70/6c/9a
+*color13:        rgb:82/6a/b1
+
+!cyan
+*color6:         rgb:92/b1/9e
+*color14:        rgb:a1/cd/cd
+
+!white
+*color7:         rgb:ff/ff/ff
+*color15:        rgb:dd/dd/dd
+ 
+! urxvt settings
+! transparency settings
+URxvt.inheritPixmap: true
+URxvt.transparent: true
+!URxvt.tintColor: #000
+URxvt.shading: 30
+
+! other settings
+URxvt.geometry: 90x25+180+200
+URxvt.cursorColor:red3
+URxvt.scrollBar:False
+URxvt.saveLines:3000
+URxvt.preeditType:Root
+
+! open URL in browser
+URxvt.urlLauncher: google-chrome
+URxvt.matcher.button: 1
+URxvt.perl-ext-common: matcher,default,clipboard
+
+! Copy+Paste
+URxvt.iso14755: False
+URxvt.iso14755_52: False
+URxvt.keysym.Control-C: perl:clipboard:copy
+URxvt.keysym.Control-V: perl:clipboard:paste
+
+! normal font
+URxvt.font:xft:Hack:pixelsize=14:antialias=true
+
+! bold font
+URxvt.boldFont:xft:Hack:pixelsize=14:Bold:antialias=true
