@@ -115,3 +115,12 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+function mtmx () {
+  if [ $1 ]; then
+    echo "params: $#"
+    echo "file: $1"
+  else
+    tmuxp load .tmuxp/config/default.yaml
+  fi
+}
