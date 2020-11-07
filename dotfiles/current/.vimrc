@@ -4,6 +4,7 @@ set shiftwidth=4
 set et
 
 set number
+set ruler
 
 colorscheme ron
 
