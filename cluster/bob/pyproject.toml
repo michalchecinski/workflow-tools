@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "bob"
+version = "0.1.0"
+description = "bob is my dedicated local cluster manager"
+authors = ["Joseph Flinn <joseph.s.flinn@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "^7.1.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+pytest-cov = "^2.10.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
