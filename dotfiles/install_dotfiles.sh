@@ -27,9 +27,20 @@ ubuntu_server () {
   install_dotfile ".vimrc"
 }
 
+mac () {
+  install_dotfile ".vimrc"
+  install_dotfile ".tmux.conf"
+  install_dotfile ".profile"
+  install_dotfile ".zshrc"
+  install_dotfile ".zprofile"
+}
+
 case $1 in
   "ubuntu-server")
     ubuntu_server
+  ;;
+  "mac")
+    mac
   ;;
   "test")
     test_script
