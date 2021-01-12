@@ -15,6 +15,7 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 
@@ -23,6 +24,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 export DOTNET_ROOT=$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
+
+export GOPATH=$HOME/go
+export PATH=$HOME/go/bin:$PATH
 
 ###############
 #             #
