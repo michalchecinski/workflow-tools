@@ -9,4 +9,4 @@ RUN pip install ansible
 
 WORKDIR /etc/ansible
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
