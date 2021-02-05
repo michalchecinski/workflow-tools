@@ -1,0 +1,9 @@
+---
+- name: start microK8s
+  hosts: cluster
+  remote_user: root
+
+  tasks:
+  - name: start microk8s
+    shell: 
+      cmd: microk8s start

@@ -1,0 +1,8 @@
+---
+- name: shutdown cluster
+  hosts: cluster
+  remote_user: root
+
+  tasks:
+  - name: stop microk8s
+    shell: shutdown -h now

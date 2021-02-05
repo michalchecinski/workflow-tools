@@ -19,9 +19,10 @@ test_script () {
   install_dotfile "test"
 }
 
-ubuntu_server () {
+ubuntu () {
   install_dotfile ".bash_aliases"
   install_dotfile ".bashrc"
+  install_dotfile ".tmux.conf"
   install_dotfile ".bash_profile"
   install_dotfile ".profile"
   install_dotfile ".vimrc"
@@ -36,8 +37,8 @@ mac () {
 }
 
 case $1 in
-  "ubuntu-server")
-    ubuntu_server
+  "ubuntu")
+    ubuntu
   ;;
   "mac")
     mac

@@ -1,13 +1,10 @@
-[main_node]
-192.168.1.21
-
-[main]
-10.0.0.1
+[primary]
+192.168.0.250
 
 [workers]
-10.0.0.2
-10.0.0.3
+192.168.0.251
+192.168.0.252
 
 [cluster:children]
-main
+primary
 workers
