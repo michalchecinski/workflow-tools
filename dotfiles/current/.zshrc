@@ -28,6 +28,8 @@ export PATH=$PATH:$HOME/dotnet
 export GOPATH=$HOME/go
 export PATH=$HOME/go/bin:$PATH
 
+export PATH=$HOME/workflow-tools/bin:$PATH
+
 ###############
 #             #
 #   Aliases   #
