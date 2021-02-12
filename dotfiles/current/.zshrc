@@ -40,6 +40,11 @@ export PATH=$HOME/workflow-tools/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/google/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/google/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/google/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google/google-cloud-sdk/completion.zsh.inc'; fi
 
 ##########################################
 #                                        #
@@ -47,6 +52,9 @@ export NVM_DIR="$HOME/.nvm"
 #                                        #
 ##########################################
 function mtmx () {
+  # Usage:
+  #   mtmx: load default profile in current project directory
+  #   mtmx <file-path>: loads specified tmuxp profile
   if [ $1 ]; then
     echo "params: $#"
     echo "file: $1"
@@ -55,8 +63,21 @@ function mtmx () {
   fi
 }
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/google/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/google/google-cloud-sdk/path.zsh.inc'; fi
+function kubeclean () {
+  pods=$(kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}')
+  echo $pods
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/google/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google/google-cloud-sdk/completion.zsh.inc'; fi
+  if [[ $pods ]] && [[ "$pods" != "No resources found" ]]; then
+    echo "---"
+    read "input?Delete listed pods? [N/y] "
+
+    case $input in
+      [yY][eE][sS]|[yY])
+        kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
+        ;;
+      *)
+        ;;
+    esac
+  fi
+}
+
