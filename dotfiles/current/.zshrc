@@ -30,13 +30,6 @@ export PATH=$HOME/go/bin:$PATH
 
 export PATH=$HOME/workflow-tools/bin:$PATH
 
-###############
-#             #
-#   Aliases   #
-#             #
-###############
-#alias=""
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
@@ -46,11 +39,26 @@ if [ -f '/usr/local/google/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/
 # The next line enables shell command completion for gcloud.
 if [ -f '/usr/local/google/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google/google-cloud-sdk/completion.zsh.inc'; fi
 
+kube_configs=(~/.kube/configs/*)
+export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
+
+
+###############
+#             #
+#   Aliases   #
+#             #
+###############
+#alias=""
+
 ##########################################
 #                                        #
 #       custom commands/functions        #
 #                                        #
 ##########################################
+
+##########
+#  mtmx  #
+##########
 function mtmx () {
   # Usage:
   #   mtmx: load default profile in current project directory
@@ -63,6 +71,9 @@ function mtmx () {
   fi
 }
 
+###############
+#  kubeclean  #
+###############
 function kubeclean () {
   pods=$(kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}')
   echo $pods
