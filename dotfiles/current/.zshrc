@@ -42,6 +42,8 @@ if [ -f '/usr/local/google/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/
 kube_configs=(~/.kube/configs/*)
 export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
 
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
+
 
 ###############
 #             #
@@ -80,15 +82,18 @@ function kubeclean () {
 
   if [[ $pods ]] && [[ "$pods" != "No resources found" ]]; then
     echo "---"
-    read "input?Delete listed pods? [N/y] "
+    if [[ -z $1 ]] && [[ "$1" == "-y" ]]; then
+      kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
+    else
+      read "input?Delete listed pods? [N/y] "
 
-    case $input in
-      [yY][eE][sS]|[yY])
-        kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
-        ;;
-      *)
-        ;;
-    esac
+      case $input in
+        [yY][eE][sS]|[yY])
+          kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}' | xargs kubectl delete pod
+          ;;
+        *)
+          ;;
+      esac
+    fi
   fi
 }
-
