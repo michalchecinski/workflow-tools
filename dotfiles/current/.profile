@@ -38,12 +38,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export DOTNET_ROOT=$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
 
-###############
-#             #
-#   Aliases   #
-#             #
-###############
-#alias=""
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
