@@ -7,10 +7,18 @@ Ansible is installed in the root python evironment: `pip install ansible`
 
 A Root SSH key has been generated and deployed to each machine
 
-#### Run
+## Run
 While being root in the `**/ansible/src`:
 
-`ansible -i hosts cluster -m ping`
+### ping test
+`ansible -i hosts nodes -m ping`
+
+### Cluster OS update
+This is a safe cluster OS update. It happens serially. If a reboot is necessary,
+each node is drained of the k8s pods. It also checks for any ongoing work in a 
+`tmux` session and prevents a reboot if that is the case (for the user: `joseph`)
+
+`asnible-playbook -i hosts -e "targets=nodes" playbooks/cluster/update-os.yaml`
 
 
 #### K8s

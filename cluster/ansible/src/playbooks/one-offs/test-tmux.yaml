@@ -1,0 +1,17 @@
+---
+- hosts: nodes
+  become: true
+  become_user: root
+  serial: 1
+  tasks:
+    - name: Get tmux sessions
+      shell: "tmux ls | wc -l"
+      become: true
+      become_user: joseph
+      register: tmux_session_count
+
+    - name: test conditional
+      command: echo "ready to reboot"
+      #debug: var=tmux_session_count
+      when: tmux_session_count.stdout == "0"
+
