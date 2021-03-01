@@ -1,0 +1,33 @@
+- name: Get tmux sessions
+  shell: "tmux ls | wc -l"
+  become: true
+  become_user: joseph
+  register: tmux_session_count
+
+- name: cordon k8s node
+  when: tmux_session_count.stdout == "0"
+  shell: "microk8s kubectl cordon $(cat /etc/hostname)"
+
+- name: drain k8s node
+  when: tmux_session_count.stdout == "0"
+  shell: "microk8s kubectl drain $(cat /etc/hostname) --ignore-daemonsets --delete-emptydir-data"
+
+- name: stop microk8s
+  when: tmux_session_count.stdout == "0"
+  shell: microk8s stop
+
+- import_tasks: reboot.yaml
+
+- name: start microk8s
+  when: tmux_session_count.stdout == "0"
+  shell: microk8s start
+
+- name: wait for node to become ready
+  when: tmux_session_count.stdout == "0"
+  shell: "microk8s kubectl wait --for=condition=Ready no/$(cat /etc/hostname)"
+
+- name: uncordon k8s node
+  when: tmux_session_count.stdout == "0"
+  shell: "microk8s kubectl uncordon $(cat /etc/hostname)"
+
+
