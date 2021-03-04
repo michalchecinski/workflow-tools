@@ -50,7 +50,7 @@ export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
 #   Aliases   #
 #             #
 ###############
-#alias=""
+alias tf="terraform"
 
 ##########################################
 #                                        #
