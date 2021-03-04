@@ -16,31 +16,33 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+add_to_path () {
+    # Args:
+    #   $1 -> directory
+    if [ -d "$1" ] ; then
+        PATH="$1:$PATH"
+    fi
+}
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+add_to_path "$HOME/bin"
+add_to_path "$HOME/.local/bin"
+add_to_path "$HOME/.tfenv/bin"
+add_to_path "$HOME/.poetry/bin"
+add_to_path "$HOME/.cargo/bin"
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-export PATH="$PYENV_ROOT/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
-
-export PATH="$HOME/.poetry/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+add_to_path "$PYENV_ROOT/bin"
 
 export DOTNET_ROOT=$HOME/dotnet
-export PATH=$PATH:$HOME/dotnet
+add_to_path "$HOME/dotnet"
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+add_to_path "${KREW_ROOT:-$HOME/.krew}/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-
+add_to_path "$HOME/workflow-tools/bin"
