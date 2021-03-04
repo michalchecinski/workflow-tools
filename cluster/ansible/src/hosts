@@ -1,10 +1,7 @@
-[primary]
-192.168.0.250
-
-[workers]
+[nodes]
 192.168.0.251
 192.168.0.252
+192.168.0.253
 
 [cluster:children]
-primary
-workers
+nodes

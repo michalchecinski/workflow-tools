@@ -68,3 +68,15 @@ network:
       dhcp4: no
   version: 2
 ```
+
+## Gluster Setup
+
+### LVM Creation
+There were already physical volumes (pvs) and volume groups (vgs) set up on the ubuntu servers
+```
+lvcreate -l 20 -n gluster-lv ubuntu-vg
+mkfs.xfs -i size=512 /dev/ubuntu-vg/gluster-lv
+lvextend -L100000 /dev/ubunut-vg/gluster-lv
+echo "/dev/ubuntu-vg/gluster-lv /export/gluster-lv xfs defaults 0 0" >> /etc/fstab
+mkdir -p /export/gluster-lv && mount -a && mkdir -p /export/gluster-lv/brick
+```
