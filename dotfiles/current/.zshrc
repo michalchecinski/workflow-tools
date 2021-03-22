@@ -51,6 +51,7 @@ export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
 #             #
 ###############
 alias tf="terraform"
+alias cksp="ispell -x -p ~/.ispell_english"
 
 ##########################################
 #                                        #
