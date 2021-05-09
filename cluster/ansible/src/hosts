@@ -1,7 +1,20 @@
-[nodes]
+[k8s-node1]
 192.168.0.251
+
+[k8s-node2]
 192.168.0.252
+
+[k8s-node3]
 192.168.0.253
+
+[nas]
+192.168.0.109
+
+[nodes:children]
+k8s-node1
+k8s-node2
+k8s-node3
 
 [cluster:children]
 nodes
+nas

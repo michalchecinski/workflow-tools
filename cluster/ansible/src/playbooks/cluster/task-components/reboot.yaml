@@ -1,4 +1,4 @@
-- name: Reboot the box if kernel updated and no tmux sessions
+- name: Reboot machine
   reboot:
     msg: "Reboot initiated by Ansible for kernel updates"
     connect_timeout: 5

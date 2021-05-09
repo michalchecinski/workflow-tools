@@ -7,21 +7,30 @@ Ansible is installed in the root python evironment: `pip install ansible`
 
 A Root SSH key has been generated and deployed to each machine
 
-## Run
+## Cluster
 While being root in the `**/ansible/src`:
 
 ### ping test
 `ansible -i hosts nodes -m ping`
 
-### Cluster OS update
+### OS update
 This is a safe cluster OS update. It happens serially. If a reboot is necessary,
 each node is drained of the k8s pods. It also checks for any ongoing work in a 
 `tmux` session and prevents a reboot if that is the case (for the user: `joseph`)
 
-`asnible-playbook -i hosts -e "targets=nodes" playbooks/cluster/update-os.yaml`
+**Update cluster:** `asnible-playbook -i hosts -e "targets=cluster" playbooks/cluster/update-os.yaml`
+**Update just nodes:** `asnible-playbook -i hosts -e "targets=nodes" playbooks/cluster/update-os.yaml`
+**Update just nas:** `asnible-playbook -i hosts -e "targets=nas" playbooks/cluster/update-os.yaml`
+
+### Power down
+This powers down the cluster
+
+**Power down cluster:** `asnible-playbook -i hosts -e "targets=cluster" playbooks/cluster/power-down.yaml`
+**power down just nodes:** `asnible-playbook -i hosts -e "targets=nodes" playbooks/cluster/power-down.yaml`
+**power down just nas:** `asnible-playbook -i hosts -e "targets=nas" playbooks/cluster/power-down.yaml`
 
 
-#### K8s
+## K8s
 
 To get the token:
 ```

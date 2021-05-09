@@ -1,0 +1,8 @@
+- name: Get tmux sessions
+  shell: "tmux ls | wc -l"
+  become: true
+  become_user: joseph
+  register: tmux_session_count
+
+- import_tasks: shutdown.yaml
+  when: tmux_session_count.stdout == "0"
