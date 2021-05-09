@@ -1,3 +1,13 @@
+##############
+#  bindkeys  #
+##############
+bindkey -v
+bindkey "^R" history-incremental-pattern-search-backward
+
+
+###################
+#  session setup  #
+###################
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
@@ -50,7 +60,8 @@ export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
 #   Aliases   #
 #             #
 ###############
-#alias=""
+alias tf="terraform"
+alias cksp="ispell -x -p ~/.ispell_english"
 
 ##########################################
 #                                        #

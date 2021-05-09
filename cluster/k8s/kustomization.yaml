@@ -1,0 +1,3 @@
+resources:
+  - glusterfs-endpoint.yaml
+  - glusterfs-svc.yaml

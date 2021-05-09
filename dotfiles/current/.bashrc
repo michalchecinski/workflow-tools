@@ -126,7 +126,7 @@ export EDITOR="$VISUAL"
 
 export PATH="/home/joseph/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 
 ##########################################

@@ -6,6 +6,8 @@ set et
 set number
 set ruler
 
+set tw=120
+
 colorscheme ron
 
 if empty(glob('~/.vim/autoload/plug.vim'))
