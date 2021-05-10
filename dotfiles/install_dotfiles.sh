@@ -19,21 +19,23 @@ test_script () {
   install_dotfile "test"
 }
 
+install_dir () {
+  export -f install_dotfile
+  files=$(find ./current/$1 -maxdepth 1 -type f -exec basename {} \;)
+  for file in $files
+  do
+    install_dotfile $1 $file
+  done
+}
+
 ubuntu () {
-  install_dotfile ubuntu ".bash_aliases"
-  install_dotfile ubuntu ".bashrc"
-  install_dotfile ubuntu ".tmux.conf"
-  install_dotfile ubuntu ".bash_profile"
-  install_dotfile ubuntu ".profile"
-  install_dotfile ubuntu ".vimrc"
+  install_dir shared
+  install_dir ubuntu
 }
 
 mac () {
-  install_dotfile mac ".vimrc"
-  install_dotfile mac ".tmux.conf"
-  install_dotfile mac ".profile"
-  install_dotfile mac ".zshrc"
-  install_dotfile mac ".zprofile"
+  install_dir shared
+  install_dir mac
 }
 
 case $1 in
