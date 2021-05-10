@@ -15,10 +15,6 @@ install_dotfile () {
   fi
 }
 
-test_script () {
-  install_dotfile "test"
-}
-
 install_dir () {
   export -f install_dotfile
   files=$(find ./current/$1 -maxdepth 1 -type f -exec basename {} \;)
@@ -36,6 +32,10 @@ ubuntu () {
 mac () {
   install_dir shared
   install_dir mac
+}
+
+test_script () {
+  install_dotfile "test"
 }
 
 case $1 in
