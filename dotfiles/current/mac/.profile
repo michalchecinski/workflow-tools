@@ -46,3 +46,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 add_to_path "$HOME/workflow-tools/bin"
+
+export PATH="$HOME/.poetry/bin:$PATH"
