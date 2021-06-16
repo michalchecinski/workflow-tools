@@ -19,7 +19,6 @@ endif
 
 set nocompatible "vim-polygot
 
-
 "plugins
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'

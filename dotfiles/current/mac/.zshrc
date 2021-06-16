@@ -9,7 +9,9 @@ bindkey "^R" history-incremental-pattern-search-backward
 #  session setup  #
 ###################
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
 fi
 
 export VISUAL=vim

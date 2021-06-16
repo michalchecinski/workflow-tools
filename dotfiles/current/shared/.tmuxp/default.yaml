@@ -1,0 +1,10 @@
+session_name: 'default'
+start_directory: ${PWD}
+windows:
+- focus: 'true'
+  layout: 5a0b,211x95,0,0[211x71,0,0,0,211x23,0,72,2]
+  options: {}
+  panes:
+  - focus: 'true'
+  - 
+  window_name: start

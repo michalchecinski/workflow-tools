@@ -2,7 +2,7 @@
 
 install_dotfile () {
   echo "[+] installing dotfile: $1/$2"
-  if [ -f ./current/$1/$2 ]; then
+  if [[ -f ./current/$1/$2 ]] || [[ -d ./current/$1/$2 ]]; then
     if [ -f ~/$2 ] || [ -h ~/$2 ]; then
       mv ~/$2 ~/$2.old
       ln -s ${PWD}/current/$1/$2 ~/$2
@@ -17,7 +17,7 @@ install_dotfile () {
 
 install_dir () {
   export -f install_dotfile
-  files=$(find ./current/$1 -maxdepth 1 -type f -exec basename {} \;)
+  files=$(find ./current/$1 -d 1 -exec basename {} \;)
   for file in $files
   do
     install_dotfile $1 $file
