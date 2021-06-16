@@ -4,4 +4,5 @@
   become_user: root
   serial: 1
   tasks:
-    - import_tasks: task-components/safe-reboot-nodes.yaml
+    - name: reboot nodes
+      import_tasks: task-components/safe-reboot-node.yaml

@@ -21,13 +21,14 @@ each node is drained of the k8s pods. It also checks for any ongoing work in a
 **Update cluster:** `ansible-playbook -i hosts -e "targets=homelab" playbooks/homelab/update-os.yaml`
 **Update just nodes:** `ansible-playbook -i hosts -e "targets=nodes" playbooks/homelab/update-os.yaml`
 **Update just nas:** `ansible-playbook -i hosts -e "targets=nas" playbooks/homelab/update-os.yaml`
+**Update single node:** `ansible-playbook -i hosts -e "targets=k8s-node1" playbooks/homelab/update-os.yaml`
 
 ### Power down
 This powers down the cluster
 
-**Power down cluster:** `asnible-playbook -i hosts -e "targets=cluster" playbooks/cluster/power-down.yaml`
-**power down just nodes:** `asnible-playbook -i hosts -e "targets=nodes" playbooks/cluster/power-down.yaml`
-**power down just nas:** `asnible-playbook -i hosts -e "targets=nas" playbooks/cluster/power-down.yaml`
+**Power down cluster:** `asnible-playbook -i hosts -e "targets=cluster" playbooks/homelab/power-down.yaml`
+**power down just nodes:** `asnible-playbook -i hosts -e "targets=nodes" playbooks/homelab/power-down.yaml`
+**power down just nas:** `asnible-playbook -i hosts -e "targets=nas" playbooks/homelab/power-down.yaml`
 
 
 ## K8s
