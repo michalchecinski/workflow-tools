@@ -1,0 +1,52 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-https-ingress
+  namespace: argocd
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  rules:
+  - host: argocd.flinnlab.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port: 
+              name: https
+  tls:
+    - hosts:
+        - argocd.flinnlab.com
+      secretName: argocd-server-tls
+      #secretName: argocd-https-tls
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-grpc-ingress
+  namespace: argocd
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+spec:
+  rules:
+  - host: grpc.argocd.flinnlab.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port: 
+              name: https
+  tls:
+    - hosts:
+        - grpc.argocd.flinnlab.com
+      #secretName: argocd-server-tls
+      secretName: argocd-grpc-tls

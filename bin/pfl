@@ -1,0 +1,16 @@
+# Title: Prefixed Filename List (pfl)
+# Description: This is a stub for a command that creates new files with prefix to keep them sorted by naame in
+#              chronological order by time
+#     
+
+
+
+echo "pfl - no yet implemented"
+
+echo "
+Ideas:
+  - Use a .pfl-index file to track file prefix for incrementation
+    + a .pfl-index file should exist in all directories that pfl works in
+    + \`pfl init\` initializes the directory with the .pfl-index file
+  - \`pfl new <filename>\` auto increments the prefix and opens the file in $EDITOR
+"
