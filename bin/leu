@@ -1,0 +1,130 @@
+#/bin/bash
+
+# Let's Encrypt Update - leu
+
+CERT_DIR=""
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  CERT_DIR="/Users/joseph/.certs"
+else
+  CERT_DIR="/home/joseph/.certs"
+fi
+
+###########
+#  Usage  #
+###########
+usage () {
+  echo "Usage: Not yet implemented"
+}
+
+###############
+#  Exception  #
+###############
+exp () {
+  if [[ $1 ]]; then
+    echo "[!] $1"
+  fi
+  exit 1
+}
+
+
+######################
+#  Permission check  #
+######################
+if [[ "$(ls /etc/letsencrypt/archive)" == "" ]]; then
+  exp "Please use root or sudo user to run command"
+fi
+
+
+#################
+#  Get Command  #
+#################
+COMMAND=$1; shift
+
+################
+#  Get Params  #
+################
+CERT=""
+CERT_ID=""
+
+while [ ! $# -eq 0 ]; do
+  case "$1" in
+    -c | --cert )
+      if [[ $2 ]]; then
+        CERT="$2"
+        shift
+      else
+        exp "--cert requires a value"
+      fi
+      ;;
+    -i | --cert-id )
+      if [[ $2 ]]; then
+        CERT_ID="$2"
+        shift
+      else
+        exp "--cert-id requires a value"
+      fi
+      ;;
+    -h | --help )
+      usage && exit
+      ;;
+    *)
+      usage && exit
+      ;;
+  esac
+  shift
+done
+
+
+###################
+#  Validate Cert  #
+###################
+if [[ -d "/etc/letsencrypt/archive/$CERT" ]]; then
+  ls "/etc/letsencrypt/archive/$CERT" >> /dev/null
+else
+  exp "Cert for $CERT does not exist"
+fi
+
+
+#################
+#  Run Command  #
+#################
+case "$COMMAND" in
+  ls | list )
+    if [[ $CERT ]]; then
+      ls "/etc/letsencrypt/archive/$CERT"
+    else
+      ls "/etc/letsencrypt/archive"
+    fi
+    ;;
+  cp | copy )
+    if [[ $CERT ]]; then
+      if ! [[ -d "$CERT_DIR/$CERT" ]]; then mkdir $CERT_DIR/$CERT; fi
+      if [[ $CERT_ID ]]; then
+        cp /etc/letsencrypt/archive/$CERT/*$CERT_ID.pem $CERT_DIR/$CERT
+        chown -R joseph:staff $CERT_DIR/$CERT
+
+        for FILE in $(ls $CERT_DIR/$CERT/*$CERT_ID.pem); do
+          NEW_FILE=$(echo $FILE | awk -v cert_id=$CERT_ID '{split($0,a,cert_id); print a[1]".pem"}')
+          if [[ -f $NEW_FILE ]]; then
+            mv $NEW_FILE $NEW_FILE.old
+          fi
+          mv $FILE $NEW_FILE
+          if [[ $? -eq 0 ]]; then
+            rm $NEW_FILE.old
+          fi
+        done
+      else
+        cp /etc/letsencrypt/archive/$CERT/*.pem $CERT_DIR/$CERT
+        chown -R joseph:staff $CERT_DIR/$CERT
+      fi
+    else
+      exp "leu-copy requires --cert parameter"
+    fi
+    ;;
+  help )
+    usage && exit
+    ;;
+  * )
+    exp "leu: $COMMAND not found"
+    ;;
+esac
