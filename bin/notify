@@ -1,0 +1,61 @@
+#/bin/bash
+
+usage () {
+  echo "Help documentation is not yet implemented" 
+}
+
+PARAM=$1;
+TITLE=''
+MESSAGE=''
+
+
+################
+#  Get Params  #
+################
+while [ ! $# -eq 0 ]; do
+  case "$1" in
+    -t | --title)
+      if [ "$2" ]; then
+        TITLE="$2"
+        shift
+      else
+        echo "--title requires a value"
+        exit 1
+      fi
+      ;;
+    -m | --message)
+      if [ "$2" ]; then
+        MESSAGE="$2"
+        shift
+      else
+        echo "--message requires a value"
+        exit 1
+      fi
+      ;;
+    -h | --help)
+      usage
+      exit
+      ;;
+    *)
+      usage
+      exit
+      ;;
+  esac
+  shift
+done
+
+
+################
+#  Run notify  #
+################
+case "$OSTYPE" in
+  "darwin"*)
+    osascript -e "display notification \"$MESSAGE\" with title \"$TITLE\" sound name \"Sosumi\""
+    ;;
+  "linux-gnu"*)
+    echo "Linux is not yet supported"
+    ;;
+  *)
+    echo "Unsupported OS type: $OSTYPE"
+    ;;
+esac
