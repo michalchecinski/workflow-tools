@@ -28,19 +28,20 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 export PATH="$HOME/Library/Python/3.8/bin:$PATH"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 export DOTNET_ROOT=$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
+export PATH=$PATH:$HOME/.dotnet/tools
 
 export GOPATH=$HOME/go
 export PATH=$HOME/go/bin:$PATH
 
 export PATH=$HOME/workflow-tools/bin:$PATH
+
+export PATH="/usr/local/opt/curl/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
