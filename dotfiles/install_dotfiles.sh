@@ -17,7 +17,7 @@ install_dotfile () {
 
 install_dir () {
   export -f install_dotfile
-  files=$(find ./current/$1 -d 1 -exec basename {} \;)
+  files=$(find ./current/$1 -maxdepth 1 -mindepth 1 -exec basename {} \;)
   for file in $files
   do
     install_dotfile $1 $file

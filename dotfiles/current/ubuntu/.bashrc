@@ -105,9 +105,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# Set up pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+# Load custom bash funcitons
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
+# Load custom path and env vars
+if [ -f ~/.env_setup ]; then
+    . ~/.env_setup
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -121,32 +126,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-export PATH="/home/joseph/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
-
-
-##########################################
-#                                        #
-#       custom commands/functions        #
-#                                        #
-##########################################
-function mtmx () {
-  if [ $1 ]; then
-    echo "params: $#"
-    echo "file: $1"
-  else
-    tmuxp load .tmuxp/config/default.yaml
-  fi
-}
-
-function nvim () {
-  ~/Applications/nvim.appimage $@
-}
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
