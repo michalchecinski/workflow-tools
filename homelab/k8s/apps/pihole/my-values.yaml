@@ -74,7 +74,7 @@ ingress:
   hosts:
     # virtualHost (default value is pi.hole) will be appended to the hosts
     - flinnlab.com
-  tls: []
+  tls:
     - secretName: pihole-tls
       hosts:
        #- virtualHost (default value is pi.hole) will be appended to the hosts
