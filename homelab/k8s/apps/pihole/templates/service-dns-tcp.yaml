@@ -23,6 +23,7 @@ spec:
     - port: {{ .Values.serviceDns.port }}
       targetPort: dns
       protocol: TCP
+      nodePort: {{ .Values.serviceDns.port }}
       name: dns
     {{- if .Values.monitoring.sidecar.enabled }}
     - port: {{ .Values.monitoring.sidecar.port }}

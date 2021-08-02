@@ -72,13 +72,11 @@ ingress:
     #cert-manager.io/cluster-issuer: letsencrypt
   path: /
   hosts:
-    # virtualHost (default value is pi.hole) will be appended to the hosts
     - pihole.flinnlab.com
-  tls:
-    - secretName: pihole-tls
-      hosts:
-       #- virtualHost (default value is pi.hole) will be appended to the hosts
-        - pihole.flinnlab.com
+  tls: []
+  #- secretName: pihole-tls
+  #    hosts:
+  #      - pihole.flinnlab.com
 
 # Probes configuration
 probes:
@@ -129,7 +127,8 @@ persistentVolumeClaim:
 
   ## subPath: "pihole"
 
-nodeSelector: {}
+nodeSelector: 
+  kubernetes.io/hostname: k8s-node1
 
 tolerations: []
 
@@ -232,7 +231,7 @@ adlists: {}
 whitelist: 
   # If you want to provide whitelisted domains, add them here.
   # - clients4.google.com
-  - pihole.flinnlab.com
+  - *.flinnlab.com
 
 blacklist: {}
   # If you want to have special domains blacklisted, add them here
