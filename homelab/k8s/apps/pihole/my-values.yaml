@@ -68,8 +68,8 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: public
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: letsencrypt
+    #kubernetes.io/tls-acme: "true"
+    #cert-manager.io/cluster-issuer: letsencrypt
   path: /
   hosts:
     # virtualHost (default value is pi.hole) will be appended to the hosts
@@ -229,9 +229,10 @@ adlists: {}
   # - https://hosts-file.net/grm.txt
   # - https://reddestdream.github.io/Projects/MinimalHosts/etc/MinimalHostsBlocker/minimalhosts
 
-whitelist: {}
+whitelist: 
   # If you want to provide whitelisted domains, add them here.
   # - clients4.google.com
+  - pihole.flinnlab.com
 
 blacklist: {}
   # If you want to have special domains blacklisted, add them here
