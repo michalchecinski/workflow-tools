@@ -70,9 +70,12 @@ chmod +x ~/.local/bin/kubectx
 curl -sSL https://github.com/ahmetb/kubectx/releases/download/$kubectx_version/kubens --output ~/.local/bin/kubens
 chmod +x ~/.local/bin/kubens
 
+## Install k9s
 k9s_version=$(\
   curl --silent "https://api.github.com/repos/ahmetb/kubectx/releases/latest" | \
   jq -r .tag_name
 )
 curl -LO https://github.com/derailed/k9s/releases/download/$k9s_version/k9s_Linux_x86_64.tar.gz
 
+## Install Helm
+sudo snap install helm --classic
