@@ -51,6 +51,6 @@ jobs:
             dist/mac-dotfiles.zip
             bin/*
           commit: ${{ github.sha }}
-          tag: ${{ steps.version.outputs.value }}
+          tag: v${{ steps.version.outputs.value }}
           name: "Version ${{ steps.version.outputs.value }}"
           token: ${{ secrets.GITHUB_TOKEN }}
