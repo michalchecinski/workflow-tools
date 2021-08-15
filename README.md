@@ -90,8 +90,7 @@ allows me to connect back to the server and reattach to the tmux session. It
 also allows me to multitask on the server which is very helpful when developing
 with docker and I want to see the system resource utilization (some docker 
 containers can be memory hogs), all of the current docker containers, as well as
-the code editor and some other random shells. tmux-archive contains the first
-iteration of saving tmux window/pane layouts. 
+the code editor and some other random shells. 
 
 **2. tmuxp** - I found that writing a bunch of bash to get a specific layout that 
 would change with screen size was pretty annoying especially when I had to go
@@ -115,3 +114,5 @@ I would like to use containers, I still have not settled on the best design and
 will probably get a cloud-based VM up and running. The thought here is that
 development is normally tightly coupled with the internet (I constantly search 
 for answers to questions).
+
+Update [2021-08-15]: Codespaces looks interesting.
