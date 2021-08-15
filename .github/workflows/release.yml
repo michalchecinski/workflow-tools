@@ -25,7 +25,7 @@ jobs:
           echo "version from file: $file_version"
 
           if [[ $($current_version | cut -d . -f "1 2") == "$file_verison" ]]; then
-            new_version=$file_version.$(expr $(echo $current_version | cut -d . -f 3 + 1))
+            new_version=$file_version.$(expr $(echo $current_version | cut -d . -f 3) + 1)
           else
             new_version=$file_version.0
           fi
