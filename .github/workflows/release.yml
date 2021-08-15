@@ -35,7 +35,6 @@ jobs:
       - name: Build Ubuntu asset
         run: |
           mkdir -p dist/ubuntu
-          ls -atlhR ./dotfiles
           cp -a dotfiles/current/shared/. dist/ubuntu
           cp -a dotfiles/current/ubuntu/. dist/ubuntu
           zip -r ubuntu-dotfiles.zip dist/ubuntu
@@ -45,7 +44,7 @@ jobs:
           mkdir -p dist/mac
           cp -a dotfiles/current/shared/. dist/mac
           cp -a dotfiles/current/ubuntu/. dist/mac
-          zip -r ubuntu-dotfiles.zip dist/mac
+          zip -r mac-dotfiles.zip dist/mac
 
       - name: Create release
         uses: ncipollo/release-action@95215a3cb6e6a1908b3c44e00b4fdb15548b1e09
