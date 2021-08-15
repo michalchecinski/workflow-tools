@@ -18,7 +18,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          current_version=$(hub release -L 1)
+          current_tag=$(hub release -L 1)
+          current_version=${current_tag:1}
           file_version=$(grep version_stub .version | grep -o "[0-9].[0-9]")
           echo "current release version: $current_version"
           echo "version from file: $file_version"
@@ -55,5 +56,6 @@ jobs:
             bin/*
           commit: ${{ github.sha }}
           tag: v${{ steps.version.outputs.value }}
+          draft: true
           name: "Version ${{ steps.version.outputs.value }}"
           token: ${{ secrets.GITHUB_TOKEN }}
