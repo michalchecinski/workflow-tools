@@ -51,8 +51,8 @@ jobs:
         uses: ncipollo/release-action@95215a3cb6e6a1908b3c44e00b4fdb15548b1e09
         with:
           artifacts: |
-            dist/ubuntu-dotfiles.zip,
-            dist/mac-dotfiles.zip,
+            ubuntu-dotfiles.zip,
+            mac-dotfiles.zip,
             bin/*
           commit: ${{ github.sha }}
           tag: "v${{ steps.version.outputs.value }}"
