@@ -3,6 +3,10 @@
 This is a collection of tools and configs to ease my devlopment workflow and/or
 my tech workflow.
 
+**0. bin** - A collection of useful scripts
+
+- dotfiles
+
 **1. docker** - I have a dream of being computer agnostic when it comes to my
 development environment. I switch between multiple computers on a weekly basis; 
 a powerful workstation with multiple monitors at home or work and a thin sleek
