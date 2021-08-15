@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f  # v2.3.4
 
       - name: Get release version
-        id: versions
+        id: version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -38,24 +38,24 @@ jobs:
           ls -atlhR ./dotfiles
           cp -a dotfiles/current/shared/. dist/ubuntu
           cp -a dotfiles/current/ubuntu/. dist/ubuntu
-          zip ubuntu-dotfiles.zip dist/ubuntu
+          zip -r ubuntu-dotfiles.zip dist/ubuntu
 
       - name: Build Mac asset
         run: |
           mkdir -p dist/mac
           cp -a dotfiles/current/shared/. dist/mac
           cp -a dotfiles/current/ubuntu/. dist/mac
-          zip ubuntu-dotfiles.zip dist/mac
+          zip -r ubuntu-dotfiles.zip dist/mac
 
       - name: Create release
         uses: ncipollo/release-action@95215a3cb6e6a1908b3c44e00b4fdb15548b1e09
         with:
           artifacts: |
-            dist/ubuntu-dotfiles.zip
-            dist/mac-dotfiles.zip
+            dist/ubuntu-dotfiles.zip,
+            dist/mac-dotfiles.zip,
             bin/*
           commit: ${{ github.sha }}
-          tag: v${{ steps.version.outputs.value }}
+          tag: "v${{ steps.version.outputs.value }}"
           draft: true
           name: "Version ${{ steps.version.outputs.value }}"
           token: ${{ secrets.GITHUB_TOKEN }}
