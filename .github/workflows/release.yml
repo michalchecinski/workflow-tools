@@ -34,15 +34,16 @@ jobs:
       - name: Build Ubuntu asset
         run: |
           mkdir -p dist/ubuntu
-          cp dotfiles/current/shared/* dist/ubuntu
-          cp dotfiles/current/ubuntu/* dist/ubuntu
+          ll -R ./dotfiles
+          cp -R dotfiles/current/shared/* dist/ubuntu
+          cp -R dotfiles/current/ubuntu/* dist/ubuntu
           zip ubuntu-dotfiles.zip dist/ubuntu
 
       - name: Build Mac asset
-        run: echo "building Mac asset"
+        run: |
           mkdir -p dist/mac
-          cp dotfiles/current/shared/* dist/mac
-          cp dotfiles/current/ubuntu/* dist/mac
+          cp -R dotfiles/current/shared/* dist/mac
+          cp -R dotfiles/current/ubuntu/* dist/mac
           zip ubuntu-dotfiles.zip dist/mac
 
       - name: Create release
