@@ -34,7 +34,7 @@ jobs:
       - name: Build Ubuntu asset
         run: |
           mkdir -p dist/ubuntu
-          ll -R ./dotfiles
+          ls -atlhR ./dotfiles
           cp -R dotfiles/current/shared/* dist/ubuntu
           cp -R dotfiles/current/ubuntu/* dist/ubuntu
           zip ubuntu-dotfiles.zip dist/ubuntu
