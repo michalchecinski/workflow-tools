@@ -48,7 +48,7 @@ jobs:
         run: |
           mkdir -p dist/mac-dotfiles
           cp -a dotfiles/current/shared/. dist/mac-dotfiles
-          cp -a dotfiles/current/ubuntu/. dist/mac-dotfiles
+          cp -a dotfiles/current/mac/. dist/mac-dotfiles
           cd dist
           zip -r mac-dotfiles-$VERSION.zip mac-dotfiles
 
