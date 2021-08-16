@@ -3,11 +3,16 @@
 This is a collection of tools and configs to ease my devlopment workflow and/or
 my tech workflow.
 
-**0. bin** - A collection of useful scripts
+## 0. bin - A collection of useful scripts
 
-- dotfiles
+### `dotfiles`
+#### Installation
+```
+curl -L https://github.com/joseph-flinn/workflow-tools/releases/download/latest/dotfiles > /usr/local/bin/dotfiles
+chmod +x /usr/local/bin
+```
 
-**1. docker** - I have a dream of being computer agnostic when it comes to my
+## 1. docker - I have a dream of being computer agnostic when it comes to my
 development environment. I switch between multiple computers on a weekly basis; 
 a powerful workstation with multiple monitors at home or work and a thin sleek
 long-battery-life laptop on the move. I would like to seemlessly switch between
@@ -45,7 +50,7 @@ developing in python and run the scripts in the container. Could use aliases if
 absolutely necessary for faster program execution `dpython3 hello.py` instead of 
 `docker run --rm -it python:3.7.5-slim-buster python hello.py`)
 
-**2. .tmuxp** - I have always been interested in aliases for different tasks that
+## 2. .tmuxp - I have always been interested in aliases for different tasks that
 I do a lot. However, early on in my career, aliases were one of factors in me
 deleting a website from production. Since then, they have left a bad taste in my
 mouth. Recently I have wanted to have directory specific aliases so that there 
@@ -82,31 +87,9 @@ tmuxp session as long as it is an executable. Honestly, this is still a work in
 progress. I would like to make this more generic since it is currently very project 
 specific. I will contiune to update it as a have more ideas.
 
----
+**Update:** any script that is added to the `~/workflow-tools/bin` directory, while 
+using the included dotfiles, is available via the PATH
 
-#### Archive
-
-**1. tmux** - I discovered tmux a couple of years ago and immediately 
-incorporated it into my daily workflow. I was creating a bunch of SSH tunnels
-to a single machine just to have the connections all crash for some reason and I
-would lose all of my workspace setup. Using tmux that is built ontop of screen 
-allows me to connect back to the server and reattach to the tmux session. It 
-also allows me to multitask on the server which is very helpful when developing
-with docker and I want to see the system resource utilization (some docker 
-containers can be memory hogs), all of the current docker containers, as well as
-the code editor and some other random shells. 
-
-**2. tmuxp** - I found that writing a bunch of bash to get a specific layout that 
-would change with screen size was pretty annoying especially when I had to go
-and guess what size the panes were. I was going to write my own python wrapper
-for the bash tmux, but I used one of the most important lessons that I have 
-learned as a junior developer: "Don't reinvent the wheel if you don't have to or
-you really aren't looking to learn from doing so." I found 
-[tmuxp](https://github.com/tmux-python/tmuxp) when searching for that wheel and
-it fits perfectly into my workflow. I am now aware of tmuxinator that looks
-about the same as tmuxp; however, I am partial to python and tools written in 
-python and because python is found already installed on most *NIX servers (not that
-you couldn't install Ruby, but less hassle and mess?).
 
 --- 
 

@@ -3,12 +3,14 @@
 
 # Get the latest dotfiles
 download_dotfiles () {
-  download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq --arg os $1 -c -r '.assets[] | select( .name | test($os)) | select( .name | test("-dotfiles.")).browser_download_url')
+  local OS=$1
+  download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq --arg os $OS -c -r '.assets[] | select( .name | test($os)) | select( .name | test("-dotfiles.")).browser_download_url')
 
   if [[ $download_url ]]; then
     echo "Download url: $download_url"
     curl -s -L $download_url > /tmp/dotfiles.zip
-    unzip /tmp/dotfiles.zip -d /tmp
+    unzip -q /tmp/dotfiles.zip -d /tmp
+    rm /tmp/dotfiles.zip
   else
     echo "[!] Download url not found"
     exit
@@ -16,14 +18,36 @@ download_dotfiles () {
 }
 
 install_dotfiles () {
-  if [[ -d ~/.config/dotfiles ]]; then
-    mv ~/.config/dotfiles ~/.config/dotfiles.old
-  else
-    if ! [[ -d ~/.config ]]; then
-      mkdir -p ~/.config/dotfiles
-    elif ! [[ -d ~/.config/dotfiles ]]; then
-      mkdir ~/.config/dotfiles
+  local OS=$1
+  local config_dir="$HOME/.config"
+  local dot_config_dir="$config_dir/$OS-dotfiles"
+
+  if [[ -d $dot_config_dir ]]; then
+    mv $dot_config_dir $dot_config_dir.old
+  elif ! [[ -d $config_dir ]]; then
+    mkdir -p $config_dir
+  fi
+
+  mv -f /tmp/$OS-dotfiles $config_dir
+
+  files=$(find $dot_config_dir -maxdepth 1 -mindepth 1 -exec basename {} \;)
+  for file in $files; do
+    echo "[+] installing dotfile: $dot_config_dir/$file"
+    if [[ -f $dot_config_dir/$file ]] || [[ -d $dot_config_dir/$file ]]; then
+      if [ -f ~/$file ] || [ -h ~/$file ]; then
+        mv ~/$file ~/$file.old
+        ln -s $dot_config_dir/$file ~/$file
+        rm ~/$file.old
+      else
+        ln -s $dot_config_dir/$file ~/$file
+      fi
+    else
+      echo "[!] dotfile doesn't exist: $dot_config_dir/$file"
     fi
+  done
+
+  if [[ -d $dot_config_dir.old ]]; then
+    rm -rf $dot_config_dir.old
   fi
 }
 
@@ -47,6 +71,7 @@ esac
 case $COMMAND in 
   "install")
     download_dotfiles $OS
+    install_dotfiles $OS
   ;;
   *)
     echo "[!] Unrecognized command: $COMMAND"
