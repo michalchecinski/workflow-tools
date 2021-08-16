@@ -1,3 +1,55 @@
 #!/bin/bash
 
-echo "[*] dotfiles is not yet implemented"
+
+# Get the latest dotfiles
+download_dotfiles () {
+  download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq --arg os $1 -c -r '.assets[] | select( .name | test($os)) | select( .name | test("-dotfiles.")).browser_download_url')
+
+  if [[ $download_url ]]; then
+    echo "Download url: $download_url"
+    curl -s -L $download_url > /tmp/dotfiles.zip
+    unzip /tmp/dotfiles.zip -d /tmp
+  else
+    echo "[!] Download url not found"
+    exit
+  fi
+}
+
+install_dotfiles () {
+  if [[ -d ~/.config/dotfiles ]]; then
+    mv ~/.config/dotfiles ~/.config/dotfiles.old
+  else
+    if ! [[ -d ~/.config ]]; then
+      mkdir -p ~/.config/dotfiles
+    elif ! [[ -d ~/.config/dotfiles ]]; then
+      mkdir ~/.config/dotfiles
+    fi
+  fi
+}
+
+# Get command
+COMMAND=$1; shift
+
+# Get params
+OS=""
+
+case $1 in
+  "ubuntu") OS=ubuntu;;
+  "mac") OS=mac;;
+  *)
+    echo "[!] Unsupported os: $1"
+    echo "[*] Supported environments: ubuntu, mac, test"
+  ;;
+esac
+
+
+# Run command
+case $COMMAND in 
+  "install")
+    download_dotfiles $OS
+  ;;
+  *)
+    echo "[!] Unrecognized command: $COMMAND"
+  ;;
+esac
+

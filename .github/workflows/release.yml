@@ -36,26 +36,28 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.value }}
         run: |
-          mkdir -p dist/ubuntu
-          cp -a dotfiles/current/shared/. dist/ubuntu
-          cp -a dotfiles/current/ubuntu/. dist/ubuntu
-          zip -r ubuntu-dotfiles-$VERSION.zip dist/ubuntu
+          mkdir -p dist/ubuntu-dotfiles
+          cp -a dotfiles/current/shared/. dist/ubuntu-dotfiles
+          cp -a dotfiles/current/ubuntu/. dist/ubuntu-dotfiles
+          cd dist
+          zip -r ubuntu-dotfiles-$VERSION.zip ubuntu-dotfiles
 
       - name: Build Mac asset
         env:
           VERSION: ${{ steps.version.outputs.value }}
         run: |
-          mkdir -p dist/mac
-          cp -a dotfiles/current/shared/. dist/mac
-          cp -a dotfiles/current/ubuntu/. dist/mac
-          zip -r mac-dotfiles-$VERSION.zip dist/mac
+          mkdir -p dist/mac-dotfiles
+          cp -a dotfiles/current/shared/. dist/mac-dotfiles
+          cp -a dotfiles/current/ubuntu/. dist/mac-dotfiles
+          cd dist
+          zip -r mac-dotfiles-$VERSION.zip mac-dotfiles
 
       - name: Create release
         uses: ncipollo/release-action@95215a3cb6e6a1908b3c44e00b4fdb15548b1e09
         with:
           artifacts: |
-            ubuntu-dotfiles-${{ steps.version.outputs.value }}.zip,
-            mac-dotfiles-${{ steps.version.outputs.value }}.zip,
+            dist/ubuntu-dotfiles-${{ steps.version.outputs.value }}.zip,
+            dist/mac-dotfiles-${{ steps.version.outputs.value }}.zip,
             bin/*
           commit: ${{ github.sha }}
           tag: "v${{ steps.version.outputs.value }}"
