@@ -59,6 +59,5 @@ jobs:
             bin/*
           commit: ${{ github.sha }}
           tag: "v${{ steps.version.outputs.value }}"
-          draft: true
           name: "Version ${{ steps.version.outputs.value }}"
           token: ${{ secrets.GITHUB_TOKEN }}
