@@ -42,6 +42,7 @@ export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/workflow-tools/bin:$PATH
 
 export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/crowdin@3/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -65,6 +66,7 @@ export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
 ###############
 alias tf="terraform"
 alias cksp="ispell -x -p ~/.ispell_english"
+alias vim="nvim"
 
 ##########################################
 #                                        #
