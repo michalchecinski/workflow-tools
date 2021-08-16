@@ -4,9 +4,9 @@
 # Get the latest dotfiles
 download_dotfiles () {
   local OS=$1
-  download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq --arg os $OS -c -r '.assets[] | select( .name | test($os)) | select( .name | test("-dotfiles.")).browser_download_url')
+  local download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq --arg os $OS -c -r '.assets[] | select( .name | test($os)) | select( .name | test("-dotfiles.")).browser_download_url')
 
-  if [[ $download_url ]]; then
+  if [[ "$download_url" != "Not Found" ]]; then
     echo "Download url: $download_url"
     curl -s -L $download_url > /tmp/dotfiles.zip
     unzip -q /tmp/dotfiles.zip -d /tmp
@@ -51,6 +51,19 @@ install_dotfiles () {
   fi
 }
 
+update_self () {
+  local download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq -r '.assets[] | select( .name == "dotfiles").browser_download_url')
+
+  if [[ "$download_url" != "Not Found" ]]; then
+    echo "Download url: $download_url"
+    curl -s -L $download_url > /usr/local/bin/dotfiles
+    chmod +x /usr/local/bin/dotfiles
+  else
+    echo "[!] Download url not found"
+    exit
+  fi
+}
+
 # Get command
 COMMAND=$1; shift
 
@@ -72,6 +85,9 @@ case $COMMAND in
   "install")
     download_dotfiles $OS
     install_dotfiles $OS
+  ;;
+  "update-self")
+    update_self
   ;;
   *)
     echo "[!] Unrecognized command: $COMMAND"
