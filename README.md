@@ -9,8 +9,8 @@ my tech workflow.
 #### Installation
 ```
 download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq -r '.assets[] | select( .name == "dotfiles").browser_download_url')
-curl -s -L $download_url > /usr/local/bin/dotfiles
-chmod +x /usr/local/bin/dotfiles
+curl -s -L $download_url > /usr/bin/local/dotfiles
+chmod +x /usr/bin/local/dotfiles
 ```
 
 ## 1. docker - I have a dream of being computer agnostic when it comes to my
