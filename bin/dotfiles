@@ -30,6 +30,25 @@ install_dotfiles () {
 
   mv -f /tmp/$OS-dotfiles $config_dir
 
+  install_dotfile_dir $dot_config_dir
+
+  if [[ -d $dot_config_dir.old ]]; then
+    rm -rf $dot_config_dir.old
+  fi
+}
+
+install_dev_dotfiles () {
+  local OS=$1
+  local dotfiles_dir="$HOME/workflow-tools/dotfiles/current"
+  local dot_config_dir="$dotfiles_dir/$OS"
+
+  install_dotfile_dir $dot_config_dir
+
+}
+
+install_dotfile_dir () {
+  local dot_config_dir=$1
+
   files=$(find $dot_config_dir -maxdepth 1 -mindepth 1 -exec basename {} \;)
   for file in $files; do
     echo "[+] installing dotfile: $dot_config_dir/$file"
@@ -45,10 +64,18 @@ install_dotfiles () {
       echo "[!] dotfile doesn't exist: $dot_config_dir/$file"
     fi
   done
+}
 
-  if [[ -d $dot_config_dir.old ]]; then
-    rm -rf $dot_config_dir.old
-  fi
+check_os () {
+  case $1 in
+    "ubuntu") OS=ubuntu;;
+    "mac") OS=mac;;
+    *)
+      echo "[!] Unsupported os: $1"
+      echo "[*] Supported environments: ubuntu, mac"
+      exit 1
+    ;;
+  esac
 }
 
 update_self () {
@@ -67,27 +94,25 @@ update_self () {
 # Get command
 COMMAND=$1; shift
 
-# Get params
-OS=""
-
-case $1 in
-  "ubuntu") OS=ubuntu;;
-  "mac") OS=mac;;
-  *)
-    echo "[!] Unsupported os: $1"
-    echo "[*] Supported environments: ubuntu, mac, test"
-  ;;
-esac
-
-
 # Run command
 case $COMMAND in 
   "install")
+    OS=""
+    check_os $1
     download_dotfiles $OS
     install_dotfiles $OS
   ;;
+  "install-dev")
+    OS=""
+    check_os $1
+    install_dev_dotfiles "shared"
+    install_dev_dotfiles $OS
+  ;;
   "update-self")
     update_self
+  ;;
+  "help")
+    echo "[*] Not yet implemented"
   ;;
   *)
     echo "[!] Unrecognized command: $COMMAND"

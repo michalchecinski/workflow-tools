@@ -1,0 +1,11 @@
+###############################
+#  custom commands/functions  #
+###############################
+function mtmx () {
+  if [ $1 ]; then
+    echo "params: $#"
+    echo "file: $1"
+  else
+    tmuxp load default
+  fi
+}
