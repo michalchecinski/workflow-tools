@@ -3,8 +3,7 @@
 ###############################
 function mtmx () {
   if [ $1 ]; then
-    echo "params: $#"
-    echo "file: $1"
+    tmuxp load -s $1 default
   else
     tmuxp load default
   fi
