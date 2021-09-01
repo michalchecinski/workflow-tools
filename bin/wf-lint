@@ -44,7 +44,7 @@ run () {
   local workflow_dir=$1
 
   case "$workflow_dir" in
-    "." | "") 
+    "") 
       echo "workflow_dir input: $workflow_dir"
       python3 $linter_path $PWD 
     ;;
@@ -53,6 +53,33 @@ run () {
       python3 $linter_path $workflow_dir
     ;;
   esac
+}
+
+usage () {
+  echo "
+Usage: wf-lint [COMMAND] [OPTIONS]
+  This script is used to help streamline the management of linting GitHub Action workflows. It has an oppinionated 
+  personal file system setup for working at Bitwarden.
+
+Commands:
+  mkdir - Creates a directory in a specified location and symlinks all of the workflow files in the specified
+          repository directory
+    Options:
+      repo_dir - The directory where all of the repositories with the workflows are stored
+      install_dir - The directory where all of the symlinks will be created
+    Examples: 
+      wf-lint mkdir
+      wf-lint mkdir ~/bitwarden/repos ~/bitwarden/workflows
+
+  run - Runs the linter that is found at ~/bitwarden/devops/tools/github-workflow-linter/lint.py
+    Examples: 
+      wf-lint run
+      wf-lint run ~/bitwarden/workflows
+
+  help - Prints out the usage doc
+    Examples: 
+      dotfiles help
+"
 }
 
 # Get command

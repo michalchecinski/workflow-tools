@@ -3,14 +3,19 @@
 usage () {
   echo "
 Usage: dotfiles [COMMAND] [ARGS] 
-  This script should be used to help ease the process of rebooting a node instead of using the hacky scaling method.
+  This script is used to manage dotfiles found in https://github.com/joseph-flinn/workflow/tools/tree/main/dotfiles
+  across all Linux like machines
 
 Commands:
   install - Installs the latest released dotfiles for a specified OS from GitHub
+    Args:
+      os - choosing the collection of dotfiles by OS. Choices: ubuntu, mac
     Examples: 
       dotfiles install mac
 
   install-dev - Installs the local ~/workflow-tools versions of the dotfiles for developing and testing
+    Args:
+      os - choosing the collection of dotfiles by OS. Choices: ubuntu, mac
     Examples: 
       dotfiles install-dev ubuntu
 
