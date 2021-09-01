@@ -1,0 +1,70 @@
+#!/bin/bash
+
+default_repo_directory="$HOME/bitwarden/official-repos"
+default_install_directory="$HOME/bitwarden/workflows"
+
+
+# arg: repo_dir - $1
+# arg: install_dir - $2
+make_dir () {
+  echo "[*] directory config:"
+  if [ -z $1 ] || [ -z $2 ]; then
+    read -p "  Repo directory [$default_repo_directory]: " repo_dir
+    read -p "  Install directory [$default_install_directory]: " install_dir
+
+    repo_dir=${repo_dir:-$default_repo_directory}
+    install_dir=${install_dir:-$default_install_directory}
+  else
+      repo_dir=$1
+      install_dir=$2
+  fi
+
+  echo "Repo dir: $repo_dir"
+  echo "Install dir: $install_dir"
+  if [ -d $install_dir ]; then
+      rm -rfv $install_dir | awk '{print "Removing: " $0}'
+  fi
+
+  mkdir -p $install_dir
+
+  for project in $(ls $repo_dir); do
+    if [ -d $repo_dir/$project/.github/workflows ]; then
+        for workflow in $(ls $repo_dir/$project/.github/workflows); do
+            ln -s $repo_dir/$project/.github/workflows/$workflow $install_dir/$project-$workflow
+        done
+    fi
+  done
+
+  echo "[*] done"
+}
+
+# arg: workflow_dir - $1
+run () {
+  local linter_path="$HOME/bitwarden/devops/tools/github-workflow-linter/lint.py"
+  local workflow_dir=$1
+
+  case "$workflow_dir" in
+    "." | "") 
+      echo "workflow_dir input: $workflow_dir"
+      python3 $linter_path $PWD 
+    ;;
+    "*") 
+      echo "workflow_dir input: $workflow_dir"
+      python3 $linter_path $workflow_dir
+    ;;
+  esac
+}
+
+# Get command
+COMMAND=$1; shift
+
+# Run command
+case $COMMAND in 
+  "mkdir") make_dir $1 $2 ;;
+  "run") run $1 ;;
+  "help") usage ;;
+  *)
+    echo "[!] Unrecognized command: $COMMAND"
+  ;;
+esac
+
