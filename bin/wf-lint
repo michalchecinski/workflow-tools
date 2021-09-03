@@ -40,16 +40,18 @@ make_dir () {
 
 # arg: workflow_dir - $1
 run () {
-  local linter_path="$HOME/bitwarden/devops/tools/github-workflow-linter/lint.py"
+  local linter_path="$HOME/bitwarden/official-repos/gh-actions/lint-workflow/lint.py"
   local workflow_dir=$1
 
   case "$workflow_dir" in
     "") 
       echo "workflow_dir input: $workflow_dir"
+      yamllint -c $HOME/bitwarden/official-repos/gh-actions/lint-workflow/.yamllint.yml $PWD
       python3 $linter_path $PWD 
     ;;
     "*") 
       echo "workflow_dir input: $workflow_dir"
+      yamllint -c $HOME/bitwarden/official-repos/gh-actions/lint-workflow/.yamllint.yml $workflow_dir
       python3 $linter_path $workflow_dir
     ;;
   esac

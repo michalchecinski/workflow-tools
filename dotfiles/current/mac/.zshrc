@@ -20,7 +20,7 @@ export GOPATH=$HOME/go
 . ~/.env_setup
 
 # add_to_path is from .env_setup
-add_to_path "$HOME/Library/Python/3.8/bin"
+add_to_path "$HOME/Library/Python/3.9/bin"
 add_to_path "$HOME/dotnet"
 add_to_path "$HOME/.dotnet/tools"
 add_to_path "$HOME/go/bin"
