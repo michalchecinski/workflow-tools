@@ -1,7 +1,7 @@
 ###############
 #  kubeclean  #
 ###############
-function kubeclean () {
+kubeclean () {
   pods=$(kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=" $1}')
   echo $pods
 
@@ -21,4 +21,12 @@ function kubeclean () {
       esac
     fi
   fi
+}
+
+mk-rc () {
+  git switch master
+  git pull
+  git branch -D rc
+  git switch -c rc
+  git push -u origin rc
 }
