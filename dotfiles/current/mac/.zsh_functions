@@ -23,7 +23,8 @@ kubeclean () {
   fi
 }
 
-mk-rc () {
+cut-rc () {
+  git push -d origin rc
   git switch master
   git pull
   git branch -D rc
