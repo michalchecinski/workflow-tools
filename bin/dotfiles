@@ -44,7 +44,7 @@ download_dotfiles () {
     echo "Download url: $download_url"
     curl -s -L $download_url > /tmp/$OS-dotfiles.zip
     unzip -q /tmp/$OS-dotfiles.zip -d /tmp
-    rm /tmp/dotfiles.zip
+    rm /tmp/$OS-dotfiles.zip
   else
     echo "[!] Download url not found"
     exit
