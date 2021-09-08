@@ -40,7 +40,7 @@ jobs:
           cp -a dotfiles/current/shared/. dist/ubuntu-dotfiles
           cp -a dotfiles/current/ubuntu/. dist/ubuntu-dotfiles
           cd dist
-          echo "$VERSION" > .version
+          echo "$VERSION" > dist/ubuntu-dotfiles/.version
           zip -r ubuntu-dotfiles-$VERSION.zip ubuntu-dotfiles
 
       - name: Build Mac asset
@@ -50,8 +50,8 @@ jobs:
           mkdir -p dist/mac-dotfiles
           cp -a dotfiles/current/shared/. dist/mac-dotfiles
           cp -a dotfiles/current/mac/. dist/mac-dotfiles
+          echo "$VERSION" > dist/mac-dotfiles/.version
           cd dist
-          echo "$VERSION" > .version
           zip -r mac-dotfiles-$VERSION.zip mac-dotfiles
 
       - name: Create release

@@ -87,7 +87,7 @@ install_dotfile_dir () {
   for file in $files; do
     echo "[+] installing dotfile: $dot_config_dir/$file"
     if [[ -f $dot_config_dir/$file ]] || [[ -d $dot_config_dir/$file ]]; then
-      if [ -f ~/$file ] || [ -h ~/$file ]; then
+      if ([ -f ~/$file ] || [ -h ~/$file ]) && [ "$file" != ".version" ]; then
         mv ~/$file ~/$file.old
         ln -s $dot_config_dir/$file ~/$file
         rm ~/$file.old
