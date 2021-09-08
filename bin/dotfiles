@@ -42,8 +42,8 @@ download_dotfiles () {
 
   if [[ "$download_url" != "Not Found" ]]; then
     echo "Download url: $download_url"
-    curl -s -L $download_url > /tmp/dotfiles.zip
-    unzip -q /tmp/dotfiles.zip -d /tmp
+    curl -s -L $download_url > /tmp/$OS-dotfiles.zip
+    unzip -q /tmp/$OS-dotfiles.zip -d /tmp
     rm /tmp/dotfiles.zip
   else
     echo "[!] Download url not found"
