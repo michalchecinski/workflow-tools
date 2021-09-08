@@ -39,8 +39,8 @@ jobs:
           mkdir -p dist/ubuntu-dotfiles
           cp -a dotfiles/current/shared/. dist/ubuntu-dotfiles
           cp -a dotfiles/current/ubuntu/. dist/ubuntu-dotfiles
-          cd dist
           echo "$VERSION" > dist/ubuntu-dotfiles/.version
+          cd dist
           zip -r ubuntu-dotfiles-$VERSION.zip ubuntu-dotfiles
 
       - name: Build Mac asset
