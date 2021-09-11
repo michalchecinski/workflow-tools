@@ -1,15 +1,19 @@
 #!/bin/bash
+#
+# Quick description of script
 
-usage () {
+usage() {
   echo "
-[!] Not yet implemented
-
 Usage: <script-name> [COMMAND] [ARGS] 
   <Description>
+
+  help - Prints out the usage doc
+    Examples: 
+      <script-name> help
 "
 }
 
-err () {
+err() {
   if [[ $1 ]]; then
     echo "[!] $1"
   fi
@@ -27,7 +31,7 @@ err () {
 # Returns: 
 #   Returned values other than the default exit status of the last command run.
 ##############################
-func1 () {
+func1() {
 }
 
 # Get command

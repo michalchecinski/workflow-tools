@@ -1,16 +1,35 @@
 #!/bin/bash
+# 
+# Manage the homelab via Ansible playbooks without the needing to remember the long Ansible Playbook commands
 
 _ANSIBLE_ROOT_DIR=$HOME/workflow-tools/homelab/ansible
 
-usage () {
-  err "Not yet implemented"
+usage() {
   echo "
-Usage: <script-name> [COMMAND] [ARGS] 
-  <Description>
+Usage: homelab [COMMAND] [ARGS] 
+  homelab is a tool to help manage the homelab via ansible. I was finding myself opening the README to reference the 
+  commands every time I was going to update the machines in my homelab.
+
+Commands
+  update - Updates the specified Ansible target
+    Args:
+      target - the target machine
+    Examples:
+      homelab update homelab
+
+  down - Powers down the specified Ansible target
+    Args:
+      target - the target machine
+    Examples:
+      homelab down homelab
+
+  help - Prints out the usage doc
+    Examples: 
+      homelab help
 "
 }
 
-err () {
+err() {
   if [[ $1 ]]; then
     echo "[!] $1"
   fi
@@ -25,7 +44,7 @@ err () {
 # Arguments: 
 #   1 - command target
 ##############################
-check-target () {
+check-target() {
   local target=$1
   local dirty_hosts=$(grep $_ANSIBLE_ROOT_DIR/hosts -e "\[.*\]")
   local hosts=$(
@@ -48,7 +67,7 @@ check-target () {
 # Arguments: 
 #   1 - update target
 ##############################
-update () {
+update() {
   local target=$1
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \

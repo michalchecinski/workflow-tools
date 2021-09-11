@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usage () {
+usage() {
   echo "
 Usage: dotfiles [COMMAND] [ARGS] 
   This script is used to manage dotfiles found in https://github.com/joseph-flinn/workflow/tools/tree/main/dotfiles
@@ -29,14 +29,14 @@ Commands:
 "
 }
 
-version () {
+version() {
   local version=$(curl -sL https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq -r ".tag_name")
   echo "Latest: $version"
   echo "Installed: $(cat $HOME/.config/dotfiles/.version)"
 }
 
 # Get the latest dotfiles
-download_dotfiles () {
+download_dotfiles() {
   local OS=$1
   local download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq --arg os $OS -c -r '.assets[] | select( .name | test($os)) | select( .name | test("-dotfiles.")).browser_download_url')
 
@@ -51,7 +51,7 @@ download_dotfiles () {
   fi
 }
 
-install_dotfiles () {
+install_dotfiles() {
   local OS=$1
   local config_dir="$HOME/.config"
   local dot_config_dir="$config_dir/dotfiles"
@@ -71,7 +71,7 @@ install_dotfiles () {
   fi
 }
 
-install_dev_dotfiles () {
+install_dev_dotfiles() {
   local OS=$1
   local dotfiles_dir="$HOME/workflow-tools/dotfiles/current"
   local dot_config_dir="$dotfiles_dir/$OS"
@@ -80,7 +80,7 @@ install_dev_dotfiles () {
 
 }
 
-install_dotfile_dir () {
+install_dotfile_dir() {
   local dot_config_dir=$1
 
   files=$(find $dot_config_dir -maxdepth 1 -mindepth 1 -exec basename {} \;)
@@ -102,7 +102,7 @@ install_dotfile_dir () {
   done
 }
 
-check_os () {
+check_os() {
   case $1 in
     "ubuntu") OS=ubuntu;;
     "mac") OS=mac;;
@@ -114,7 +114,7 @@ check_os () {
   esac
 }
 
-update_self () {
+update_self() {
   local download_url=$(curl -s https://api.github.com/repos/joseph-flinn/workflow-tools/releases/latest | jq -r '.assets[] | select( .name == "dotfiles").browser_download_url')
 
   if [[ "$download_url" != "Not Found" ]]; then

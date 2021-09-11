@@ -1,6 +1,17 @@
 #!/bin/bash
+#
+# A management script to manage the custom utilities in the bin direcotry of workflow-tools
 
-lsbin () {
+##############################
+# Lists the custom scripts and aliases in workflow-tools
+# Globals: 
+#   HOME
+# Arguments: 
+#   None
+# Outputs: 
+#   the list of custom scripts available with their aliases
+##############################
+lsbin() {
     files=$(ls $HOME/workflow-tools/bin)
     for file in $files; do
         echo $file
@@ -10,9 +21,35 @@ lsbin () {
     cat $HOME/workflow-tools/bin/.aliases
 }
 
+##############################
+# Description of the function.
+# Globals: 
+#   _WORKFLOW_TOOLS_DIR
+# Arguments: 
+#   1 - new script name
+# Outputs: 
+#   Output to STDOUT or STDERR.
+# Returns: 
+#   Returned values other than the default exit status of the last command run.
+##############################
+create-script() {
+    local new_script_name=""
+    local bin_dir=""
+
+    if [ $1 ]; then
+        new_script_name=$1
+    fi
+
+    bin_dir=$(dirname $(which mybin))
+
+    cp $bin_dir/.cmd-template $bin_dir/$new_script_name
+    vim $bin_dir/$new_script_name
+}
+
 command=$1
 
 case $command in 
     "ls") lsbin ;;
+    "new") create-script $2;;
     "*") echo "[!] Command not recognized" ;;
 esac

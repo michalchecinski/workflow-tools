@@ -1,6 +1,6 @@
-#/bin/bash
+#!/bin/bash
 
-usage () {
+usage() {
   echo "Help documentation is not yet implemented" 
 }
 

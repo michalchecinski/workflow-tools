@@ -12,14 +12,14 @@ fi
 ###########
 #  Usage  #
 ###########
-usage () {
+usage() {
   echo "Usage: Not yet implemented"
 }
 
 ###############
 #  Exception  #
 ###############
-exp () {
+exp() {
   if [[ $1 ]]; then
     echo "[!] $1"
   fi
