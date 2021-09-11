@@ -105,6 +105,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/workflow-tools/bin/.aliases ]; then
+    . ~/workflow-tools/bin/.aliases
+fi
+
 # Load custom bash funcitons
 if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions

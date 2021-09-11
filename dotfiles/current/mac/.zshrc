@@ -53,3 +53,7 @@ export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
 alias tf="terraform"
 alias cksp="ispell -x -p ~/.ispell_english"
 alias vim="nvim"
+
+if [ -f ~/workflow-tools/bin/.aliases ]; then
+    . ~/workflow-tools/bin/.aliases
+fi
