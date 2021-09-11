@@ -19,19 +19,41 @@ each node is drained of the k8s pods. It also checks for any ongoing work in a
 `tmux` session and prevents a reboot if that is the case (for the user: `joseph`)
 
 ```
-Update cluster: ansible-playbook -i hosts -e "targets=homelab" playbooks/homelab/update-os.yaml
-Update just nodes: ansible-playbook -i hosts -e "targets=nodes" playbooks/homelab/update-os.yaml
-Update just nas: ansible-playbook -i hosts -e "targets=nas" playbooks/homelab/update-os.yaml
-Update single node: ansible-playbook -i hosts -e "targets=k8s-node1" playbooks/homelab/update-os.yaml
+#############
+#  homelab  #
+#############
+Update cluster: homelab update homelab
+Update just nodes: homelab update nodes
+Update just nas: homelab update nas
+Update single machine: homelab update k8s-node1
+
+#############
+#  Ansible  #
+#############
+Update cluster: ansible-playbook -i hosts -K -e "targets=homelab" playbooks/homelab/update-os.yaml
+Update just nodes: ansible-playbook -i hosts -K -e "targets=nodes" playbooks/homelab/update-os.yaml
+Update just nas: ansible-playbook -i hosts -K -e "targets=nas" playbooks/homelab/update-os.yaml
+Update single machine: ansible-playbook -i hosts -K -e "targets=k8s-node1" playbooks/homelab/update-os.yaml
 ```
 
 ### Power down
 This powers down the cluster
 
 ```
-Power down cluster: asnible-playbook -i hosts -e "targets=cluster" playbooks/homelab/power-down.yaml
-power down just nodes: asnible-playbook -i hosts -e "targets=nodes" playbooks/homelab/power-down.yaml
-power down just nas: asnible-playbook -i hosts -e "targets=nas" playbooks/homelab/power-down.yaml
+#############
+#  homelab  #
+#############
+Power down cluster: homelab down homelab
+Power down just nodes: homelab down nodes
+Power down just nas: homelab down nas
+Power down single machine: homelab down k8s-node1
+
+#############
+#  Ansible  #
+#############
+Power down cluster: asnible-playbook -i hosts -K -e "targets=cluster" playbooks/homelab/power-down.yaml
+Power down just nodes: asnible-playbook -i hosts -K -e "targets=nodes" playbooks/homelab/power-down.yaml
+Power down just nas: asnible-playbook -i hosts -K -e "targets=nas" playbooks/homelab/power-down.yaml
 ```
 
 

@@ -137,18 +137,17 @@ case $COMMAND in
     check_os $1
     download_dotfiles $OS
     install_dotfiles $OS
-  ;;
+    ;;
   "install-dev")
     OS=""
     check_os $1
     install_dev_dotfiles "shared"
     install_dev_dotfiles $OS
-  ;;
+    ;;
   "update-self") update_self ;;
   "version") version ;;
   "help") usage ;;
-  *)
-    echo "[!] Unrecognized command: $COMMAND"
-  ;;
+  "") echo "[!] Missing command." ;;
+  *) echo "[!] Unrecognized command: $COMMAND" ;;
 esac
 

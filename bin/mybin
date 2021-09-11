@@ -1,0 +1,18 @@
+#!/bin/bash
+
+lsbin () {
+    files=$(ls $HOME/workflow-tools/bin)
+    for file in $files; do
+        echo $file
+    done
+
+    echo "----------"
+    cat $HOME/workflow-tools/bin/.aliases
+}
+
+command=$1
+
+case $command in 
+    "ls") lsbin ;;
+    "*") echo "[!] Command not recognized" ;;
+esac

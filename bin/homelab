@@ -1,1 +1,90 @@
 #!/bin/bash
+
+_ANSIBLE_ROOT_DIR=$HOME/workflow-tools/homelab/ansible
+
+usage () {
+  err "Not yet implemented"
+  echo "
+Usage: <script-name> [COMMAND] [ARGS] 
+  <Description>
+"
+}
+
+err () {
+  if [[ $1 ]]; then
+    echo "[!] $1"
+  fi
+  exit 1
+}
+
+
+##############################
+# Checks if the target machine is supported
+# Globals: 
+#   _ANSIBLE_ROOT_DIR
+# Arguments: 
+#   1 - command target
+##############################
+check-target () {
+  local target=$1
+  local dirty_hosts=$(grep $_ANSIBLE_ROOT_DIR/hosts -e "\[.*\]")
+  local hosts=$(
+    for host in $dirty_hosts; do
+      echo ${host:1:-1} | cut -d ":" -f 1
+    done
+  )
+
+  hosts=($hosts)
+  if [[ ! " ${hosts[*]} " =~ " ${target} " ]]; then
+    err "update target not supported: $target"
+  fi
+
+}
+
+##############################
+# Run an OS update against target machine
+# Globals: 
+#   _ANSIBLE_ROOT_DIR
+# Arguments: 
+#   1 - update target
+##############################
+update () {
+  local target=$1
+  ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
+    -K -e "targets=$target" \
+    $_ANSIBLE_ROOT_DIR/playbooks/homelab/update-os.yaml
+}
+
+##############################
+# Power down target machine
+# Globals: 
+#   _ANSIBLE_ROOT_DIR
+# Arguments: 
+#   1 - update target
+##############################
+power-down() {
+  local target=$1
+  ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
+    -K -e "targets=$target" \
+    $_ANSIBLE_ROOT_DIR/playbooks/homelab/power-down.yaml
+}
+
+# Get command
+COMMAND=$1; shift
+
+# Run command
+case $COMMAND in 
+  "update") 
+    TARGET=$1
+    check-target $TARGET
+    update $TARGET
+    ;;
+  "down")
+    TARGET=$1
+    check-target $TARGET
+    update $TARGET
+    ;;
+  "help" | "-h" | "--help") usage ;;
+  "") err "Missing command." ;;
+  *) err "Unrecognized command: $COMMAND" ;;
+esac

@@ -1,0 +1,62 @@
+#!/bin/bash
+
+usage () {
+  echo "
+[!] Not yet implemented
+
+Usage: <script-name> [COMMAND] [ARGS] 
+  <Description>
+"
+}
+
+err () {
+  if [[ $1 ]]; then
+    echo "[!] $1"
+  fi
+  exit 1
+}
+
+##############################
+# Description of the function.
+# Globals: 
+#   List of global variables used and modified.
+# Arguments: 
+#   Arguments taken.
+# Outputs: 
+#   Output to STDOUT or STDERR.
+# Returns: 
+#   Returned values other than the default exit status of the last command run.
+##############################
+func1 () {
+}
+
+# Get command
+COMMAND=$1; shift
+
+
+# Get Params
+PARAM1=""
+
+while [ ! $# -eq 0 ]; do
+  case "$1" in
+    -p1 | --param1 )
+      if [[ $2 ]]; then
+        param1="$2"
+        shift
+      else
+        exp "--param1 requires a value"
+      fi
+      ;;
+    -h | --help ) usage && exit ;;
+    *) usage && exit ;;
+  esac
+  shift
+done
+
+
+# Run command
+case $COMMAND in 
+  "help" | "-h" | "--help") usage ;;
+  "") exp "Missing command." ;;
+  *) exp "Unrecognized command: $COMMAND" ;;
+esac
