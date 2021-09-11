@@ -14,10 +14,10 @@ nvim() {
   ~/Applications/nvim.appimage $@
 }
 
-#vim() {
-#  read -r -p "Did you mean nvim? [Y/n]: " answer
-#  case $answer in 
-#    [Yy]*|"") ~/Applications/nvim.appimage $@;;
-#    *) echo "Exiting...";;
-#  esac
-#}
+vim() {
+  read -r -p "Did you mean nvim? [Y/n]: " answer
+  case $answer in 
+    [Yy]*|"") ~/Applications/nvim.appimage $@;;
+    *) echo "Exiting...";;
+  esac
+}
