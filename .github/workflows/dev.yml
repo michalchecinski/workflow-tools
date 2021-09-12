@@ -39,6 +39,10 @@ jobs:
             echo "::set-output name=dotfiles-changed::false"
           fi
 
+      - name: test git diff
+        run: |
+          git diff origin/main
+
       - name: Auto merge
         run: |
           git switch main
