@@ -17,17 +17,16 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f  # v2.3.4
 
-      - name: setup git config
+      - name: Setup git
         run: |
           git config user.name = "GitHub Action Bot"
           git config user.email = "<>"
 
+          git fetch -a
+
       - name: Check dotfile changes
         id: dotfiles
         run: |
-          git fetch -a
-          echo "git branch: $(git branch)"
-
           DIFF_LEN=$(git diff --name-only origin/$_DIFF_BRANCH -- dotfiles/* | wc -l | xargs)
           echo "[*] git diff lines: $DIFF_LEN"
           echo "=====Files Changed====="
