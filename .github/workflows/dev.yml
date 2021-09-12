@@ -25,6 +25,7 @@ jobs:
       - name: Check dotfile changes
         id: dotfiles
         run: |
+          git fetch -a
           echo "git branch: $(git branch)"
 
           DIFF_LEN=$(git diff --name-only origin/$_DIFF_BRANCH -- dotfiles/* | wc -l | xargs)
