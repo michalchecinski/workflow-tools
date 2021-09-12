@@ -3,12 +3,54 @@ name: Build & Release
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
-  build-n-release:
-    name: Build
+  merge-code:
+    name: Auto merge code
     runs-on: ubuntu-20.04
+    env:
+      _DIFF_BRANCH: "main"
+    outputs:
+      dotfiles-changed: ${{ steps.dotfiles.outputs.changed }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f  # v2.3.4
+
+      - name: setup git config
+        run: |
+          git config user.name = "GitHub Action Bot"
+          git config user.email = "<>"
+
+      - name: Check dotfile changes
+        id: dotfiles
+        run: |
+          git branch
+
+          DIFF_LEN=$(git diff --name-only origin/$_DIFF_BRANCH dotfiles/* | wc -l | xargs)
+          echo "[*] git diff lines: $DIFF_LEN"
+          echo "=====Files Changed====="
+          git diff --name-only origin/$_DIFF_BRANCH
+          echo "======================="
+
+          if [ "$DIFF_LEN" != "0" ]; then
+            echo "::set-output name=dotfiles-changed::true"
+          else
+            echo "::set-output name=dotfiles-changed::false"
+          fi
+
+      - name: Auto merge
+        run: |
+          git switch main
+          git merge dev
+          git push origin main
+
+
+  release-dotfiles:
+    name: Release Dotfiles
+    runs-on: ubuntu-20.04
+    needs: merge-code
+    if: ${{ needs.merge-code.outputs.dotfiles-changed }} == "true"
     steps:
       - name: Checkout Repo
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f  # v2.3.4
