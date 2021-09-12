@@ -53,7 +53,7 @@ jobs:
     name: Test Release Dotfiles
     runs-on: ubuntu-20.04
     needs: merge-code
-    if: ${{ needs.merge-code.outputs.dotfiles-changed }} == "true"
+    if: needs.merge-code.outputs.dotfiles-changed == 'true'
     env:
       _DOTFILES_CHANGED: ${{ needs.merge-code.outputs.dotfiles-changed }}
     steps:
