@@ -34,9 +34,9 @@ jobs:
           echo "======================="
 
           if [ "$DIFF_LEN" != "0" ]; then
-            echo "::set-output name=dotfiles-changed::true"
+            echo "::set-output name=changed::true"
           else
-            echo "::set-output name=dotfiles-changed::false"
+            echo "::set-output name=changed::false"
           fi
 
       - name: test git diff
@@ -67,7 +67,7 @@ jobs:
 
 
   test-release-dotfiles-catch:
-    name: Test Release Dotfiles
+    name: Test Release Dotfiles Catch
     runs-on: ubuntu-20.04
     needs: merge-code
     env:
