@@ -43,11 +43,9 @@ jobs:
         run: |
           git diff origin/main
 
-      - name: Auto merge
+      - name: Auto "merge" main
         run: |
-          git switch main
-          git merge dev
-          git push origin main
+          git push origin dev:main --force-with-lease
 
 
   release-dotfiles:
