@@ -25,12 +25,12 @@ jobs:
       - name: Check dotfile changes
         id: dotfiles
         run: |
-          git branch
+          echo "git branch: $(git branch)"
 
-          DIFF_LEN=$(git diff --name-only origin/$_DIFF_BRANCH dotfiles/* | wc -l | xargs)
+          DIFF_LEN=$(git diff --name-only origin/$_DIFF_BRANCH -- dotfiles/* | wc -l | xargs)
           echo "[*] git diff lines: $DIFF_LEN"
           echo "=====Files Changed====="
-          git diff --name-only origin/$_DIFF_BRANCH
+          git diff --name-only origin/$_DIFF_BRANCH -- dotfiles/*
           echo "======================="
 
           if [ "$DIFF_LEN" != "0" ]; then
