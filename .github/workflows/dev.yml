@@ -50,12 +50,12 @@ jobs:
 
 
   test-release-dotfiles:
-    name: Release Dotfiles
+    name: Test Release Dotfiles
     runs-on: ubuntu-20.04
     needs: merge-code
     if: ${{ needs.merge-code.outputs.dotfiles-changed }} == "true"
     env:
-      _DOTFILES_CHANGED: ${{ needs.merge-code.oututs.dotfiles-changed }}
+      _DOTFILES_CHANGED: ${{ needs.merge-code.outputs.dotfiles-changed }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f  # v2.3.4
