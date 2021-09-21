@@ -74,11 +74,13 @@ run() {
     "") 
       echo "workflow_dir input: $workflow_dir"
       yamllint -c $HOME/bitwarden/official-repos/gh-actions/lint-workflow/.yamllint.yml $PWD
+      actionlint
       python3 $linter_path $PWD 
     ;;
     *) 
       echo "workflow_dir input: $workflow_dir"
       yamllint -c $HOME/bitwarden/official-repos/gh-actions/lint-workflow/.yamllint.yml $workflow_dir
+      actionlint
       python3 $linter_path $workflow_dir
     ;;
   esac
