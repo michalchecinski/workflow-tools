@@ -70,20 +70,16 @@ run() {
   local linter_path="$HOME/bitwarden/official-repos/gh-actions/lint-workflow/lint.py"
   local workflow_dir=$1
 
-  case "$workflow_dir" in
-    "") 
-      echo "workflow_dir input: $workflow_dir"
-      yamllint -c $HOME/bitwarden/official-repos/gh-actions/lint-workflow/.yamllint.yml $PWD
-      actionlint
-      python3 $linter_path $PWD 
-    ;;
-    *) 
-      echo "workflow_dir input: $workflow_dir"
-      yamllint -c $HOME/bitwarden/official-repos/gh-actions/lint-workflow/.yamllint.yml $workflow_dir
-      actionlint
-      python3 $linter_path $workflow_dir
-    ;;
-  esac
+  if [ "$workflow_dir" == "" ] && [ -d ".github/workflows" ]; then
+    workflow_dir=".github/workflows"
+  else
+    workflow_dir="$PWD"
+  fi
+
+  echo "workflow_dir input: $workflow_dir"
+  yamllint -c $HOME/bitwarden/official-repos/gh-actions/lint-workflow/.yamllint.yml $workflow_dir
+  actionlint
+  python3 $linter_path $workflow_dir
 }
 
 # Get command
