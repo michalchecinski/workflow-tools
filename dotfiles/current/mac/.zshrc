@@ -14,8 +14,10 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init --path)"
 fi
 
-export DOTNET_ROOT=$HOME/dotnet
+#export DOTNET_ROOT=$HOME/dotnet
+export DOTNET_ROOT="/usr/local/opt/dotnet/libexec"
 export GOPATH=$HOME/go
+export DOCKER_HOST=tcp://locahost:2375
 
 . ~/.env_setup
 

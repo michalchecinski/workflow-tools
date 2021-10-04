@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+# Supports running the community edition of the Docker engine on Mac via a VirtualBox VM
+
+_VAGRANT_FILE_LOCATION="$HOME/bitwarden/devops/tools/mac-docker-setup/"
+_VAGRANT_MACHINE_ID="8ac8f01"
+
+usage() {
+  echo "
+Usage: docker-vm [COMMAND] [ARGS] 
+  <Description>
+
+  help - Prints out the usage doc
+    Examples: 
+      docker-vm help
+"
+}
+
+err() {
+  if [[ $1 ]]; then
+    echo "[!] $1"
+  fi
+  exit 1
+}
+
+##############################
+# Starts the Docker VM
+# Globals: 
+#   _VAGRANT_FILE_LOCATION
+##############################
+up() {
+  vagrant up $_VAGRANT_MACHINE_ID
+}
+
+##############################
+# Stops the Docker VM
+# Globals: 
+#   _VAGRANT_FILE_LOCATION
+##############################
+halt() {
+  vagrant halt $_VAGRANT_MACHINE_ID
+}
+
+
+##############################
+# Gets the current Vagrant status
+##############################
+status() {
+  vagrant global-status > /tmp/vagrant-status-output
+  head -2 /tmp/vagrant-status-output
+  grep $_VAGRANT_MACHINE_ID /tmp/vagrant-status-output
+}
+
+# Get command
+COMMAND=$1; shift
+
+
+# Run command
+case $COMMAND in 
+  "up") up ;;
+  "halt") halt ;;
+  "status") status ;;
+  "help" | "-h" | "--help") usage ;;
+  "") exp "Missing command." ;;
+  *) exp "Unrecognized command: $COMMAND" ;;
+esac
