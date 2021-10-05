@@ -4,7 +4,7 @@ usage() {
   echo "
 Usage: dotfiles [COMMAND] [ARGS] 
   This script is used to manage dotfiles found in https://github.com/joseph-flinn/workflow/tools/tree/main/dotfiles
-  across all Linux like machines
+  across all Linux like machines. It currently supports Ubuntu and Mac
 
 Commands:
   install - Installs the latest released dotfiles for a specified OS from GitHub
