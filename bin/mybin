@@ -10,6 +10,8 @@ Usage: mybin [COMMAND] [ARGS]
   ls - lists the custom scripts available and their commands
 
   new - creates a new script from a template with the given parameter as a name
+    Args:
+      script-name: the name of the new script
     Examples:
       mybin new new-script-name
 
