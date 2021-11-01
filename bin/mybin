@@ -2,6 +2,25 @@
 #
 # A management script to manage the custom utilities in the bin direcotry of workflow-tools
 
+usage() {
+  echo "
+Usage: mybin [COMMAND] [ARGS] 
+  A script to manage the custom utilities in the bin directory of the workflow-tools
+
+  ls - lists the custom scripts available and their commands
+
+  new - creates a new script from a template with the given parameter as a name
+    Args:
+      script-name: the name of the new script
+    Examples:
+      mybin new new-script-name
+
+  help - Prints out the usage doc
+    Examples: 
+      mybin help
+"
+}
+
 ##############################
 # Lists the custom scripts and aliases in workflow-tools
 # Globals: 
@@ -50,6 +69,8 @@ command=$1
 
 case $command in 
     "ls") lsbin ;;
-    "new") create-script $2;;
+    "new") create-script $2 ;;
+    "help") usage ;;
+    "") usage ;;
     "*") echo "[!] Command not recognized" ;;
 esac
