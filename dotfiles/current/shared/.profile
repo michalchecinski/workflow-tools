@@ -24,3 +24,4 @@ if [ -n "$ZSH_VERSION" ]; then
     fi
 fi
 
+export PATH="$HOME/.poetry/bin:$PATH"
