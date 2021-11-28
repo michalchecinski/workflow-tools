@@ -1,7 +1,10 @@
 #!/bin/bash
 
 usage() {
-  echo "Help documentation is not yet implemented" 
+  echo "
+-----
+Help documentation is not yet implemented
+"
 }
 
 PARAM=$1;
@@ -55,7 +58,5 @@ case "$OSTYPE" in
   "linux-gnu"*)
     echo "Linux is not yet supported"
     ;;
-  *)
-    echo "Unsupported OS type: $OSTYPE"
-    ;;
+  *) echo "Unsupported OS type: $OSTYPE"; usage ;;
 esac

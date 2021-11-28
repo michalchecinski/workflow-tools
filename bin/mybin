@@ -4,6 +4,7 @@
 
 usage() {
   echo "
+-----
 Usage: mybin [COMMAND] [ARGS] 
   A script to manage the custom utilities in the bin directory of the workflow-tools
 
@@ -72,5 +73,5 @@ case $command in
     "new") create-script $2 ;;
     "help") usage ;;
     "") usage ;;
-    "*") echo "[!] Command not recognized" ;;
+    "*") echo "[!] Command not recognized"; usage ;;
 esac

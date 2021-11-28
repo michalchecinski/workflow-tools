@@ -90,8 +90,6 @@ case $COMMAND in
   "mkdir") make_dir $1 $2 ;;
   "run") run $1 ;;
   "help") usage ;;
-  *)
-    echo "[!] Unrecognized command: $COMMAND"
-  ;;
+  *) echo "[!] Unrecognized command: $COMMAND"; usage ;;
 esac
 
