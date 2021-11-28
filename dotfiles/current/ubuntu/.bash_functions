@@ -23,7 +23,13 @@ vim() {
 }
 
 load_env() {
-  set -o allexport
-  source .env
-  set +o allexport
+  if [ -f .env ]; then
+    set -o allexport
+    source .env
+    set +o allexport
+
+    echo "[+] Successfully loaded .env"
+  else
+    echo "[!] .env doesn't exist"
+  fi
 }
