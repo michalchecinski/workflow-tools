@@ -28,6 +28,7 @@ add_to_path "$HOME/.dotnet/tools"
 add_to_path "$HOME/go/bin"
 add_to_path "/usr/local/opt/curl/bin"
 add_to_path "/usr/local/opt/crowdin@3/bin"
+add_to_path "$HOME/bitwarden/bin"
 
 # Load custom funcitons
 if [ -f ~/.functions ]; then
