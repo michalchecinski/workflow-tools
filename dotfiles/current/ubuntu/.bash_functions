@@ -21,3 +21,9 @@ vim() {
     *) echo "Exiting...";;
   esac
 }
+
+load_env() {
+  set -o allexport
+  source .env
+  set +o allexport
+}
