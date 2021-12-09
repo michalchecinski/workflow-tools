@@ -7,6 +7,7 @@ _VAGRANT_MACHINE_ID="8ac8f01"
 
 usage() {
   echo "
+-----
 Usage: docker-vm [COMMAND] [ARGS] 
   <Description>
 
@@ -61,6 +62,6 @@ case $COMMAND in
   "halt") halt ;;
   "status") status ;;
   "help" | "-h" | "--help") usage ;;
-  "") exp "Missing command." ;;
-  *) exp "Unrecognized command: $COMMAND" ;;
+  "") exp "Missing command."; usage ;;
+  *) exp "Unrecognized command: $COMMAND"; usage ;;
 esac

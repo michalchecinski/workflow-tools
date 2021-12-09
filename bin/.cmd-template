@@ -4,6 +4,7 @@
 
 usage() {
   echo "
+-----
 Usage: <script-name> [COMMAND] [ARGS] 
   <Description>
 

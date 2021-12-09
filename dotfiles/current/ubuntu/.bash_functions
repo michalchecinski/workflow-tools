@@ -21,3 +21,15 @@ vim() {
     *) echo "Exiting...";;
   esac
 }
+
+load_env() {
+  if [ -f .env ]; then
+    set -o allexport
+    source .env
+    set +o allexport
+
+    echo "[+] Successfully loaded .env"
+  else
+    echo "[!] .env doesn't exist"
+  fi
+}

@@ -6,6 +6,7 @@ _ANSIBLE_ROOT_DIR=$HOME/workflow-tools/homelab/ansible
 
 usage() {
   echo "
+-----
 Usage: homelab [COMMAND] [ARGS] 
   homelab is a tool to help manage the homelab via ansible. I was finding myself opening the README to reference the 
   commands every time I was going to update the machines in my homelab.

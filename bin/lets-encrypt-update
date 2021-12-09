@@ -13,7 +13,10 @@ fi
 #  Usage  #
 ###########
 usage() {
-  echo "Usage: Not yet implemented"
+  echo "
+-----
+Usage: Not yet implemented
+"
 }
 
 ###############
@@ -124,7 +127,5 @@ case "$COMMAND" in
   help )
     usage && exit
     ;;
-  * )
-    exp "leu: $COMMAND not found"
-    ;;
+  * ) exp "leu: $COMMAND not found"; usage ;;
 esac

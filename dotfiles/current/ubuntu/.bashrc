@@ -132,4 +132,4 @@ fi
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-
+export DOCKER_BUILDKIT=1
