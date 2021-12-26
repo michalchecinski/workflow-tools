@@ -18,6 +18,26 @@ This is a safe cluster OS update. It happens serially. If a reboot is necessary,
 each node is drained of the k8s pods. It also checks for any ongoing work in a 
 `tmux` session and prevents a reboot if that is the case (for the user: `joseph`)
 
+#### NEW
+```
+#############
+#  homelab  #
+#############
+Update cluster: homelab update homelab
+Update just nodes: homelab update nodes
+Update just nas: homelab update nas
+Update single machine: homelab update k8s-node1
+
+#############
+#  Ansible  #
+#############
+Update cluster: ansible-playbook -i hosts -K -e "targets=homelab" update-os.yaml
+Update just nodes: ansible-playbook -i hosts -K -e "targets=nodes" update-os.yaml
+Update just nas: ansible-playbook -i hosts -K -e "targets=nas" update-os.yaml
+Update single machine: ansible-playbook -i hosts -K -e "targets=k8s-node1" update-os.yaml
+```
+
+#### OLD
 ```
 #############
 #  homelab  #

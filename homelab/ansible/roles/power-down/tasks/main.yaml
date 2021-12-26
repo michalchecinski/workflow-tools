@@ -1,0 +1,5 @@
+- import_tasks: k8s-node.yaml
+  when: targets == "nodes" or "nodes" in group_names
+
+- import_tasks: nas.yaml
+  when: targets == "nas" or "nas" in group_names

@@ -1,0 +1,12 @@
+- name: Check if a reboot is needed
+  register: reboot_required_file
+  stat: path=/var/run/reboot-required get_md5=no
+  when: not force
+
+- name: reboot k8s node
+  import_tasks: k8s-node.yaml
+  when: force or (reboot_required_file.stat.exists and (targets == "nodes" or "nodes" in group_names))
+
+- name: reboot nas
+  import_tasks: nas.yaml
+  when: force or (reboot_required_file.stat.exists and (targets == "nas" or "nas" in group_names))

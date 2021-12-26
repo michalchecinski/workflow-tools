@@ -1,5 +1,5 @@
 - name: Get tmux sessions
-  shell: "tmux ls | wc -l"
+  shell: tmux ls | wc -l
   become: true
   become_user: joseph
   register: tmux_session_count
