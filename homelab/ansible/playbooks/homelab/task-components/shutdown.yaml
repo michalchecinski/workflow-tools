@@ -1,2 +1,0 @@
-- name: Shutdown machine
-  community.general.shutdown: {}

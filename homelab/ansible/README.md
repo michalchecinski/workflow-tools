@@ -31,10 +31,10 @@ Update single machine: homelab update k8s-node1
 #############
 #  Ansible  #
 #############
-Update cluster: ansible-playbook -i hosts -K -e "targets=homelab" update-os.yaml
-Update just nodes: ansible-playbook -i hosts -K -e "targets=nodes" update-os.yaml
-Update just nas: ansible-playbook -i hosts -K -e "targets=nas" update-os.yaml
-Update single machine: ansible-playbook -i hosts -K -e "targets=k8s-node1" update-os.yaml
+Update cluster: ansible-playbook -i hosts -K -e "targets=homelab" playbooks/update-os.yaml
+Update just nodes: ansible-playbook -i hosts -K -e "targets=nodes" playbooks/update-os.yaml
+Update just nas: ansible-playbook -i hosts -K -e "targets=nas" playbooks/update-os.yaml
+Update single machine: ansible-playbook -i hosts -K -e "targets=k8s-node1" playbooks/update-os.yaml
 ```
 
 #### OLD
