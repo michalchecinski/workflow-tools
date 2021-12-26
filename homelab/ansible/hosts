@@ -1,14 +1,14 @@
 [k8s-node1]
-192.168.0.251
+192.168.0.251 mac_address=1c:69:7a:6a:bd:10
 
 [k8s-node2]
-192.168.0.252
+192.168.0.252 mac_address=1c:69:7a:6a:b9:2d
 
 [k8s-node3]
-192.168.0.253
+192.168.0.253 mac_address=1c:69:7a:6a:8a:e8
 
 [nas]
-192.168.0.109
+192.168.0.109 mac_address=f2:84:78:b8:11:4f
 
 [nodes:children]
 k8s-node1

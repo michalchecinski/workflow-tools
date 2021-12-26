@@ -1,0 +1,11 @@
+---
+- hosts: "{{ targets }}"
+  become: true
+  become_user: root
+  serial: 1
+  tasks:
+    - community.general.wakeonlan:
+        mac: "{{ mac_address }}"
+        broadcast: "{{ hostvars[inventory_hostname]['inventory_hostname'] }}"
+      delegate_to: localhost
+

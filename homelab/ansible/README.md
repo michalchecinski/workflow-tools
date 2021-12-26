@@ -24,7 +24,6 @@ This is a safe cluster OS update. It happens serially. If a reboot is necessary,
 each node is drained of the k8s pods. It also checks for any ongoing work in a 
 `tmux` session and prevents a reboot if that is the case (for the user: `joseph`)
 
-#### NEW
 ```
 #############
 #  homelab  #

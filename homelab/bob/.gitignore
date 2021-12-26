@@ -1,9 +1,0 @@
-.session.vim
-.tmuxp.yaml
-**/*.swp
-.venv
-
-# Building
-bob.egg-info
-**/__pycache__
-
