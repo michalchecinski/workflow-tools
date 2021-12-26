@@ -72,7 +72,7 @@ update() {
   local target=$1
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
-    $_ANSIBLE_ROOT_DIR/playbooks/homelab/update-os.yaml
+    $_ANSIBLE_ROOT_DIR/playbooks/update-os.yaml
 }
 
 ##############################
@@ -86,7 +86,7 @@ power-down() {
   local target=$1
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
-    $_ANSIBLE_ROOT_DIR/playbooks/homelab/power-down.yaml
+    $_ANSIBLE_ROOT_DIR/playbooks/power-down.yaml
 }
 
 # Get command

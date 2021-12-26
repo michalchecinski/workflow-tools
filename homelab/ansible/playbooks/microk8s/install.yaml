@@ -1,9 +1,0 @@
----
-- name: Install MicroK8s
-  hosts: cluster
-  remote_user: root
-
-  tasks:
-  - name: install microk8s
-    shell: 
-      cmd: snap install microk8s --classic

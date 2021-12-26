@@ -1,9 +1,0 @@
----
-- name: stop microK8s
-  hosts: cluster
-  remote_user: root
-
-  tasks:
-  - name: stop microk8s
-    shell: 
-      cmd: microk8s stop
