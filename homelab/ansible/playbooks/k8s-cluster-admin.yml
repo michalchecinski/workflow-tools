@@ -1,0 +1,8 @@
+---
+
+- hosts: localhost
+  gather_facts: true
+  connection: local
+  roles:
+    - k8s-argocd
+    - k8s-cert-manager

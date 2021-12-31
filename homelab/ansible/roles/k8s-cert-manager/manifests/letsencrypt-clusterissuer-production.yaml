@@ -5,9 +5,9 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: joeflinn412@gmail.com
+    email: certs@bitwarden.com
     privateKeySecretRef:
-      name: letsencrypt
+      name: letsencrypt-production-private-key
     solvers:
       - http01:
           ingress:

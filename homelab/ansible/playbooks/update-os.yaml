@@ -4,5 +4,5 @@
   become_user: root
   serial: 1
   roles:
-    - update-os
-    - reboot
+    - node-update-os
+    - node-reboot

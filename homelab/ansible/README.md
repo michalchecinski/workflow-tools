@@ -7,7 +7,7 @@ Ansible is installed in the root python evironment: `pip install ansible`
 
 A Root SSH key has been generated and deployed to each machine
 
-## Cluster
+## Cluster Nodes
 While being root in the `**/ansible/src`:
 
 ### ping test
@@ -65,8 +65,34 @@ Power down just nas: asnible-playbook -i hosts -K -e "targets=nas" playbooks/pow
 
 ## K8s
 
+### Cluster Access
 To get the token:
 ```
 token=$(microk8s kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
 microk8s kubectl -n kube-system describe secret $token
 ```
+
+### Cluster Admin via Ansible
+#### Requirements
+
+- Ansible
+  - `brew install ansible`
+- Helm
+  - `brew install helm`
+- Kubernetes python module
+  - `pip3 install kubernetes`
+- Kubernetes Ansible Collection
+  - `ansible-galaxy collection install -r requirements.yml`
+
+#### How setup to test
+
+1. Install [K3d](https://k3d.io/v5.2.1/)
+2. Build a K8s cluster.
+    -  `k3d cluster create test-ansible --image rancher/k3s:v1.20.7-k3s1`
+
+### How to run
+
+1. Validate the environment variables in `<env>-values.yml` or create a new file if needed.
+2. Switch to the correct k8s cluster context
+3. Run the `main-clusters.yml` playbook with Ansible, passing in the values file.
+   1. `ansible-playbook playbooks/k8s-cluster-admin.yml -e "@values/nucs.yml"`

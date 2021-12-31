@@ -5,9 +5,9 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: joeflinn412@gmail.com
+    email: certs@bitwarden.com
     privateKeySecretRef:
-      name: letsencrypt-staging
+      name: letsencrypt-staging-private-key
     solvers:
       - http01:
           ingress:

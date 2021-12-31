@@ -1,0 +1,26 @@
+- name: Add Argo Helm Repo
+  kubernetes.core.helm_repository:
+    name: argo
+    repo_url: "https://argoproj.github.io/argo-helm"
+
+- name: Deploy ArgoCD
+  kubernetes.core.helm:
+    name: argo
+    chart_ref: argo/argo-cd
+    release_namespace: argocd
+    create_namespace: true
+    values:
+      global:
+        tag: "{{ version.argocd }}"
+      server:
+        ingress:
+          enabled: true
+          ingressClassName: "public"
+          hosts: 
+            - "{{ ingressHosts.argo }}"
+          tls:
+            - secretName: argocd-server-tls
+          annotations:
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+            nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+            nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"

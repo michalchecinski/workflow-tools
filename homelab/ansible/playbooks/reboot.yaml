@@ -4,4 +4,4 @@
   become_user: root
   serial: 1
   roles:
-    - reboot
+    - node-reboot

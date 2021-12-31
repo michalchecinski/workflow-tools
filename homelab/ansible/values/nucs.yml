@@ -1,0 +1,7 @@
+---
+ingressHosts:
+  argo: argocd.flinnlab.com
+
+version:
+  cert_manager: v1.4.1
+  argocd: v2.1.7
