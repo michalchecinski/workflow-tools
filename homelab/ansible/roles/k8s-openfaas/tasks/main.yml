@@ -1,0 +1,17 @@
+- name: Add OpenFaaS Helm Repo
+  kubernetes.core.helm_repository:
+    name: openfaas
+    repo_url: "https://openfaas.github.io/faas-netes"
+
+- name: Deploy ArgoCD
+  kubernetes.core.helm:
+    name: openfaas
+    chart_ref: openfaas/openfaas
+    release_namespace: openfaas
+    create_namespace: true
+    values:
+      functionNamespace: openfaas-fn
+      generateBasicAuth: true
+      ingress:
+        enabled: true
+
