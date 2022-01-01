@@ -1,0 +1,63 @@
+argoApps:
+
+  - name: appfunctions
+    projectName: default
+    namespace: appfunctions
+    gitPath: k8s/apps/appfunctions/overlays/qa
+    gitRepo: git@github.com:bitwarden/devops.git
+    targetRevision: HEAD
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=True
+
+  - name: eventprocessor
+    projectName: default
+    namespace: eventprocessor
+    gitPath: k8s/apps/events-proc/overlays/qa
+    gitRepo: git@github.com:bitwarden/devops.git
+    targetRevision: HEAD
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=True
+
+  - name: icons
+    projectName: default
+    namespace: icons
+    gitPath: k8s/apps/icons/overlays/qa
+    gitRepo: git@github.com:bitwarden/devops.git
+    targetRevision: HEAD
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=True
+
+  - name: notifications
+    projectName: default
+    namespace: notifications
+    gitPath: k8s/apps/notifications/overlays/qa
+    gitRepo: git@github.com:bitwarden/devops.git
+    targetRevision: HEAD
+    syncOptions:
+      - CreateNamespace=True
+
+  - name: proxy
+    projectName: default
+    namespace: proxy
+    gitPath: k8s/apps/proxy/overlays/qa
+    gitRepo: git@github.com:bitwarden/devops.git
+    targetRevision: feature/qa-proxy
+    syncOptions:
+      - CreateNamespace=True
+
+  - name: web-client
+    projectName: default
+    namespace: proxy
+    gitPath: k8s/apps/web/overlays/qa
+    gitRepo: git@github.com:bitwarden/devops.git
+    targetRevision: HEAD
+    syncOptions:
+      - CreateNamespace=True

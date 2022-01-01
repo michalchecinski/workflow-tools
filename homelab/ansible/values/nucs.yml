@@ -1,6 +1,6 @@
 ---
 ingressHosts:
-  argo: argocd.flinnlab.com
+  argo: argocd.local
 
 version:
   cert_manager: v1.4.1
