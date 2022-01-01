@@ -18,6 +18,16 @@ Commands
     Examples:
       homelab update homelab
 
+  reboot - Powers up the specified Ansible target
+    Args:
+      target - the target machine
+    Options:
+      --force: Will force a (safe) reboot even if a reboot is not required by the OS
+    Examples:
+      homelab reboot nodes
+      homelab reboot nodes --force
+
+
   up - Powers up the specified Ansible target
     Args:
       target - the target machine
@@ -56,7 +66,12 @@ check-target() {
   local dirty_hosts=$(grep $_ANSIBLE_ROOT_DIR/hosts -e "\[.*\]")
   local hosts=$(
     for host in $dirty_hosts; do
-      echo ${host:1:-1} | cut -d ":" -f 1
+      if [[ "$(basename $(echo $SHELL))" == "bash" ]]; then
+        echo ${host:1:-1} | cut -d ":" -f 1
+      else
+        end=$(( ${#host} - 2 ))
+        echo ${host:1:$end} | cut -d ":" -f 1
+      fi
     done
   )
 
@@ -76,9 +91,34 @@ check-target() {
 ##############################
 update() {
   local target=$1
+  cd ~/workflow-tools/homelab/ansible
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
     $_ANSIBLE_ROOT_DIR/playbooks/update-os.yaml
+}
+
+##############################
+# Reboot the targeted machines
+# Globals: 
+#   _ANSIBLE_ROOT_DIR
+# Arguments: 
+#   1 - update target
+#   2 - force reboot even if not needed
+##############################
+reboot() {
+  local target=$1
+  local force=$2
+  cd ~/workflow-tools/homelab/ansible
+
+  if [[ "$2" == "--force" ]]; then
+    ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
+      -K -e "targets=$target" -e "force=true" \
+      $_ANSIBLE_ROOT_DIR/playbooks/reboot.yaml
+  else
+    ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
+      -K -e "targets=$target" \
+      $_ANSIBLE_ROOT_DIR/playbooks/reboot.yaml
+  fi
 }
 
 ##############################
@@ -90,6 +130,7 @@ update() {
 ##############################
 wol() {
   local target=$1
+  cd ~/workflow-tools/homelab/ansible
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
     $_ANSIBLE_ROOT_DIR/playbooks/wol.yaml
@@ -104,6 +145,7 @@ wol() {
 ##############################
 power-down() {
   local target=$1
+  cd ~/workflow-tools/homelab/ansible
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
     $_ANSIBLE_ROOT_DIR/playbooks/power-down.yaml
@@ -128,6 +170,11 @@ case $COMMAND in
     TARGET=$1
     check-target $TARGET
     power-down $TARGET
+    ;;
+  "reboot")
+    TARGET=$1
+    check-target $TARGET
+    reboot $TARGET $2
     ;;
   "help" | "-h" | "--help") usage ;;
   "") err "Missing command." ;;

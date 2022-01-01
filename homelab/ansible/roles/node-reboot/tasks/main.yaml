@@ -5,8 +5,8 @@
 
 - name: reboot k8s node
   import_tasks: k8s-node.yaml
-  when: force or (reboot_required_file.stat.exists and (targets == "nodes" or "nodes" in group_names))
+  when: (targets == "nodes" or "nodes" in group_names) and (force or reboot_required_file.stat.exists)
 
 - name: reboot nas
   import_tasks: nas.yaml
-  when: force or (reboot_required_file.stat.exists and (targets == "nas" or "nas" in group_names))
+  when: (targets == "nas" or "nas" in group_names) and (force or reboot_required_file.stat.exists)
