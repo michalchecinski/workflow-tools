@@ -39,15 +39,18 @@ if [ -f ~/.zsh_functions ]; then
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/google/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/google/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/usr/local/google/google-cloud-sdk/path.zsh.inc' ]; then 
+  . '/usr/local/google/google-cloud-sdk/path.zsh.inc'
+fi
+
+
+######################
+#  Auto Completions  #
+######################
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
 
 # The next line enables shell command completion for gcloud.
 #if [ -f '/usr/local/google/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google/google-cloud-sdk/completion.zsh.inc'; fi
-
-kube_configs=(~/.kube/configs/*)
-export KUBECONFIG=$(IFS=: ; echo "${kube_configs[*]}")
-
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
 
 
 #############

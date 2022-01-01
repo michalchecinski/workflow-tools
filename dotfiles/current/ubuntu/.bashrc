@@ -96,29 +96,6 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/workflow-tools/bin/.aliases ]; then
-    . ~/workflow-tools/bin/.aliases
-fi
-
-# Load custom bash funcitons
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
-fi
-
-# Load custom path and env vars
-if [ -f ~/.env_setup ]; then
-    . ~/.env_setup
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -130,6 +107,59 @@ if ! shopt -oq posix; then
   fi
 fi
 
+#############################################################################
+#  Custom Additions
+#############################################################################
+
+# Load custom path and env vars
+. ~/.env_setup
+
+# Load custom bash funcitons
+if [[ -f ~/.bash_functions ]]; then
+  . ~/.bash_functions
+fi
+
+###################
+#  Session Setup  #
+###################
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 export DOCKER_BUILDKIT=1
+
+
+##############################
+#  Install Bash Completions  #
+##############################
+COMPDIR=$(pkg-config --variable=completionsdir bash-completion)
+
+# kubectx & kubens
+if [[ ! -f $COMPDIR/kubens || ! -f $COMPDIR/kubectx ]]; then
+    ln -sf ~/.kubectx/completion/kubens.bash $COMPDIR/kubens
+    ln -sf ~/.kubectx/completion/kubectx.bash $COMPDIR/kubectx
+fi
+
+# kubectl
+source <(kubectl completion bash)
+
+
+#############
+#  Aliases  #
+#############
+if [[ -f ~/.bash_aliases ]]; then
+  . ~/.bash_aliases
+fi
+
+if [[ -f ~/.workflow-tools/bin/.aliases ]]; then
+  . ~/workflow-tools/bin/.aliases
+fi
+
+
+##############################
+#  Install kubectx & kubens  # 
+##############################
+if [[ ! -d ~/.kubectx ]]; then
+    git clone https://github.com/ahmetb/kubectx.git ~/.kubectx
+fi
+
+add_to_path "$HOME/.kubectx"
+
