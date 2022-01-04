@@ -125,8 +125,7 @@ fi
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 export DOCKER_BUILDKIT=1
-
-add_to_path "LEDGER_FILE=~/finances/current.journal"
+export LEDGER_FILE=~/finances/current.journal
 
 
 ##############################
