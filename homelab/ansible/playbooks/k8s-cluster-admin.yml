@@ -3,7 +3,7 @@
   gather_facts: true
   connection: local
   roles:
-    #- k8s-nfs-storage-class
-    #- k8s-argocd
-    #- k8s-cert-manager
+    - k8s-nfs-storage-class
+    - k8s-argocd
+    - k8s-cert-manager
     - k8s-openfaas
