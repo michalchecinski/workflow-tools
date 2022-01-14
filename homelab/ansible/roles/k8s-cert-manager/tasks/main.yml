@@ -27,3 +27,9 @@
     state: present
     src: ./manifests/letsencrypt-clusterissuer-production.yaml
     namespace: cert-manager
+
+- name: Deploy Local CA cert Issuer
+  kubernetes.core.k8s:
+    state: present
+    src: ./manifests/ca-clusterissuer.yaml
+    namespace: cert-manager

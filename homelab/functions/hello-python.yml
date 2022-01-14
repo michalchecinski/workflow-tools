@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: https://faas.flinnlab.com
+functions:
+  hello-python:
+    lang: python3
+    handler: ./hello-python
+    image: hello-python:latest
+

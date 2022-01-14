@@ -1,9 +1,12 @@
+- name: Deploy OpenFaaS Namespaces
+  ansible.builtin.command: kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
+
 - name: Add OpenFaaS Helm Repo
   kubernetes.core.helm_repository:
     name: openfaas
-    repo_url: "https://openfaas.github.io/faas-netes"
+    repo_url: "https://openfaas.github.io/faas-netes/"
 
-- name: Deploy ArgoCD
+- name: Deploy OpenFaas
   kubernetes.core.helm:
     name: openfaas
     chart_ref: openfaas/openfaas
@@ -14,4 +17,18 @@
       generateBasicAuth: true
       ingress:
         enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "public"
+          cert-manager.io/cluster-issuer: local-ca-issuer
+        tls:
+          - hosts:
+            - faas.flinnlab.com
+            secretName: openfaas-crt
+        hosts:
+          - host: faas.flinnlab.com
+            serviceName: gateway
+            servicePort: 8080
+            path: /
+      ingressOperator:
+        create: true
 
