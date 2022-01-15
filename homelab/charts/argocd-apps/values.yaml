@@ -1,7 +1,7 @@
 argoApps:
-  kustomize: {}
   helm:
     - name: openhab
+      enabled: true
       namespace: openhab
       argoProject: default
       repo: "https://k8s-at-home.com/charts/"
@@ -10,3 +10,17 @@ argoApps:
       automated: null
       syncOptions:
         - CreateNamespace=true
+      valueFiles:
+        - ../../apps/openhab/values.yml
+  manifests:  # Includes Kustomize
+    - name: nfs-test
+      enabled: true
+      projectName: default
+      namespace: nfs-test
+      gitPath: homelab/apps/nfs-test
+      gitRepo: git@github.com:joseph-flinn/workflow-tools.git
+      targetRevision: HEAD
+      automated:
+        prune: true
+      syncOptions:
+        - CreateNamespace=True

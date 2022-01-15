@@ -1,0 +1,86 @@
+#
+# IMPORTANT NOTE
+#
+# This chart inherits from our common library chart. You can check the default values/options here:
+# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+#
+
+image:
+  # -- image repository
+  repository: openhab/openhab
+  # -- image tag
+  tag: 3.2.0
+  # -- image pull policy
+  pullPolicy: IfNotPresent
+
+# -- environment variables. See more environment variables in the [openhab image documentation](https://hub.docker.com/r/openhab/openhab).
+# @default -- See below
+env:
+  TZ: America/Los_Angeles
+  EXTRA_JAVA_OPTS: -Duser.timezone="America/Los_Angeles"
+  USER_ID: 1000
+  GROUP_ID: 1000
+  OPENHAB_HTTP_PORT: 8080
+  OPENHAB_HTTPS_PORT: 8443
+  CRYPTO_POLICY: unlimited
+
+# -- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    ports:
+      http:
+        enabled: true
+        port: 8080
+      https:
+        enabled: true
+        port: 8443
+
+ingress:
+  # -- Enable and configure ingress settings for the chart under this key.
+  # @default -- See values.yaml
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: local-ca-issuer
+      ingressClassName: public
+      hosts:
+        - host: openhab.local
+          paths:
+            - path: /
+              pathType: Prefix
+              port: 8443
+      tls:
+        - secretName: openhab-tls
+          hosts:
+            - openhab.local
+
+# -- Configure persistence settings for the chart under this key. Choose either
+# -- a single volume for all data or separate volumes for each sub-directory.
+# @default -- See values.yaml
+persistence:
+  # -- separate volumes
+  addons:
+    enabled: true
+    type: pvc
+    storageClass: nfs-client
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    mountPath: /openhab/addons
+    retain: true
+  conf:
+    enabled: true
+    type: pvc
+    storageClass: nfs-client
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    mountPath: /openhab/conf
+    retain: true
+  userdata:
+    enabled: true
+    type: pvc
+    storageClass: nfs-client
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    mountPath: /openhab/userdata
+    retain: true

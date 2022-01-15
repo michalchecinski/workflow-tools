@@ -1,5 +1,6 @@
 {{- range $argoApps := .Values.argoApps.helm }}
 
+{{ if $argoApps.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -15,17 +16,17 @@ spec:
     path: ''
     chart: {{ $argoApps.chart }}
     targetRevision: {{ $argoApps.chartVersion }}
-  helm:
-    {{- if $argoApps.valueFiles }}
-      syncOptions:
-      {{- range $argoApps.valueFiles }}
-        - {{ . | title }}
+    helm:
+      {{- if $argoApps.valueFiles }}
+        valueFiles:
+        {{- range $argoApps.valueFiles }}
+          - {{ . | title }}
+        {{- end }}
       {{- end }}
-    {{- end }}
-    {{- if $argoApps.values }}
-      values: |
-        {{- toYaml $argoApps.values | nindent 8 }}
-    {{- end }}
+      {{- if $argoApps.values }}
+        values: |
+          {{- toYaml $argoApps.values | nindent 10 }}
+      {{- end }}
   project: {{ $argoApps.argoProject }}
   syncPolicy:
     automated: null
@@ -35,4 +36,5 @@ spec:
       - {{ . | title }}
     {{- end }}
   {{- end }}
+{{- end }}
 {{- end }}

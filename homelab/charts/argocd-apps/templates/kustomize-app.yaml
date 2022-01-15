@@ -1,5 +1,6 @@
-{{- range $argoApps := .Values.argoApps.kustomize }}
+{{- range $argoApps := .Values.argoApps.manifests }}
 
+{{ if $argoApps.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -26,4 +27,5 @@ spec:
       - {{ . | title }}
     {{- end }}
   {{- end }}
+{{- end }}
 {{- end }}
