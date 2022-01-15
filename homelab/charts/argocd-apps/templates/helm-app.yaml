@@ -1,4 +1,4 @@
-{{- range $argoApps := .Values.argoApps }}
+{{- range $argoApps := .Values.argoApps.helm }}
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -11,15 +11,13 @@ spec:
     namespace: {{ $argoApps.namespace }}
     server: 'https://kubernetes.default.svc'
   source:
-    path: {{ $argoApps.gitPath }}
-    repoURL: {{ $argoApps.gitRepo }}
-    targetRevision: {{ $argoApps.targetRevision }}
-  project: {{ $argoApps.projectName }}
+    repoURL: {{ $argoApps.repo }}
+    path: ''
+    chart: {{ $argoApps.chart }}
+    targetRevision: {{ $argoApps.chartVersion }}
+  project: {{ $argoApps.argoProject }}
   syncPolicy:
-  {{- if $argoApps.automated }}
-    automated:
-      {{- toYaml $argoApps.automated | nindent 6 }}
-  {{- end }}
+    automated: null
   {{- if $argoApps.syncOptions }}
     syncOptions:
     {{- range $argoApps.syncOptions }}

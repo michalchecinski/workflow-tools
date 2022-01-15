@@ -1,12 +1,12 @@
 argoApps:
-
-  - name: nextcloud
-    projectName: default
-    namespace: nextcloud
-    gitPath: ""
-    gitRepo: ""
-    targetRevision: HEAD
-    automated:
-      prune: true
-    syncOptions:
-      - CreateNamespace=True
+  kustomize: {}
+  helm:
+    - name: openhab
+      namespace: openhab
+      argoProject: default
+      repo: "https://k8s-at-home.com/charts/"
+      chart: openhab
+      chartVersion: 1.3.0
+      automated: null
+      syncOptions:
+        - CreateNamespace=true
