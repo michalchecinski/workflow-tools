@@ -17,10 +17,13 @@
           enabled: true
           ingressClassName: "public"
           hosts: 
-            - "{{ ingressHosts.argo }}"
+            - "{{ ingressHosts.argocd }}"
           tls:
             - secretName: argocd-server-tls
+              hosts:
+                - "{{ ingressHosts.argocd }}"
           annotations:
             nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
             nginx.ingress.kubernetes.io/ssl-passthrough: "true"
             nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+            cert-manager.io/cluster-issuer: "{{ ingressHosts.clusterIssuer }}"
