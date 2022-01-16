@@ -38,7 +38,7 @@ home-assistant:
       annotations:
         cert-manager.io/cluster-issuer: local-ca-issuer
       hosts:
-        - host: home-assistant.k8s.local
+        - host: home-assistant.k8s.lan
           paths:
             - path: /
               pathType: Prefix
@@ -46,7 +46,7 @@ home-assistant:
       tls:
         - secretName: home-assistant-tls
           hosts:
-            - home-assistant.k8s.local
+            - home-assistant.k8s.lan
 
   # -- Enable devices to be discoverable
   # hostNetwork: true
