@@ -17,5 +17,4 @@ appVersion: "2021.12.7"
 dependencies:
 - name: home-assistant
   version: 12.0.1
-  repository: https://k8s-at-home.com/charts/
-
+  repository: https://k8s-at-home.com/charts
