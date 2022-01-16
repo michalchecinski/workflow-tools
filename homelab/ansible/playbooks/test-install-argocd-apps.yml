@@ -3,4 +3,4 @@
   gather_facts: true
   connection: local
   roles:
-    - k8s-argocd-apps
+    - k8s-argocd-bootstrap-apps

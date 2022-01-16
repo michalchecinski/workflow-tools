@@ -24,4 +24,4 @@ argoApps:
       automated:
         prune: true
       syncOptions:
-        - CreateNamespace=True
+        - CreateNamespace=true

@@ -1,7 +1,19 @@
 ---
+- name: Check for argo-apps chart
+  shell:
+    cmd: helm list -n argocd | grep argo-apps | wc -l
+  register: argo_apps_installed
+
 - name: Deploy ArgoCD Applications
+  when: argo_apps_installed.stdout == "0"
   kubernetes.core.helm:
     name: argo-apps
     chart_ref: "{{playbook_dir}}/../../charts/argocd-apps"
     release_namespace: argocd
     replace: yes
+
+- name: Upgrade ArgoCD Applications
+  when: argo_apps_installed.stdout == "1"
+  shell: |
+    CHART_DIR="{{ playbook_dir }}/../../charts/argocd-apps"
+    helm upgrade -n argocd argo-apps $CHART_DIR -f $CHART_DIR/values.yaml

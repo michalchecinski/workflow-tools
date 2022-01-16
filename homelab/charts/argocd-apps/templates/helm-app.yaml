@@ -33,7 +33,7 @@ spec:
   {{- if $argoApps.syncOptions }}
     syncOptions:
     {{- range $argoApps.syncOptions }}
-      - {{ . | title }}
+      - {{ . }}
     {{- end }}
   {{- end }}
 {{- end }}
