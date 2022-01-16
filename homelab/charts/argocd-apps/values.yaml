@@ -2,7 +2,7 @@ argoApps:
   helm:
     - name: home-assistant
       enabled: true
-      namespace: home-assitant
+      namespace: home-assistant
       argoProject: default
       repo: git@github.com:joseph-flinn/workflow-tools.git
       path: homelab/apps/home-assistant
