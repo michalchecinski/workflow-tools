@@ -1,12 +1,12 @@
 argoApps:
   helm:
-    - name: openhab
+    - name: home-assistant
       enabled: true
-      namespace: openhab
+      namespace: home-assitant
       argoProject: default
       repo: git@github.com:joseph-flinn/workflow-tools.git
-      path: homelab/apps/openhab
-      chartVersion: v0.1.1-openhab
+      path: homelab/apps/home-assistant
+      chartVersion: v0.1.1-home-assistant
       automated:
         prune: true
       syncOptions:

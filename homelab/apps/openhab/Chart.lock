@@ -1,0 +1,6 @@
+dependencies:
+- name: openhab
+  repository: https://k8s-at-home.com/charts/
+  version: 1.3.0
+digest: sha256:a6028812f3e062601ccb139ea96543022e8ce6cc78d5293fa2106cbd3a69ad7b
+generated: "2022-01-15T20:05:19.643351821-08:00"
