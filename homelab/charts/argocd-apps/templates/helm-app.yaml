@@ -14,8 +14,7 @@ spec:
   source:
     repoURL: {{ $argoApps.repo }}
     path: {{ $argoApps.path }}
-    #chart: {{ $argoApps.chart }}
-    targetRevision: {{ $argoApps.chartVersion }}
+    targetRevision: {{ $argoApps.targetRevision }}
     helm:
       {{- if $argoApps.valueFiles }}
         valueFiles:

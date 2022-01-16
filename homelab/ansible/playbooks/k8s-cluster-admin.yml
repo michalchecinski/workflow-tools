@@ -6,5 +6,5 @@
     - k8s-nfs-storage-class
     - k8s-cert-manager
     - k8s-argocd
-    - k8s-argocd-apps
+    - k8s-argocd-bootstrap-apps
     - k8s-openfaas
