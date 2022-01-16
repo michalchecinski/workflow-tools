@@ -19,9 +19,7 @@ spec:
     helm:
       {{- if $argoApps.valueFiles }}
         valueFiles:
-        {{- range $argoApps.valueFiles }}
-          - {{ . | title }}
-        {{- end }}
+        {{ toYaml $argoApps.valueFiles | nindent 8}}
       {{- end }}
       {{- if $argoApps.values }}
         values: |
