@@ -1,7 +1,0 @@
----
-- name: Deploy ArgoCD Applications
-  kubernetes.core.helm:
-    name: argo-apps
-    chart_ref: "{{playbook_dir}}/../../charts/argocd-apps"
-    release_namespace: argocd
-    replace: yes

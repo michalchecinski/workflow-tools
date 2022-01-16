@@ -14,14 +14,11 @@ spec:
   source:
     repoURL: {{ $argoApps.repo }}
     path: {{ $argoApps.path }}
-    #chart: {{ $argoApps.chart }}
-    targetRevision: {{ $argoApps.chartVersion }}
+    targetRevision: {{ $argoApps.targetRevision }}
     helm:
       {{- if $argoApps.valueFiles }}
         valueFiles:
-        {{- range $argoApps.valueFiles }}
-          - {{ . | title }}
-        {{- end }}
+        {{ toYaml $argoApps.valueFiles | nindent 8}}
       {{- end }}
       {{- if $argoApps.values }}
         values: |
@@ -36,7 +33,7 @@ spec:
   {{- if $argoApps.syncOptions }}
     syncOptions:
     {{- range $argoApps.syncOptions }}
-      - {{ . | title }}
+      - {{ . }}
     {{- end }}
   {{- end }}
 {{- end }}
