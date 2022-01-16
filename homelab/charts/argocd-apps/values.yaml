@@ -12,7 +12,7 @@ argoApps:
       syncOptions:
         - CreateNamespace=true
       valueFiles:
-        - values.yml
+        - values.yaml
   manifests:  # Includes Kustomize
     - name: nfs-test
       enabled: false
