@@ -7,6 +7,10 @@ version:
   cert_manager: v1.4.1
   argocd: v2.2.2
 
+argocd:
+  git_repo: git@github.com:joseph-flinn/workflow-tools.git
+  git_private_key: /home/joseph/.ssh/microk8s-argocd-deploy
+
 nfs:
   host: 192.168.0.109
   path: /srv/nfs4

@@ -13,8 +13,8 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: {{ $argoApps.repo }}
-    path: ''
-    chart: {{ $argoApps.chart }}
+    path: {{ $argoApps.path }}
+    #chart: {{ $argoApps.chart }}
     targetRevision: {{ $argoApps.chartVersion }}
     helm:
       {{- if $argoApps.valueFiles }}
@@ -29,7 +29,10 @@ spec:
       {{- end }}
   project: {{ $argoApps.argoProject }}
   syncPolicy:
-    automated: null
+  {{- if $argoApps.automated }}
+    automated:
+      {{- toYaml $argoApps.automated | nindent 6 }}
+  {{- end }}
   {{- if $argoApps.syncOptions }}
     syncOptions:
     {{- range $argoApps.syncOptions }}
