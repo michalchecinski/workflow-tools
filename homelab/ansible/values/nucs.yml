@@ -1,7 +1,7 @@
 ---
 ingressHosts:
   clusterIssuer: local-ca-issuer
-  argocd: argocd.local
+  argocd: argocd.k8s.local
 
 version:
   cert_manager: v1.4.1
