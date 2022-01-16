@@ -7,7 +7,7 @@ type: application
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
 #version: v0.1.0
-version: openhab-v0.1.0 
+version: v0.1.0-openhab
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
