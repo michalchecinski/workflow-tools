@@ -6,7 +6,7 @@ argoApps:
       argoProject: default
       repo: git@github.com:joseph-flinn/workflow-tools.git
       path: homelab/apps/home-assistant
-      chartVersion: v0.1.0-home-assistant
+      chartVersion: v0.1.1-home-assistant
       automated:
         prune: true
       syncOptions:
