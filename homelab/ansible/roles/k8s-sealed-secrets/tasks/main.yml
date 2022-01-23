@@ -5,7 +5,18 @@
 
 - name: Deploy Sealed Secrets
   kubernetes.core.helm:
-    name: sealed-secrets
+    name: sealed-secrets-controller
     chart_ref: sealed-secrets/sealed-secrets
     release_namespace: kube-system
     create_namespace: true
+    values:
+      #fullnameOverride: sealed-secrets-controller
+      ingress:
+        enabled: true
+        ingressClassName: public
+        hostname: sealed-secrets.k8s.lan
+        path: /
+        pathType: Prefix
+        tls: true
+        annotations:
+          cert-manager.io/cluster-issuer: local-ca-issuer
