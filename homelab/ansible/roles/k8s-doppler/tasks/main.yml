@@ -1,0 +1,10 @@
+- name: Add Doppler Operator Helm Repo
+  kubernetes.core.helm_repository:
+    name: doppler
+    repo_url: https://helm.doppler.com
+
+- name: Deploy Doppler Operator
+  kubernetes.core.helm:
+    name: doppler-operator
+    chart_ref: doppler/doppler-kubernetes-operator
+    release_namespace: kube-system
