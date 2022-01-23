@@ -86,7 +86,7 @@ home-assistant:
       tag: 14.1.0
     postgresqlUsername: home-assistant
     postgresqlDatabase: home-assistant
-    postgresqlPassword: home-assistant-pass
+    existingSecret: home-assistant-secrets
     persistence:
       enabled: true
       storageClass: nfs-client
