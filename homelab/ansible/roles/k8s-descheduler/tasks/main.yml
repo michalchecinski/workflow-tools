@@ -1,0 +1,12 @@
+- name: Add Descheduler Helm Repo
+  kubernetes.core.helm_repository:
+    name: descheduler
+    repo_url: "https://kubernetes-sigs.github.io/descheduler"
+
+- name: Deploy Descheduler
+  kubernetes.core.helm:
+    name: descheduler
+    chart_ref: descheduler/descheduler
+    release_namespace: kube-system
+    values:
+      cronJobApiVersion: batch/v1
