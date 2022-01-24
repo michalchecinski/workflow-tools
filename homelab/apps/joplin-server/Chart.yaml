@@ -1,0 +1,19 @@
+apiVersion: v2
+name: joplin-server
+description: File System server to sync notes
+type: application
+
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+# Versions are expected to follow Semantic Versioning (https://semver.org/)
+version: v0.1.0-joplin-server
+
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application. Versions are not expected to
+# follow Semantic Versioning. They should reflect the version the application is using.
+appVersion: "2.1.2"
+
+dependencies:
+- name: joplin-server
+  version: 4.5.0
+  repository: https://k8s-at-home.com/charts
