@@ -13,45 +13,7 @@ curl -s -L $download_url > /usr/local/bin/dotfiles
 chmod +x /usr/local/bin/dotfiles
 ```
 
-## 1. docker - I have a dream of being computer agnostic when it comes to my
-development environment. I switch between multiple computers on a weekly basis; 
-a powerful workstation with multiple monitors at home or work and a thin sleek
-long-battery-life laptop on the move. I would like to seemlessly switch between
-these and any other computers that I would like. I currently have two ideas on 
-how to make this a reality. The first is using a cloud based VM (which I am 
-essentially doing the same thing now with a local server) which could have a 
-suite of tools surrounding it to minimize cost (I don't develop while I sleep. 
-Why should I pay for that compute time?). However, with the adoption of 
-containerization, anything that can be run in a VM can be run in a container. 
-I'm not sure if docker is the right tool with the decision to design their 
-containers around a single process, but this is the current attempt using 
-docker. I have not adopted it fully as it still has some work that needs to be 
-done (Do I use dind to control the local docker instance from inside the DevEnv 
-container? If not set up correctly, does this lead to a security risk? Am I ok 
-with the security risk? Will I be using this in an environment that cannot have 
-security risks?). Maybe LXD is the way to go? This should be compatible with all
-Linux computers/servers (maybe even chromebooks some day?).
-
-Cloud based VM:
-- Could provide a powerful computer environment for a thin not-powerful laptop
-- Always needs to be connected to the internet
-- Could experience connection lag depending on local network (coffee shop)
-- Security concerns connecting from public networks (solution: VPN, but lag)
-
-Container:
-- Theoretically, performance grows with the machine it is on if resources are
-not limited by the orchestrator.
-- Theoretically does everything a VM does with less overhead
-- Decouples DevEnv from the internet if desired
-
-Thoughts: Create a LXD container with vim and tmuxp as the dev environment that
-connects to a remote docker cluster (swarm or machine?) to run any other 
-development containers (ex. run a python container on the docker cluster if
-developing in python and run the scripts in the container. Could use aliases if
-absolutely necessary for faster program execution `dpython3 hello.py` instead of 
-`docker run --rm -it python:3.7.5-slim-buster python hello.py`)
-
-## 2. .tmuxp - I have always been interested in aliases for different tasks that
+## 1. .tmuxp - I have always been interested in aliases for different tasks that
 I do a lot. However, early on in my career, aliases were one of factors in me
 deleting a website from production. Since then, they have left a bad taste in my
 mouth. Recently I have wanted to have directory specific aliases so that there 
