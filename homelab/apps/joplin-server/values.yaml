@@ -3,7 +3,7 @@ joplin-server:
     # -- image repository
     repository: joplin/server
       # -- image tag
-    tag: 2.1.2
+    tag: 2.7.3-beta
     # -- image pull policy
     pullPolicy: IfNotPresent
 
