@@ -16,7 +16,7 @@
   when: tmux_session_count.stdout == "0"
   shell: microk8s stop
 
-- import_tasks: reboot.yaml
+- import_tasks: reboot.yml
   when: tmux_session_count.stdout == "0"
 
 - name: start microk8s

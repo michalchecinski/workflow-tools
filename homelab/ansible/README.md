@@ -36,10 +36,10 @@ Update single machine: homelab update k8s-node1
 #############
 #  Ansible  #
 #############
-Update cluster: ansible-playbook -i hosts -K -e "targets=homelab" playbooks/update-os.yaml
-Update just nodes: ansible-playbook -i hosts -K -e "targets=nodes" playbooks/update-os.yaml
-Update just nas: ansible-playbook -i hosts -K -e "targets=nas" playbooks/update-os.yaml
-Update single machine: ansible-playbook -i hosts -K -e "targets=k8s-node1" playbooks/update-os.yaml
+Update cluster: ansible-playbook -i hosts -K -e "targets=homelab" playbooks/update-os.yml
+Update just nodes: ansible-playbook -i hosts -K -e "targets=nodes" playbooks/update-os.yml
+Update just nas: ansible-playbook -i hosts -K -e "targets=nas" playbooks/update-os.yml
+Update single machine: ansible-playbook -i hosts -K -e "targets=k8s-node1" playbooks/update-os.yml
 ```
 
 ### Power down
@@ -57,9 +57,9 @@ Power down single machine: homelab down k8s-node1
 #############
 #  Ansible  #
 #############
-Power down cluster: asnible-playbook -i hosts -K -e "targets=cluster" playbooks/power-down.yaml
-Power down just nodes: asnible-playbook -i hosts -K -e "targets=nodes" playbooks/power-down.yaml
-Power down just nas: asnible-playbook -i hosts -K -e "targets=nas" playbooks/power-down.yaml
+Power down cluster: asnible-playbook -i hosts -K -e "targets=cluster" playbooks/power-down.yml
+Power down just nodes: asnible-playbook -i hosts -K -e "targets=nodes" playbooks/power-down.yml
+Power down just nas: asnible-playbook -i hosts -K -e "targets=nas" playbooks/power-down.yml
 ```
 
 

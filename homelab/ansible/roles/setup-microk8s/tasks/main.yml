@@ -1,0 +1,8 @@
+- name: Enable Microk8s Ingress
+  shell: microk8s enable ingress
+
+- name: Enable Microk8s MetalLB
+  shell: microk8s enable metallb
+
+- name: Create Ingress Service
+  shell: kubectl apply -f ../manifests/ingress-service.yml

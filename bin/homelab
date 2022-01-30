@@ -94,7 +94,7 @@ update() {
   cd ~/workflow-tools/homelab/ansible
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
-    $_ANSIBLE_ROOT_DIR/playbooks/update-os.yaml
+    $_ANSIBLE_ROOT_DIR/playbooks/update-os.yml
 }
 
 ##############################
@@ -113,11 +113,11 @@ reboot() {
   if [[ "$2" == "--force" ]]; then
     ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
       -K -e "targets=$target" -e "force=true" \
-      $_ANSIBLE_ROOT_DIR/playbooks/reboot.yaml
+      $_ANSIBLE_ROOT_DIR/playbooks/reboot.yml
   else
     ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
       -K -e "targets=$target" \
-      $_ANSIBLE_ROOT_DIR/playbooks/reboot.yaml
+      $_ANSIBLE_ROOT_DIR/playbooks/reboot.yml
   fi
 }
 
@@ -133,7 +133,7 @@ wol() {
   cd ~/workflow-tools/homelab/ansible
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
-    $_ANSIBLE_ROOT_DIR/playbooks/wol.yaml
+    $_ANSIBLE_ROOT_DIR/playbooks/wol.yml
 }
 
 ##############################
@@ -148,7 +148,7 @@ power-down() {
   cd ~/workflow-tools/homelab/ansible
   ansible-playbook -i $_ANSIBLE_ROOT_DIR/hosts \
     -K -e "targets=$target" \
-    $_ANSIBLE_ROOT_DIR/playbooks/power-down.yaml
+    $_ANSIBLE_ROOT_DIR/playbooks/power-down.yml
 }
 
 # Get command

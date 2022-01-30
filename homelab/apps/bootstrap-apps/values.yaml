@@ -1,0 +1,8 @@
+destination:
+  server: 'https://kubernetes.default.svc'
+
+apps:
+  home-assistant:
+    enabled: true
+  nfs-test:
+    enabled: false

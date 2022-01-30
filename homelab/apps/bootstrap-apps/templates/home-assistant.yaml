@@ -1,0 +1,25 @@
+{{ if apps.home-assistant.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-assistant
+  namespace: argocd
+spec:
+  destination:
+    namespace: home-assitant
+    server: {{ destination.server }}
+  source:
+    repoURL: git@github.com:joseph-flinn/workflow-tools.git
+    path: homelab/apps/home-assistant
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

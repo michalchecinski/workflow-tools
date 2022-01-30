@@ -19,17 +19,17 @@
 - name: Deploy Letsencrypt staging cert issuer
   kubernetes.core.k8s:
     state: present
-    src: ./manifests/letsencrypt-clusterissuer-staging.yaml
+    src: ./manifests/letsencrypt-clusterissuer-staging.yml
     namespace: cert-manager
 
 - name: Deploy Letsencrypt production cert issuer
   kubernetes.core.k8s:
     state: present
-    src: ./manifests/letsencrypt-clusterissuer-production.yaml
+    src: ./manifests/letsencrypt-clusterissuer-production.yml
     namespace: cert-manager
 
 - name: Deploy Local CA cert Issuer
   kubernetes.core.k8s:
     state: present
-    src: ./manifests/ca-clusterissuer.yaml
+    src: ./manifests/ca-clusterissuer.yml
     namespace: cert-manager

@@ -4,5 +4,5 @@
   become_user: joseph
   register: tmux_session_count
 
-- import_tasks: shutdown.yaml
+- import_tasks: shutdown.yml
   when: tmux_session_count.stdout == "0"

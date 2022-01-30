@@ -1,19 +1,21 @@
 ---
-- name: Check for argo-apps chart
+- name: Check for bootstrap-apps chart
   shell:
-    cmd: helm list -n argocd | grep argo-apps | wc -l
+    cmd: argocd app list | grep bootstrap-apps | wc -l
   register: argo_apps_installed
 
 - name: Deploy ArgoCD Applications
   when: argo_apps_installed.stdout == "0"
-  kubernetes.core.helm:
-    name: argo-apps
-    chart_ref: "{{playbook_dir}}/../../charts/argocd-apps"
-    release_namespace: argocd
-    replace: yes
+  shell:
+    cmd: |
+      argocd app create bootstrap-apps \
+      --dest-namespace argocd \
+      --dest-server https://kubernetes.default.svc \
+      --repo git@github.com:joseph-flinn/workflow-tools.git \
+      --path 'homelab/apps/bootstrap-apps' \
+      --grpc-web
 
-- name: Upgrade ArgoCD Applications
-  when: argo_apps_installed.stdout == "1"
-  shell: |
-    CHART_DIR="{{ playbook_dir }}/../../charts/argocd-apps"
-    helm upgrade -n argocd argo-apps $CHART_DIR -f $CHART_DIR/values.yaml
+- name: Sync ArgoCD Applications
+  when: argo_apps_installed.stdout == "0"
+  shell:
+    cmd: argocd app sync apps

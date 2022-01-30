@@ -1,0 +1,22 @@
+{{ if apps.nfs-test.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-test
+  namespace: argocd
+spec:
+  destination:
+    namespace: nfs-test
+    server: {{ destination.server }}
+  source:
+    path: homelab/apps/nfs-test
+    repoURL: git@github.com:joseph-flinn/workflow-tools.git
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}
