@@ -31,7 +31,7 @@ joplin-server:
 
   envFrom:
     - secretRef:
-      name: joplin-server-secrets
+        name: joplin-server-secrets
 
 
   # -- Configures service settings for the chart.
