@@ -27,7 +27,7 @@ joplin-server:
     # -- Postgres DB Username
     POSTGRES_USER: joplin
     # -- Postgres DB password
-    POSTGRES_PASSWORD:  # joplin-pass
+    #POSTGRES_PASSWORD:  # joplin-pass
 
   envFrom:
     - secretRef:

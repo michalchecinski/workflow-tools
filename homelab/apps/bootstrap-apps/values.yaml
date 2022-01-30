@@ -4,5 +4,7 @@ destination:
 apps:
   home_assistant:
     enabled: true
+  joplin_server:
+    enabled: true
   nfs_test:
     enabled: false
