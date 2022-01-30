@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: home-assitant
+    namespace: home-assistant
     server: {{ .Values.destination.server }}
   source:
     repoURL: git@github.com:joseph-flinn/workflow-tools.git
