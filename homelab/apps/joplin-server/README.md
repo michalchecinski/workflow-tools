@@ -13,6 +13,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: joplin-server-secrets
+  namespace: joplin-server
 type: Opaque
 data:
   # You can include additional key value pairs as you do with Opaque Secrets
