@@ -73,7 +73,7 @@ joplin-server:
     postgresqlUsername: joplin
     postgresqlDatabase: joplin
     #postgresqlPassword: joplin-pass
-  existingSecret: joplin-server-secrets
+    existingSecret: joplin-server-secrets
     persistence:
       enabled: true
       storageClass: nfs-client
