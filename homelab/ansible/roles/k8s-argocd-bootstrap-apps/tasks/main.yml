@@ -6,16 +6,11 @@
 
 - name: Deploy ArgoCD Applications
   when: argo_apps_installed.stdout == "0"
-  shell:
-    cmd: |
-      argocd app create bootstrap-apps \
-      --dest-namespace argocd \
-      --dest-server https://kubernetes.default.svc \
-      --repo git@github.com:joseph-flinn/workflow-tools.git \
-      --path 'homelab/apps/bootstrap-apps' \
-      --grpc-web
+  kubernetes.core.k8s:
+    state: present
+    src: ./manifests/argocd-bootstrap-apps.yml
 
-- name: Sync ArgoCD Applications
-  when: argo_apps_installed.stdout == "0"
-  shell:
-    cmd: argocd app sync apps
+#- name: Sync ArgoCD Applications
+#  when: argo_apps_installed.stdout == "0"
+#  shell:
+#    cmd: argocd app sync apps
