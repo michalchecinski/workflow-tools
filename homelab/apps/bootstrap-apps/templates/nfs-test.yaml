@@ -1,5 +1,4 @@
-{{ if apps.nfs-test.enabled }}
----
+{{ if .Values.apps.nfs_test.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -8,7 +7,7 @@ metadata:
 spec:
   destination:
     namespace: nfs-test
-    server: {{ destination.server }}
+    server: {{ .Values.destination.server }}
   source:
     path: homelab/apps/nfs-test
     repoURL: git@github.com:joseph-flinn/workflow-tools.git
@@ -19,4 +18,4 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
-{{- end }}
+{{ end }}

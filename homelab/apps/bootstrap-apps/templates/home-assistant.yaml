@@ -1,5 +1,4 @@
-{{ if apps.home-assistant.enabled }}
----
+{{ if .Values.apps.home_assistant.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -8,7 +7,7 @@ metadata:
 spec:
   destination:
     namespace: home-assitant
-    server: {{ destination.server }}
+    server: {{ .Values.destination.server }}
   source:
     repoURL: git@github.com:joseph-flinn/workflow-tools.git
     path: homelab/apps/home-assistant
@@ -22,4 +21,4 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
-{{- end }}
+{{ end }}
