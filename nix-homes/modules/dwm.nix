@@ -12,12 +12,12 @@ with lib; {
           patches = [
             #./path/to/my-dwm-patch.patch
           ];
-          configFile = super.writeText "config.h" (builtins.readFile /home/joseph/.config/suckless/dwm-config.h);
+          configFile = super.writeText "config.h" (builtins.readFile ./dwm/dwm-config.h);
           postPatch = oldAttrs.postPatch or "" + "\necho 'Using own config file...'\n cp ${configFile} config.def.h";
         });
         st = super.st.overrideAttrs (oldAttrs: rec {
           patches = [];
-          configFile = super.writeText "config.h" (builtins.readFile /home/joseph/.config/suckless/st-config.h);
+          configFile = super.writeText "config.h" (builtins.readFile ./dwm/st-config.h);
           postPatch = "${oldAttrs.postPatch}\ncp ${configFile} config.def.h\n";
         });
       })
