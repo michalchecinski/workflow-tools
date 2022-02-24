@@ -5,6 +5,7 @@ with lib; {
 
   options.modules.base = {
     enable = mkOption { type = types.bool; default = false; };
+    username = mkOption { type = types.string; default = "joseph"; };
   };
 
   config = mkIf config.modules.base.enable {
