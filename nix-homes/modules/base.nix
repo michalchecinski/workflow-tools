@@ -18,6 +18,7 @@ with lib; {
       openssh
       openssl
       gnumake
+      python3
     ];
   };
 }

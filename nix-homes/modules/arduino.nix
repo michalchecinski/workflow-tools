@@ -17,7 +17,8 @@ with lib; {
 
     home.file."./.arduino15/arduino-cli.yaml".text = ''
       board_manager:
-        additional_urls: []
+        additional_urls:
+          - https://arduino.esp8266.com/stable/package_esp8266com_index.json
       daemon:
         port: "50051"
       directories:
