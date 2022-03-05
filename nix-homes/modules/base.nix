@@ -17,6 +17,7 @@ with lib; {
       htop
       openssh
       openssl
+      gnumake
     ];
   };
 }
