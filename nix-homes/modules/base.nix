@@ -14,11 +14,15 @@ with lib; {
       git
       tmux
       tree
+      jq
       htop
       openssh
       openssl
       gnumake
+
       python3
+      pipenv
+      poetry
     ];
   };
 }

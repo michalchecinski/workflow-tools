@@ -10,7 +10,9 @@ with lib; {
       source = builtins.fetchGit {
         url = "https://github.com/joseph-flinn/dotfiles";
         ref = "main";
-	rev = "0ab4cf4b95e9b941d18bb80f16367a1f061b6b12";
+        sparseCheckout = ''
+        '';
+	    rev = "0ab4cf4b95e9b941d18bb80f16367a1f061b6b12";
       };
     };
 

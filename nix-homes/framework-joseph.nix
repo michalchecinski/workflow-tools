@@ -16,8 +16,9 @@
   modules.arduino.enable = true;
 
   home.packages = with pkgs; [
-    dmenu
+    ansible
     brave
+    dmenu
     hledger
   ];
 }
