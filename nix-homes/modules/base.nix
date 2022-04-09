@@ -13,9 +13,11 @@ with lib; {
       bash
       git
       tmux
+      tmuxp
       tree
       jq
       htop
+      unzip
       openssh
       openssl
       gnumake

@@ -20,5 +20,9 @@
     brave
     dmenu
     hledger
+    joplin-desktop
+    k9s
+    kubectl
+    ranger
   ];
 }
