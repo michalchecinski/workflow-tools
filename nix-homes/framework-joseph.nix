@@ -15,6 +15,8 @@
   modules.neovim.enable = true;
   modules.arduino.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     ansible
     brave
@@ -24,5 +26,6 @@
     k9s
     kubectl
     ranger
+    xflux
   ];
 }
