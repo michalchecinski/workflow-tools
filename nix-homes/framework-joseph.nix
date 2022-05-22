@@ -26,6 +26,7 @@
     k9s
     kubectl
     ranger
+    spotify
     xflux
   ];
 }

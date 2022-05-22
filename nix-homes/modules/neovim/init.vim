@@ -36,12 +36,34 @@ set nocompatible "vim-polygot
 
 "plugins
 call plug#begin('~/.vim/plugged')
+
+"" General
 Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'SirVer/ultisnips'
+Plug 'ervandew/supertab'
 
-" Colorscheme
+"" Colorscheme
 Plug 'gruvbox-community/gruvbox'
+
+"" Misc
+Plug 'ledger/vim-ledger'
+
 call plug#end()
+
+" Plugin Configuration
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit="~/.vim/UltiSnips"
+let g:UltiSnipsSnippetsDir=$HOME . '/.vim/UltiSnips'
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<tab>"
+
 
 " Colors: {{{
 augroup ColorschemePreferences
