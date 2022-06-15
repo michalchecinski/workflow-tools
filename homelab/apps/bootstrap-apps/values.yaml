@@ -2,6 +2,8 @@ destination:
   server: 'https://kubernetes.default.svc'
 
 apps:
+  external_secrets:
+    enabled: true
   home_assistant:
     enabled: true
   joplin_server:
