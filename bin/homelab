@@ -1,5 +1,3 @@
-#!/bin/bash
-# 
 # Manage the homelab via Ansible playbooks without the needing to remember the long Ansible Playbook commands
 
 _ANSIBLE_ROOT_DIR=$HOME/workflow-tools/homelab/ansible

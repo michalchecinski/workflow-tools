@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Let's Encrypt Update (leu)
 
 CERT_DIR=""

@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # Supports running the community edition of the Docker engine on Mac via a VirtualBox VM
 
 _VAGRANT_FILE_LOCATION="$HOME/bitwarden/devops/tools/mac-docker-setup/"

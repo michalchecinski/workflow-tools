@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # A management script to manage the custom utilities in the bin direcotry of workflow-tools
 
 usage() {

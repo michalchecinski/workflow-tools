@@ -1,5 +1,3 @@
-#!/bin/bash
-
 default_repo_directory="$HOME/bitwarden/official-repos"
 default_install_directory="$HOME/bitwarden/workflows"
 
