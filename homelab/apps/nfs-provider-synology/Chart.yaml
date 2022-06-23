@@ -1,0 +1,13 @@
+apiVersion: v2
+name: nfs-provider-synology
+description: NFS Provider for Synology NAS
+type: application
+
+version: 0.1.0
+appVersion: 4.0.2
+
+dependencies:
+  - name: nfs-subdir-external-provisioner
+    version: 4.0.16
+    repository: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+

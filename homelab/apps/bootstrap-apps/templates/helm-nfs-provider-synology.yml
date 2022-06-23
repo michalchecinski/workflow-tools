@@ -1,0 +1,24 @@
+{{ if .Values.apps.nfs_provider_synology.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-provider-synology
+  namespace: argocd
+spec:
+  destination:
+    namespace: kube-system
+    server: {{ .Values.destination.server }}
+  source:
+    repoURL: git@github.com:joseph-flinn/workflow-tools.git
+    path: homelab/apps/nfs-provider-synology
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}
