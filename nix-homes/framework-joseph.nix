@@ -25,7 +25,7 @@
     joplin-desktop
     k9s
     kubectl
-    helm
+    kubernetes-helm
     ranger
     spotify
     xflux
