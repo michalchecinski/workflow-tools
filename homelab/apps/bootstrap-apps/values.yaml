@@ -11,4 +11,4 @@ apps:
   nfs_provider_synology:
     enabled: true
   nfs_test:
-    enabled: false
+    enabled: true
