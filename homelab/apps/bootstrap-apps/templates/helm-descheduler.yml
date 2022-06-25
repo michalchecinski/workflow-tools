@@ -3,10 +3,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: descheduler
-  namespace: descheduler
+  namespace: argocd
 spec:
   destination:
-    namespace: descheduler
+    namespace: kube-system
     server: {{ .Values.destination.server }}
   source:
     repoURL: git@github.com:joseph-flinn/workflow-tools.git
