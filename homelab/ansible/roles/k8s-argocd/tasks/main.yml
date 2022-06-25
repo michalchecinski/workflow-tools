@@ -43,6 +43,9 @@
 - name: Linux Install ArgoCD CLI
   when: clipath.stat.exists == False and ansible_os_family != "Darwin"
   shell: |
+    if ! [[ -d ~/.local/bin ]]; then
+      mkdir -p ~/.local/bin
+    fi
     VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
     curl -sSL -o ~/.local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
     chmod +x ~/.local/bin/argocd

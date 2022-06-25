@@ -7,5 +7,3 @@
     - k8s-cert-manager
     - k8s-argocd
     - k8s-argocd-bootstrap-apps
-    - k8s-openfaas
-    - k8s-descheduler
