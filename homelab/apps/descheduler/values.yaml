@@ -1,0 +1,3 @@
+descheduler:
+  values:
+    cronJobApiVersion: batch/v1

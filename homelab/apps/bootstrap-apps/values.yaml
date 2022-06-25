@@ -2,6 +2,8 @@ destination:
   server: 'https://kubernetes.default.svc'
 
 apps:
+  descheduler:
+    enabled: true
   external_secrets:
     enabled: true
   home_assistant:
