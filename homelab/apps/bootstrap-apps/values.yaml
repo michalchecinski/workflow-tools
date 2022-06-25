@@ -9,6 +9,8 @@ apps:
   joplin_server:
     enabled: true
   nfs_provider_synology:
-    enabled: true
+    enabled: false
   nfs_test:
     enabled: false
+  sealed_secrets:
+    enabled: true

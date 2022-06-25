@@ -1,0 +1,10 @@
+sealed-secrets:
+  ingress:
+    enabled: true
+    ingressClassName: public
+    hostname: sealed-secrets.k8s.lan
+    path: /
+    pathType: Prefix
+    tls: true
+    annotations:
+      cert-manager.io/cluster-issuer: local-ca-issuer
