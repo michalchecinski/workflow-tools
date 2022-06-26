@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: nfs-pvc-test
 spec:
-  storageClassName: nfs-synology # SAME NAME AS THE STORAGECLASS
+  storageClassName: nfs-client # SAME NAME AS THE STORAGECLASS
   accessModes:
     - ReadWriteMany #  must be the same as PersistentVolume
   resources:
