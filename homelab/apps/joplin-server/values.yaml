@@ -81,6 +81,12 @@ joplin-server:
     containerSecurityContext:
       runAsUser: 1024  #nfs-client 1000
 
+    # If storageClass == nfs-client, the following should be set
+    # sercurityContext:
+    #   fsGroup: 1000
+    # containerSecurityContext:
+    #   runAsUser: 1000
+
 
 postgresql:
   enabled: true
