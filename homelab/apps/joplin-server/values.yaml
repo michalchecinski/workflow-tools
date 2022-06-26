@@ -76,6 +76,8 @@ joplin-server:
     persistence:
       enabled: true
       storageClass: nfs-synology
+    primary:
+      command: ["tail", "-f", "/dev/null"]
     #sercurityContext:
     #  fsGroup: 1000
     #containerSecurityContext:
