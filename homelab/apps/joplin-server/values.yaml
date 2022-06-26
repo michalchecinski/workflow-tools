@@ -72,11 +72,10 @@ joplin-server:
       tag: 14.1.0
     postgresqlUsername: joplin
     postgresqlDatabase: joplin
-    #postgresqlPassword: joplin-pass
     existingSecret: joplin-server-secrets
     persistence:
       enabled: true
-      storageClass: nfs-synology
+      storageClass: nfs-client
     sercurityContext:
       fsGroup: 1000
     containerSecurityContext:
