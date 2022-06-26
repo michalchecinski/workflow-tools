@@ -76,12 +76,10 @@ joplin-server:
     persistence:
       enabled: true
       storageClass: nfs-synology
-    primary:
-      command: ["tail", "-f", "/dev/null"]
-    #sercurityContext:
-    #  fsGroup: 1000
-    #containerSecurityContext:
-    #  runAsUser: 1000
+    sercurityContext:
+      fsGroup: 100  #nfs-client: 1000
+    containerSecurityContext:
+      runAsUser: 1024  #nfs-client 1000
 
 
 postgresql:
