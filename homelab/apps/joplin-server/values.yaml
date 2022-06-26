@@ -75,11 +75,11 @@ joplin-server:
     existingSecret: joplin-server-secrets
     persistence:
       enabled: true
-      storageClass: nfs-client
-    sercurityContext:
-      fsGroup: 1000
-    containerSecurityContext:
-      runAsUser: 1000
+      storageClass: nfs-synology
+    #sercurityContext:
+    #  fsGroup: 1000
+    #containerSecurityContext:
+    #  runAsUser: 1000
 
 
 postgresql:
