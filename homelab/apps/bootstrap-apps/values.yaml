@@ -9,7 +9,7 @@ apps:
   home_assistant:
     enabled: true
   joplin_server:
-    enabled: false
+    enabled: true
   nfs_provider_synology:
     enabled: true
   nfs_test:
