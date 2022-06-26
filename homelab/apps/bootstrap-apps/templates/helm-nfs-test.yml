@@ -12,7 +12,7 @@ spec:
     path: homelab/apps/nfs-test
     repoURL: git@github.com:joseph-flinn/workflow-tools.git
     targetRevision: HEAD
-  project: default
+  project: apps
   syncPolicy:
     automated:
       prune: true
