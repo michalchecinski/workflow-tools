@@ -76,7 +76,7 @@ joplin-server:
     existingSecret: joplin-server-secrets
     persistence:
       enabled: true
-      storageClass: nfs-client
+      storageClass: nfs-synology
     sercurityContext:
       fsGroup: 1000
     containerSecurityContext:
