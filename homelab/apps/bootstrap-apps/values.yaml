@@ -16,5 +16,7 @@ apps:
     enabled: true
   nfs_test:
     enabled: false
+  node_red:
+    enabled: true
   sealed_secrets:
     enabled: true

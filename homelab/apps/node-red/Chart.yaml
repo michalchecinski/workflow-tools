@@ -1,0 +1,13 @@
+apiVersion: v2
+name: node-red
+description: No code programming event driven 
+type: application
+
+version: 0.1.0
+appVersion: 2.1.4
+
+dependencies:
+  - name: node-red
+    version: 10.1.2
+    repository: https://k8s-at-home.com/charts/
+
