@@ -63,7 +63,7 @@ home-assistant:
   persistence:
     config:
       enabled: true
-      storageClass: nfs-client
+      storageClass: nfs-synology
       type: pvc
       accessMode: ReadWriteOnce
       size: 1Gi
@@ -89,11 +89,11 @@ home-assistant:
     existingSecret: home-assistant-secrets
     persistence:
       enabled: true
-      storageClass: nfs-client
+      storageClass: nfs-synology
     sercurityContext:
-      fsGroup: 1000
+      fsGroup: 100  #nfs-client: 1000
     containerSecurityContext:
-      runAsUser: 1000
+      runAsUser: 1024  #nfs-client 1000
 
   # -- Enable and configure influxdb database subchart under this key.
   #    For more options see [influxdb chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/influxdb)
