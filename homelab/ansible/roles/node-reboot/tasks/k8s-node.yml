@@ -23,6 +23,11 @@
   when: tmux_session_count.stdout == "0"
   shell: microk8s start
 
+- name: allow for microk8s to start up
+  when: tmux_session_count.stdout == "0"
+  ansible.builtin.pause:
+    seconds: 5
+
 - name: wait for node to become ready
   when: tmux_session_count.stdout == "0"
   shell: "microk8s kubectl wait --for=condition=Ready no/$(cat /etc/hostname)"
@@ -30,5 +35,3 @@
 - name: uncordon k8s node
   when: tmux_session_count.stdout == "0"
   shell: "microk8s kubectl uncordon $(cat /etc/hostname)"
-
-
