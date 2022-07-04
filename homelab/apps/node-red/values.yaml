@@ -23,7 +23,7 @@ node-red:
     # -- Node.js runtime arguments
     NODE_OPTIONS:
     # -- Setting to `true` starts Node-RED with the projects feature enabled
-    NODE_RED_ENABLE_PROJECTS:
+    NODE_RED_ENABLE_PROJECTS: true
     # -- Setting to `true` starts Node-RED in safe (not running) mode
     NODE_RED_ENABLE_SAFE_MODE:
     # -- Location of the flows configuration file.
