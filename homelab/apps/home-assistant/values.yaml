@@ -37,6 +37,7 @@ home-assistant:
       ingressClassName: "public"
       annotations:
         cert-manager.io/cluster-issuer: local-ca-issuer
+        nginx.org/websocket-services: home-assistant
       hosts:
         - host: home-assistant.k8s.lan
           paths:
