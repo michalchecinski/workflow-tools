@@ -17,4 +17,3 @@ k8s-node3
 
 [homelab:children]
 nodes
-nas
