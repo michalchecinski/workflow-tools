@@ -1,0 +1,6 @@
+cert-manager:
+  installCRDs: true
+  version: "{{ version.cert_manager }}"
+  ingressShim:
+    defaultIssuerName: letsencrypt-staging
+    defaultIssuerKind: ClusterIssuer

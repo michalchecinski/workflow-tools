@@ -2,6 +2,8 @@ destination:
   server: 'https://kubernetes.default.svc'
 
 apps:
+  cert_manager:
+    enabled: true
   descheduler:
     enabled: true
   external_secrets:
