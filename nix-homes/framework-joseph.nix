@@ -26,6 +26,7 @@
     k9s
     kubectl
     kubernetes-helm
+    kubeseal
     ranger
     spotify
     xflux
