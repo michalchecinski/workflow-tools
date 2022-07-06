@@ -103,7 +103,7 @@ photoprism:
       existingSecret: mariadb-secrets
     primary:
       persistence:
-        enabled: enabled
+        enabled: true
         storageClass: nfs-synology
         type: pvc
         accessMode: ReadWriteOnce
