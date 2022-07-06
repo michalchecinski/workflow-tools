@@ -101,9 +101,7 @@ photoprism:
     auth:
       database: photoprism
       username: photoprism
-      password: photoprism
-      rootPassword: photoprism
-      #existingSecret: mariadb-secrets
+      existingSecret: mariadb-secrets
     primary:
       persistence:
         enabled: true
