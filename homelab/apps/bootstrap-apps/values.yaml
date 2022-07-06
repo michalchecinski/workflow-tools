@@ -19,6 +19,6 @@ apps:
   node_red:
     enabled: true
   photoprism:
-    enabled: false
+    enabled: true
   sealed_secrets:
     enabled: true

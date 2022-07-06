@@ -42,6 +42,8 @@ photoprism:
   envFrom:
     - secretRef:
         name: photoprism-secrets
+    - secretRef:
+        name: test-secret
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
