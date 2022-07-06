@@ -1,0 +1,13 @@
+apiVersion: v2
+name: photoprism
+description: Photo Viewer and Organizer
+type: application
+
+version: 0.1.0
+appVersion: 220617-jammy
+
+dependencies:
+  - name: photoprism
+    version: 7.0.0
+    repository: https://k8s-at-home.com/charts/
+
