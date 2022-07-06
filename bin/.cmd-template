@@ -33,6 +33,7 @@ err() {
 #   Returned values other than the default exit status of the last command run.
 ##############################
 func1() {
+  echo "func1"
 }
 
 # Get command
@@ -62,6 +63,6 @@ done
 # Run command
 case $COMMAND in 
   "help" | "-h" | "--help") usage ;;
-  "") exp "Missing command." ;;
-  *) exp "Unrecognized command: $COMMAND" ;;
+  "") err "Missing command." ;;
+  *) err "Unrecognized command: $COMMAND" ;;
 esac
