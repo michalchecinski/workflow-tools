@@ -42,8 +42,6 @@ photoprism:
   envFrom:
     - secretRef:
         name: photoprism-secrets
-    - secretRef:
-        name: test-secret
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
@@ -103,7 +101,9 @@ photoprism:
     auth:
       database: photoprism
       username: photoprism
-      existingSecret: mariadb-secrets
+      password: photoprism
+      rootPassword: photoprism
+      #existingSecret: mariadb-secrets
     primary:
       persistence:
         enabled: true
