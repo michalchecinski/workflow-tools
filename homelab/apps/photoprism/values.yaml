@@ -40,7 +40,8 @@ photoprism:
     # -- Database user name
     PHOTOPRISM_DATABASE_USER: photoprism
   envFrom:
-    - photoprism-secrets
+    - secretRef:
+      name: photoprism-secrets
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
