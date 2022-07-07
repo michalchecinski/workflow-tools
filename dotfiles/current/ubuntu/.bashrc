@@ -111,6 +111,8 @@ fi
 #  Custom Additions
 #############################################################################
 
+set -o vi
+
 # Load custom path and env vars
 . ~/.env_setup
 
