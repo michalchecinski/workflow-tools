@@ -9,9 +9,9 @@
 node-red:
   image:
     # -- image repository
-    repository: nodered/node-red
+    repository: localhost:5000/node-red
     # -- image tag
-    tag: 2.1.4
+    tag: custom-0.1.0
     # -- image pull policy
     pullPolicy: IfNotPresent
 
