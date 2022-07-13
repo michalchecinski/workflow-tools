@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: joplin-server
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: joplin-server
