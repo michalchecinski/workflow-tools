@@ -21,6 +21,7 @@
     ansible
     brave
     dmenu
+    docker-client
     hledger
     joplin-desktop
     k9s
