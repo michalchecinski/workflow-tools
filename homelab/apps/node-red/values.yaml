@@ -9,7 +9,7 @@
 node-red:
   image:
     # -- image repository
-    repository: localhost:5000/node-red
+    repository: registry.k8s.lan/node-red
     # -- image tag
     tag: custom-0.1.0
     # -- image pull policy
