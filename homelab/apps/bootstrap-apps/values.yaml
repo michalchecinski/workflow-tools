@@ -18,5 +18,7 @@ apps:
     enabled: false
   node_red:
     enabled: true
+  registry:
+    enabled: true
   sealed_secrets:
     enabled: true
