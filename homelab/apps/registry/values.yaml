@@ -14,4 +14,5 @@ docker-registry:
       - registry.k8s.lan
     tls:
       - secretName: registry-tls
-        hosts: registry.k8s.lan
+        hosts: 
+          - registry.k8s.lan
