@@ -1,4 +1,4 @@
-registry:
+docker-registry:
   persistence:
     enabled: true
     storageClass: nfs-synology
