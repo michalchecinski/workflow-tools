@@ -18,7 +18,7 @@ spec:
   privateKey:
     algorithm: ECDSA
     size: 256
-  duration: 365d
+  duration: 8760h
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
