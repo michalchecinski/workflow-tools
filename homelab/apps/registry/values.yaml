@@ -9,6 +9,7 @@ docker-registry:
     className: public
     annotations:
       cert-manager.io/cluster-issuer: local-ca-issuer
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
     path: /
     hosts:
       - registry.k8s.lan
