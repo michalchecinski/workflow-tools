@@ -1,0 +1,12 @@
+apiVersion: v2
+name: argo-rollouts
+description: Argo Rollouts
+type: application
+
+version: 0.1.0
+appVersion: v1.2.0
+
+dependencies:
+  - name: argo-rollouts
+    version: 2.18.0
+    repository: https://argoproj.github.io/argo-helm
