@@ -1,11 +1,11 @@
 ---
 ingressHosts:
   clusterIssuer: local-ca-issuer
-  argocd: argocd.k8s.lan
+  argocd: argo-cd.k8s.lan
 
 version:
   cert_manager: v1.4.1
-  argocd: v2.4.2
+  argocd: v2.4.6
 
 argocd:
   git_repo: git@github.com:joseph-flinn/workflow-tools.git

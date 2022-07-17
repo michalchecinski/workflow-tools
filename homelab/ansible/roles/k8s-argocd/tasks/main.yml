@@ -7,7 +7,7 @@
   kubernetes.core.helm:
     name: argo
     chart_ref: argo/argo-cd
-    release_namespace: argocd
+    release_namespace: argo-cd
     create_namespace: true
     values:
       global:
