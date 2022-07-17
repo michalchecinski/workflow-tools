@@ -2,10 +2,9 @@ argo-rollouts:
   dashboard:
     ingress:
       enabled: true
+      ingressClassName: public
       annotations:
         cert-manager.io/cluster-issuer: local-ca-issuer
-      ingressClassName: public
-      pathType: Prefix
       hosts:
         - argo-rollouts.k8s.lan
       tls:
