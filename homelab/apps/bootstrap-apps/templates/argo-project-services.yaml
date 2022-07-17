@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: services
-  namespace: argocd
+  namespace: argo-cd
 spec:
   sourceRepos:
   - '*'
