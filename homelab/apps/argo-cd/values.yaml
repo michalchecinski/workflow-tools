@@ -1,4 +1,4 @@
-argo-events: 
+argo-cd: 
   server:
     ingress:
       enabled: true
