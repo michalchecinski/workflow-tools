@@ -2,6 +2,8 @@ destination:
   server: 'https://kubernetes.default.svc'
 
 apps:
+  argo_cd:
+    enabled: true
   argo_events:
     enabled: true
   argo_rollouts:

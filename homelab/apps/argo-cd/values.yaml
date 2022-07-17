@@ -1,0 +1,16 @@
+argo-events: 
+  server:
+    ingress:
+      enabled: true
+      ingressClassName: "public"
+      hosts: 
+        - argo-cd.k8s.lan
+      tls:
+        - secretName: argocd-server-tls
+          hosts:
+            - argo-cd.k8s.lan
+      annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        cert-manager.io/cluster-issuer: local-ca-issuer
