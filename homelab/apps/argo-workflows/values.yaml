@@ -12,6 +12,3 @@ argo-workflows:
         - secretName: argo-workflows-tls
           hosts:
             - argo-workflows.k8s.lan
-  extraArgs:
-    - --auth-mode=server
-
