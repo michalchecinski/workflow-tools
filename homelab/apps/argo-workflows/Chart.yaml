@@ -3,10 +3,10 @@ name: argo-workflows
 description: Argo Events
 type: application
 
-version: 0.1.0
-appVersion: v3.3.8
+version: 0.1.1
+appVersion: v3.2.9
 
 dependencies:
   - name: argo-workflows
-    version: 0.16.7
+    version: 0.13.1
     repository: https://argoproj.github.io/argo-helm
