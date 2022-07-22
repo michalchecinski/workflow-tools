@@ -1,9 +1,10 @@
 common:
   env:
-    valueFrom:
-      secretKeyRef:
-        name: nocodb-secrets
-        key: NC_DB
+    NC_DB:
+      valueFrom:
+        secretKeyRef:
+          name: nocodb-secrets
+          key: NC_DB
 
   image:
     repository: nocodb/nocodb
