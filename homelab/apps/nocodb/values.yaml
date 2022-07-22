@@ -31,11 +31,19 @@ common:
         http:
           port: 8080
 
+
 postgresql:
   auth:
     existingSecret: nocodb-secrets
   extraEnvVars:
-    POSTGRES_DATABASE: nocodb
+    - name: POSTGRES_DATABASE
+      value: nocodb
   primary:
     persistence:
       storageClass: nfs-synology
+    podSecurityContext:
+      enabled: true
+      fsGroup: 100  #nfs-client: 1000
+    containerSecurityContext:
+      enabled: true
+      runAsUser: 1024  #nfs-client 1000

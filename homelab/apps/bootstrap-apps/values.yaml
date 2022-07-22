@@ -24,6 +24,8 @@ apps:
     enabled: true
   nfs_test:
     enabled: false
+  nocodb:
+    enabled: true
   node_red:
     enabled: true
   registry:
