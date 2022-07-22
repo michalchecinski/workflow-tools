@@ -17,7 +17,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-  project: default
+  project: app
   syncPolicy:
     automated:
       prune: true
