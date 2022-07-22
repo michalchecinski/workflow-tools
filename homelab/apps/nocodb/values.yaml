@@ -36,9 +36,7 @@ common:
 postgresql:
   auth:
     existingSecret: nocodb-secrets
-  extraEnvVars:
-    - name: POSTGRES_DATABASE
-      value: nocodb
+    database: nocodb
   primary:
     persistence:
       storageClass: nfs-synology
