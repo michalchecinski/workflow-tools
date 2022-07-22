@@ -1,0 +1,41 @@
+common:
+  env:
+    valueFrom:
+      secretKeyRef:
+        name: nocodb-secrets
+        key: NC_DB
+
+  image:
+    repository: nocodb/nocodb
+    tag: 0.92.4
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: local-ca-issuer
+      hosts:
+        - host: nocodb.k8s.lan
+          paths:
+            - path: /
+              pathType: Prefix
+              port: 8080
+      tls:
+        - secretName: nocodb.k8s.lan
+          hosts: 
+            - nocodb.k8s.lan
+
+  service:
+    main:
+      ports:
+        http:
+          port: 8080
+
+postgresql:
+  auth:
+    existingSecret: nocodb-secrets
+  extraEnvVars:
+    POSTGRES_DATABASE: nocodb
+  primary:
+    persistence:
+      storageClass: nfs-synology
