@@ -6,6 +6,7 @@
     ./modules/dwm.nix
     ./modules/neovim.nix
     ./modules/arduino.nix
+    ./modules/python.nix
   ];
 
   settings.username = "joseph";
@@ -14,11 +15,13 @@
   modules.dwm.enable = true;
   modules.neovim.enable = true;
   modules.arduino.enable = true;
+  modules.python.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     ansible
+    argo
     brave
     dmenu
     docker-client
