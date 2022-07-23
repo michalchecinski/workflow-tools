@@ -12,7 +12,6 @@ common:
           key: DB_POSTGRESDB_PASSWORD
     DB_POSTGRESDB_SCHEMA: n8n
     DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false
-
     N8N_BASIC_AUTH_ACTIVE: true
     N8N_BASIC_AUTH_USER: admin
     N8N_BASIC_AUTH_PASSWORD:
@@ -26,7 +25,6 @@ common:
     NODE_ENV: production
     WEBHOOK_URL: https://n8n.k8s.lan/
     GENERIC_TIMEZONE: UTC
-
 
   image:
     repository: n8nio/n8n
