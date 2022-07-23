@@ -14,6 +14,9 @@ version: 0.1.0
 appVersion: 0.112.0
 
 dependencies:
-- name: n8n
-  version: 0.6.0
-  repository: https://8gears.container-registry.com/chartrepo/library/
+- name: common
+  version: 4.4.2
+  repository: https://library-charts.k8s-at-home.com
+- name: postgresql
+  version: 11.1.25
+  repository: https://charts.bitnami.com/bitnami

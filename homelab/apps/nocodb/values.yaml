@@ -22,7 +22,7 @@ common:
               pathType: Prefix
               port: 8080
       tls:
-        - secretName: nocodb.k8s.lan
+        - secretName: nocodb-ssl-secret
           hosts: 
             - nocodb.k8s.lan
 

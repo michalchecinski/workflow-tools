@@ -20,6 +20,8 @@ apps:
     enabled: true
   joplin_server:
     enabled: true
+  n8n:
+    enabled: true
   nfs_provider_synology:
     enabled: true
   nfs_test:

@@ -1,0 +1,82 @@
+common:
+  env:
+    DB_TYPE: postgresdb
+    DB_POSTGRESDB_DATABASE: n8n
+    DB_POSTGRESDB_HOST: n8n-postgresql
+    DB_POSTGRESDB_PORT: 5432
+    DB_POSTGRESDB_USER: n8n
+    DB_POSTGRESDB_PASSWORD:
+      valueFrom:
+        secretKeyRef:
+          name: n8n-secrets
+          key: DB_POSTGRESDB_PASSWORD
+    DB_POSTGRESDB_SCHEMA: n8n
+    DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false
+
+    N8N_BASIC_AUTH_ACTIVE: true
+    N8N_BASIC_AUTH_USER: admin
+    N8N_BASIC_AUTH_PASSWORD:
+      valueFrom:
+        secretKeyRef:
+          name: n8n-secrets
+          key: N8N_BASIC_AUTH_PASSWORD
+    N8N_HOST: n8n.k8s.lan
+    N8N_PORT: 5678
+    N8N_PROTOCOL: https
+    NODE_ENV: production
+    WEBHOOK_URL: https://n8n.k8s.lan/
+    GENERIC_TIMEZONE: UTC
+
+
+  image:
+    repository: n8nio/n8n
+    tag: 0.187.2
+
+  ingress:
+    main:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: local-ca-issuer
+      hosts:
+        - host: n8n.k8s.lan
+          paths:
+            - path: /
+              pathType: Prefix
+              port: 5678
+      tls:
+        - secretName: n8n-ssl-secret
+          hosts: 
+            - n8n.k8s.lan
+
+  service:
+    main:
+      ports:
+        http:
+          port: 5678
+
+  persistence:
+    data:
+      enabled: true
+      storageClass: nfs-synology
+      type: pvc
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      mountPath: /home/node/.n8n
+      retain: true
+
+
+postgresql:
+  auth:
+    existingSecret: n8n-secrets
+  extraEnvVars:
+    - name: POSTGRES_DATABASE
+      value: n8n
+  primary:
+    persistence:
+      storageClass: nfs-synology
+    podSecurityContext:
+      enabled: true
+      fsGroup: 100  #nfs-client: 1000
+    containerSecurityContext:
+      enabled: true
+      runAsUser: 1024  #nfs-client 1000
