@@ -4,7 +4,7 @@ common:
     DB_POSTGRESDB_DATABASE: n8n
     DB_POSTGRESDB_HOST: n8n-postgresql
     DB_POSTGRESDB_PORT: 5432
-    DB_POSTGRESDB_USER: n8n
+    DB_POSTGRESDB_USER: postgres
     DB_POSTGRESDB_PASSWORD:
       valueFrom:
         secretKeyRef:
@@ -65,7 +65,6 @@ common:
 
 postgresql:
   auth:
-    username: n8n
     existingSecret: n8n-secrets
   tls:
     enabled: true
