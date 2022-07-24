@@ -1,4 +1,10 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+let
+  unstableTarball =
+    fetchTarball
+      https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+in
+{
 
   imports = [
     ./modules/settings.nix
@@ -8,6 +14,14 @@
     ./modules/arduino.nix
     ./modules/python.nix
   ];
+
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
+  };
 
   settings.username = "joseph";
 
@@ -34,7 +48,7 @@
     kubeseal
     ranger
     spotify
-    vault
+    unstable.vault
     xflux
   ];
 }
