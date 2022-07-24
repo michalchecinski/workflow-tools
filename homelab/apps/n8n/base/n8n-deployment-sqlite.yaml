@@ -65,3 +65,17 @@ spec:
             requests:
               cpu: "0.5"
               memory: 512Mi
+
+          volumeMounts:
+            - name: data
+              mountPath: /home/node/.n8n
+
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "nfs-synology"
+        resources:
+          requests:
+            storage: 1Gi
