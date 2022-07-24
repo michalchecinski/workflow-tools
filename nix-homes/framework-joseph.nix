@@ -34,6 +34,7 @@
     kubeseal
     ranger
     spotify
+    vault
     xflux
   ];
 }
