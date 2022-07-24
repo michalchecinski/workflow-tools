@@ -68,6 +68,8 @@ spec:
               value: "https://n8n.k8s.lan/"
             - name: GENERIC_TIMEZONE
               value: "UTC"
+            - name: EXECUTIONS_PROCESS
+              value: "main"
 
           #livenessProbe:
           #  httpGet:
