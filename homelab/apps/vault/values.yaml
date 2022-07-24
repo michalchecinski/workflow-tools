@@ -36,7 +36,7 @@ vault:
         config: |
           ui = true
           listener "tcp" {
-            tlsDisable = 1
+            tls_disable = 1
             address = "[::]:8200"
             cluster_address = "[::]:8201"
             #tls_cert_file = "/vault/userconfig/tls-server/fullchain.pem"
