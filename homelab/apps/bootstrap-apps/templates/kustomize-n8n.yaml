@@ -1,0 +1,23 @@
+{{ if .Values.apps.n8n_kustomize.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n
+  namespace: argo-cd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: n8n
+    server: {{ .Values.destination.server }}
+  source:
+    repoURL: git@github.com:joseph-flinn/workflow-tools.git
+    path: homelab/apps/n8n/overlays/microk8s
+    targetRevision: HEAD
+  project: apps
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}
