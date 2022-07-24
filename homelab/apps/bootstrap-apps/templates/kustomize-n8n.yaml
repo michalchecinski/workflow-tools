@@ -1,4 +1,4 @@
-{{ if .Values.apps.n8n_kustomize.enabled }}
+{{ if .Values.apps.n8n.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
