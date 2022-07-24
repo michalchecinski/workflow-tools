@@ -48,14 +48,14 @@ spec:
             - name: EXECUTIONS_PROCESS
               value: "main"
 
-          #livenessProbe:
-          #  httpGet:
-          #    path: /healthz
-          #    port: 5678
-          #readinessProbe:
-          #  httpGet:
-          #    path: /healthz
-          #    port: 5678
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5678
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5678
           resources:
             limits:
               cpu: "1.0"
