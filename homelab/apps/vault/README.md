@@ -17,6 +17,9 @@ An NFS store has been set up specifically for backups. This volume is set to ret
 not be remounted if Vault is destroyed and recreated; however, the backups will be retained on the NFS server for manual
 recovery in the case of a disaster.
 
+This is run with a CronJob like found [here](https://michaellin.me/backup-vault-with-raft-storage-on-kubernetes/) since
+automated backups seem to be an Enterprise feature
+
 # DR
 [Follow Vault's Standard Procedure for
 Restoring](https://learn.hashicorp.com/tutorials/vault/sop-restore?in=vault/standard-procedures)
