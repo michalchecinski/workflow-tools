@@ -82,8 +82,3 @@ postgresql:
     containerSecurityContext:
       enabled: true
       runAsUser: 1024  #nfs-client 1000
-    #initdb:
-    #  scripts:
-    #    initdb.sql: |
-    #      CREATE DATABASE n8n;
-    #      GRANT ALL PRIVILEGES ON DATABASE n8n TO postgres;
