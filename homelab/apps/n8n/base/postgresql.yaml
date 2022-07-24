@@ -32,6 +32,10 @@ spec:
     metadata:
       labels: *labels
     spec:
+      securityContext:
+        runAsUser: 1024
+        runAsGroup: 100
+        fsGroup: 100
       containers:
         - name: postgresql
           image: postgres:10
