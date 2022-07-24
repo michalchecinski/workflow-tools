@@ -1,3 +1,5 @@
+{{- $currentTlsCerts := (lookup "v1" "Secret" .Release.Namespace "tls-server") }}
+{{- if not $currentTltCerts }}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -127,4 +129,4 @@ data:
     kubectl create secret generic tls-ca \
       --namespace ${NAMESPACE} \
       --from-file=ca.crt=${TEMP_DIR}/ca.crt
-
+{{ end }}
