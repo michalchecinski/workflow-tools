@@ -18,6 +18,8 @@ spec:
         - name: n8n
           image: n8nio/n8n
           imagePullPolicy: IfNotPresent
+          command: ["tail"]
+          args: ["-f", "/dev/null"]
           ports:
             - name: http-metrics
               containerPort: 5678
