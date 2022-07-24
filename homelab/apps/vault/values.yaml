@@ -18,7 +18,7 @@ vault:
 
     volumes: 
       - name: backups
-        persistantVolumeClaim:
+        persistentVolumeClaim:
           claimName: vault-backups
 
     volumeMounts:
