@@ -7,9 +7,7 @@ vault:
       hosts:
         - host: vault.k8s.lan
           paths:
-            - path: /
-              pathType: Prefix
-              port: 8200
+            - /
       tls:
         - secretName: vault-ssl
           hosts:
