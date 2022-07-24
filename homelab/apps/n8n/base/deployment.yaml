@@ -67,14 +67,14 @@ spec:
             - name: GENERIC_TIMEZONE
               value: "UTC"
 
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 5678
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 5678
+          #livenessProbe:
+          #  httpGet:
+          #    path: /healthz
+          #    port: 5678
+          #readinessProbe:
+          #  httpGet:
+          #    path: /healthz
+          #    port: 5678
           resources:
             limits:
               cpu: "1.0"
