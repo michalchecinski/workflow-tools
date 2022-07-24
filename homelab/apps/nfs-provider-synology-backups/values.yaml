@@ -1,0 +1,8 @@
+nfs-subdir-external-provisioner:
+  storageClass:
+    name: nfs-synology-backups
+    retainPolicy: Retain
+    onDelete: retain
+  nfs:
+    server: 192.168.0.99
+    path: /volume1/k8s-nfs-backups
