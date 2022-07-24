@@ -34,3 +34,5 @@ apps:
     enabled: true
   sealed_secrets:
     enabled: true
+  vault:
+    enabled: true
