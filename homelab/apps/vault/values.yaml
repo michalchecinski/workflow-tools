@@ -15,3 +15,17 @@ vault:
 
     dataStorage:
       storageClass: nfs-synology
+
+    volumes: 
+      - name: backups
+        persistantVolumeClaim:
+          claimName: vault-backups
+
+    volumeMounts:
+      - name: backups
+        mountPath: /opt/vault
+
+
+vault_backup:
+  enabled: true
+
