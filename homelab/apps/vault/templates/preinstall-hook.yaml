@@ -46,7 +46,7 @@ spec:
               mountPath: /init-artifacts
       containers:
         - name: create-secrets
-          image: "bitnami:kubectl:1.21"
+          image: "bitnami/kubectl:1.21"
           env: *env
           command: ["/init-scripts/create-secrets.sh"]
           volumeMounts:
