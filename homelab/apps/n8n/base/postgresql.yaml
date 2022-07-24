@@ -10,7 +10,6 @@ spec:
   selector:
     app.kubernetes.io/name: n8n
     component: database
-  clusterIp: None
   ports:
     - protocol: TCP
       port: 5432
