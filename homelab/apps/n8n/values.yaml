@@ -3,7 +3,7 @@ common:
     DB_TYPE: postgresdb
     DB_POSTGRESDB_DATABASE: n8n
     DB_POSTGRESDB_HOST: n8n-postgresql
-    DB_POSTGRESDB_PORT: 5432
+    DB_POSTGRESDB_PORT: "5432"
     DB_POSTGRESDB_USER: postgres
     DB_POSTGRESDB_PASSWORD:
       valueFrom:
@@ -12,13 +12,14 @@ common:
           key: DB_POSTGRESDB_PASSWORD
     DB_POSTGRESDB_SCHEMA: n8n
     DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false
-    N8N_BASIC_AUTH_ACTIVE: true
+    N8N_BASIC_AUTH_ACTIVE: "true"
     N8N_BASIC_AUTH_USER: admin
     N8N_BASIC_AUTH_PASSWORD:
       valueFrom:
         secretKeyRef:
           name: n8n-secrets
           key: N8N_BASIC_AUTH_PASSWORD
+    N8N_ENCRYPTION_KEY: "n8n"
     N8N_HOST: n8n.k8s.lan
     N8N_PORT: 5678
     N8N_PROTOCOL: https
@@ -54,7 +55,7 @@ common:
 
   persistence:
     data:
-      enabled: true
+      enabled: false
       storageClass: nfs-synology
       type: pvc
       accessMode: ReadWriteOnce
