@@ -63,15 +63,14 @@ spec:
             requests:
               cpu: "0.5"
               memory: 512Mi
-
           volumeMounts:
             - name: data
               mountPath: /home/node/.n8n
-  volumes:
-    - name: data
-      persistentVolumeClaim:
-        claimName: n8n-data
 
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: n8n-data
 
 ---
 apiVersion: v1
