@@ -2,6 +2,8 @@
 
 ```
 # Install with ArgoCD
+
+## Standalone mode
 export VAULT_ADDR="https://vault.k8s.lan"
 vault operator init
 
@@ -10,7 +12,28 @@ vault operator init
 vault operator unseal  # x3
 
 vault login
+
+
+## HA with Raft
+kubectl exec -ti -n vault vault-0 -- vault operator init
+kubectl exec -ti -n vault vault-0 -- vault operator unseal
+kubectl exec -ti -n vault vault-0 -- vault operator unseal
+kubectl exec -ti -n vault vault-0 -- vault operator unseal
+
+kubectl exec -ti -n vault vault-1 -- vault operator raft join http://vault-0.vault-internal:8200
+kubectl exec -ti -n vault vault-1 -- vault operator unseal
+kubectl exec -ti -n vault vault-1 -- vault operator unseal
+kubectl exec -ti -n vault vault-1 -- vault operator unseal
+
+kubectl exec -ti -n vault vault-2 -- vault operator raft join http://vault-0.vault-internal:8200
+kubectl exec -ti -n vault vault-2 -- vault operator unseal
+kubectl exec -ti -n vault vault-2 -- vault operator unseal
+kubectl exec -ti -n vault vault-2 -- vault operator unseal
 ```
+
+:Warning: Note: This really didn't work. I haven't created the tls secrets because there is a chicken/egg problem that I
+need to figure out. If I'm going to be storing certs as k8s secrets, I can't automate the installation of vault with
+argocd...
 
 # Backups
 An NFS store has been set up specifically for backups. This volume is set to retain in the NFS provider. The volume will
