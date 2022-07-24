@@ -65,6 +65,7 @@ common:
 
 postgresql:
   auth:
+    username: n8n
     existingSecret: n8n-secrets
   tls:
     enabled: true
