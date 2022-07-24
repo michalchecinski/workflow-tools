@@ -11,15 +11,16 @@ metadata:
 spec:
   tls:
     - hosts:
-      - n8n.k8s.lan
-    secretName: n8s-ssl-secret
+        - n8n.k8s.lan
+      secretName: n8s-ssl-secret
   rules:
     - host: n8n.k8s.lan
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
               service:
                 name: n8n-service
-                port: 
+                port:
                   number: 80

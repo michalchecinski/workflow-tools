@@ -7,14 +7,15 @@ metadata:
     app: n8n
     component: database
 spec:
+  selector:
+    app.kubernetes.io/name: n8n
+    component: database
+  clusterIp: None
   ports:
-    - name: postgres
+    - protocol: TCP
       port: 5432
       targetPort: 5432
-  clusterIP: None
-  selector:
-    app: n8n
-    component: database
+
 ---
 apiVersion: apps/v1beta2
 kind: StatefulSet
@@ -50,10 +51,9 @@ spec:
                 secretKeyRef:
                   name: n8n-secrets
                   key: postgres-password
-
-        volumeMounts:
-          - name: data
-            mountPath: /var/lib/postgresql/data
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
 
   volumeClaimTemplates:
     - metadata:
