@@ -1,0 +1,6 @@
+namespace: n8n
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  - postgresql.yaml

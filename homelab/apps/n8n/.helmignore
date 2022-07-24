@@ -1,1 +1,6 @@
 templates/secrets.yaml
+
+# Kustomize
+base
+overlays
+
