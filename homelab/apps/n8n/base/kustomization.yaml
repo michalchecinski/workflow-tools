@@ -4,3 +4,4 @@ resources:
   - service.yaml
   - ingress.yaml
   - postgresql.yaml
+  - sealed-secrets.yaml

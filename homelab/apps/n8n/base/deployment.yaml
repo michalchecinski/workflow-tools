@@ -23,28 +23,28 @@ spec:
               containerPort: 5678
           env:
             - name: DB_TYPE
-              value: postgresdb
+              value: "postgresdb"
             - name: DB_POSTGRESDB_DATABASE
-              value: n8n
+              value: "n8n"
             - name: DB_POSTGRESDB_HOST
-              value: n8n-postgresql
+              value: "n8n-postgresql"
             - name: DB_POSTGRESDB_PORT
               value: "5432"
             - name: DB_POSTGRESDB_USER
-              value: n8n
+              value: "n8n"
             - name: DB_POSTGRESDB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: n8n-secrets
                   key: DB_POSTGRESDB_PASSWORD
             - name: DB_POSTGRESDB_SCHEMA
-              value: n8n
+              value: "n8n"
             - name: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
-              value: false
+              value: "false"
             - name: N8N_BASIC_AUTH_ACTIVE
               value: "true"
             - name: N8N_BASIC_AUTH_USER
-              value: admin
+              value: "admin"
             - name: N8N_BASIC_AUTH_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -53,17 +53,17 @@ spec:
             - name: N8N_ENCRYPTION_KEY
               value: "n8n"
             - name: N8N_HOST
-              value: n8n.k8s.lan
+              value: "n8n.k8s.lan"
             - name: N8N_PORT
-              value: 5678
+              value: "5678"
             - name: N8N_PROTOCOL
-              value: https
+              value: "https"
             - name: NODE_ENV
-              value: production
+              value: "production"
             - name: WEBHOOK_URL
-              value: https://n8n.k8s.lan/
+              value: "https://n8n.k8s.lan/"
             - name: GENERIC_TIMEZONE
-              value: UTC
+              value: "UTC"
 
           livenessProbe:
             httpGet:
