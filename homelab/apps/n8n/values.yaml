@@ -62,11 +62,6 @@ common:
       mountPath: /home/node/.n8n
       retain: true
 
-  podSecurityContext:
-    runAsUser: 1024
-    runAsGroup: 100
-    fsGroup: 100
-
 
 postgresql:
   auth:
