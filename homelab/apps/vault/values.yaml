@@ -1,4 +1,5 @@
-vault: server:
+vault: 
+  server:
     ingress:
       enabled: true
       annotations:

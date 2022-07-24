@@ -1,10 +1,10 @@
 {{- $currentTlsCerts := (lookup "v1" "Secret" .Release.Namespace "tls-server") }}
-{{- if not $currentTltCerts }}
+{{- if not $currentTlsCerts }}
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "{{ .Release.Name }}"
+  name: "init-{{ .Release.Name }}"
   labels:
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
@@ -36,7 +36,7 @@ spec:
             - name: CSR_NAME
               value: vault-csr
             - name: NAMESPACE
-              value: {{ .Release.Namespace }}
+              value: "{{ .Release.Namespace }}"
             - name: TEMP_DIR
               value: /init-artifacts
           volumeMounts:
@@ -92,7 +92,7 @@ data:
     EOF
 
     openssl req -new -key ${TEMP_DIR}/vault.key \
-      -subj "/O=system:nodes/CN=system:node:vault.{{ .Release.Namespace }}.svc" \
+      -subj "/O=system:nodes/CN=system:node:vault.${NAMESPACE}.svc" \
       -out ${TEMP_DIR}/server.csr \
       -config ${TEMP_DIR}/csr.conf
 
