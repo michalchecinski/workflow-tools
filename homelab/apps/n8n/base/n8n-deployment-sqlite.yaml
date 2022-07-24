@@ -67,13 +67,22 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /home/node/.n8n
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: n8n-data
 
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "nfs-synology"
-        resources:
-          requests:
-            storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: n8n-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-synology
