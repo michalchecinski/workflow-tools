@@ -1,7 +1,8 @@
 namespace: n8n
 resources:
-  - deployment.yaml
-  - service.yaml
-  - ingress.yaml
-  - postgresql.yaml
+  - n8n-deployment-sqlite.yaml
+  - n8n-service.yaml
+  - n8n-ingress.yaml
   - sealed-secrets.yaml
+  # - n8n-deployment-postgresql.yaml
+  # - postgresql.yaml
