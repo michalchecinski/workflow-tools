@@ -22,6 +22,7 @@
   home.packages = with pkgs; [
     ansible
     argo
+    beekeeper-studio
     brave
     dmenu
     docker-client
