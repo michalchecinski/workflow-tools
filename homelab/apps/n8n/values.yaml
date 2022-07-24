@@ -72,6 +72,8 @@ postgresql:
   extraEnvVars:
     - name: POSTGRESQL_DATABASE
       value: n8n
+    - name: FOO
+      value: bar
   primary:
     persistence:
       storageClass: nfs-synology
