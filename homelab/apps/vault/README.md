@@ -31,9 +31,14 @@ kubectl exec -ti -n vault vault-2 -- vault operator unseal
 kubectl exec -ti -n vault vault-2 -- vault operator unseal
 ```
 
-:Warning: Note: This really didn't work. I haven't created the tls secrets because there is a chicken/egg problem that I
+### :Warning: Note: Issues 
+
+- TLS isn't really working. I haven't created the tls secrets because there is a chicken/egg problem that I
 need to figure out. If I'm going to be storing certs as k8s secrets, I can't automate the installation of vault with
 argocd...
+- The issue continues with a port forward directly to vault-0 responding with a `http: server gave HTTP response to HTTPS
+client`. Even with TLS disabled, this is the case.
+- Looks like the auto_rejoin isn't working with or without TLS enabled
 
 # Backups
 An NFS store has been set up specifically for backups. This volume is set to retain in the NFS provider. The volume will
