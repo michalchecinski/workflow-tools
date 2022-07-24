@@ -1,0 +1,19 @@
+vault:
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: local-ca-issuer
+      hosts:
+        - host: vault.k8s.lan
+          paths:
+            - path: /
+              pathType: Prefix
+              port: 8200
+      tls:
+        - secretName: vault-ssl
+          hosts:
+            - vault.k8s.lan
+
+    dataStorage:
+      storageClass: nfs-synology
