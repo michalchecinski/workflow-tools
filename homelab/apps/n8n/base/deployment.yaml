@@ -28,6 +28,8 @@ spec:
               value: "postgresdb"
             - name: DB_POSTGRESDB_DATABASE
               value: "n8n"
+            - name: DB_POSTGRESDB_SCHEMA
+              value: "n8n"
             - name: DB_POSTGRESDB_HOST
               value: "n8n-postgres"
             - name: DB_POSTGRESDB_PORT
