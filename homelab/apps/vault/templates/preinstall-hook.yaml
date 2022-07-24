@@ -101,22 +101,25 @@ data:
     kind: CertificateSigningRequest
     metadata:
       name: ${CSR_NAME}
+      namespace: ${NAMESPACE}
     spec:
       groups:
-      - system:authenticated
+        - system:authenticated
       request: $(cat ${TEMP_DIR}/server.csr | base64 | tr -d '\r\n')
       signerName: kubernetes.io/kubelet-serving
       usages:
-      - digital signature
-      - key encipherment
-      - server auth
+        - digital signature
+        - key encipherment
+        - server auth
     EOF
 
   create-secrets.sh: |
     #!/bin/bash
     kubectl create -f ${TEMP_DIR}/csr.yaml
+    sleep 15
     kubectl get csr ${CSR_NAME}
     kubectl certificate approve ${CSR_NAME}
+    sleep 15
 
     serverCert=$(kubectl get csr ${CSR_NAME} -o jsonpath='{.status.certificate}')
     echo "${serverCert}" | openssl base64 -d -A -out ${TEMP_DIR}/vault.crt
