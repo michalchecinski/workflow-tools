@@ -1,5 +1,4 @@
 {{- $currentTlsCerts := (lookup "v1" "Secret" .Release.Namespace "tls-server") }}
-{{- if not $currentTlsCerts }}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -29,7 +28,11 @@ spec:
       initContainers:
         - name: generate-csr
           image: "docker.io/nginx"
+{{- if not $currentTlsCerts }}
           command: ["/init-scripts/generate-csr.sh"]
+{{- else }}
+          command: ["/init-scripts/skip.sh"]
+{{ end }}
           env: &env
             - name: SERVICE
               value: vault
@@ -48,8 +51,12 @@ spec:
         - name: create-secrets
           image: "bitnami/kubectl:1.21"
           env: *env
+{{- if not $currentTlsCerts }}
           #command: ["/init-scripts/create-secrets.sh"]
           command: ["tail", "-f", "/dev/null"]
+{{- else }}
+          command: ["/init-scripts/skip.sh"]
+{{ end }}
           volumeMounts:
             - name: init-scripts
               mountPath: /init-scripts
@@ -133,4 +140,7 @@ data:
     kubectl create secret generic tls-ca \
       --namespace ${NAMESPACE} \
       --from-file=ca.crt=${TEMP_DIR}/ca.crt
-{{ end }}
+
+  skip.sh: |
+    #!/bin/bash
+    echo "[*] Secrets already exist. Skipping generation"
