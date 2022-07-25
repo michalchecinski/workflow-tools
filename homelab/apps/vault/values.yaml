@@ -1,7 +1,7 @@
 vault: 
   server:
     ingress:
-      enabled: true
+      enabled: false
       annotations:
         cert-manager.io/cluster-issuer: local-ca-issuer
       hosts:
