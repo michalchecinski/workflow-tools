@@ -104,7 +104,7 @@ data:
       -out ${TEMP_DIR}/server.csr \
       -config ${TEMP_DIR}/csr.conf
 
-    chmod 655 ${TEMP_DIR}/vault.key
+    chmod 644 ${TEMP_DIR}/vault.key
 
     cat <<EOF >${TEMP_DIR}/csr.yaml
     apiVersion: certificates.k8s.io/v1
