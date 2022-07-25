@@ -29,7 +29,8 @@ spec:
       initContainers:
         - name: generate-csr
           image: "docker.io/nginx"
-          command: ["/init-scripts/generate-csr.sh"]
+          #command: ["/init-scripts/generate-csr.sh"]
+          command: ["tail", "-f", "/dev/null"]
           env: &env
             - name: SERVICE
               value: vault
@@ -48,7 +49,8 @@ spec:
         - name: create-secrets
           image: "bitnami/kubectl:1.21"
           env: *env
-          command: ["/init-scripts/create-secrets.sh"]
+          #command: ["/init-scripts/create-secrets.sh"]
+          command: ["tail", "-f", "/dev/null"]
           volumeMounts:
             - name: init-scripts
               mountPath: /init-scripts
