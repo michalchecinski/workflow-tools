@@ -29,8 +29,7 @@ spec:
       initContainers:
         - name: generate-csr
           image: "docker.io/nginx"
-          #command: ["/init-scripts/generate-csr.sh"]
-          command: ["tail", "-f", "/dev/null"]
+          command: ["/init-scripts/generate-csr.sh"]
           env: &env
             - name: SERVICE
               value: vault
