@@ -1,4 +1,5 @@
 {{- $currentTlsCerts := (lookup "v1" "Secret" .Release.Namespace "tls-server") }}
+{{- $currentCsr := (lookup "v1" "certificates.k8s.io" "" "vault-csr") }}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -28,7 +29,7 @@ spec:
       initContainers:
         - name: generate-csr
           image: "docker.io/nginx"
-{{- if not $currentTlsCerts }}
+{{- if not $currentCsr }}
           command: ["/init-scripts/generate-csr.sh"]
 {{- else }}
           command: ["/init-scripts/skip.sh"]
@@ -138,7 +139,7 @@ data:
     kubectl create secret generic tls-server \
       --namespace ${NAMESPACE} \
       --from-file=vault.key=${TEMP_DIR}/vault.key \
-      --from-file=vault.crt=${TEMP_DIR}/vault.crt \
+      --from-file=vault.crt=${TEMP_DIR}/vault.crt
     kubectl create secret generic tls-ca \
       --namespace ${NAMESPACE} \
       --from-file=ca.crt=${TEMP_DIR}/ca.crt
