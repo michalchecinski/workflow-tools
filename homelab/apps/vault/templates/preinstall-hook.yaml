@@ -1,3 +1,4 @@
+{{ if .Values.pre_install_hook.enabled }}
 {{- $currentTlsCerts := (lookup "v1" "Secret" .Release.Namespace "tls-server") }}
 {{- $currentCsr := (lookup "v1" "certificates.k8s.io" "" "vault-csr") }}
 ---
@@ -150,3 +151,4 @@ data:
   skip.sh: |
     #!/bin/bash
     echo "[*] Secrets already exist. Skipping generation"
+{{ end }}

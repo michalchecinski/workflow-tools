@@ -84,3 +84,5 @@ vault:
 vault_backup:
   enabled: true
 
+pre_install_hook:
+  enabled: false
