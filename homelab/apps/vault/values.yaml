@@ -15,6 +15,7 @@ vault:
       storageClass: nfs-synology
 
     extraEnvironmentVars:
+      VAULT_ADDR: https://127.0.0.1:8200
       VAULT_CACERT: /opt/vault/ca.crt
       VAULT_TLS_SERVER_NAME: *domain
  
