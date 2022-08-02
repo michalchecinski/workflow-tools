@@ -18,7 +18,7 @@ spec:
     size: 4096
   dnsNames:
     - vault-active.{{ .Release.Name }}.svc.cluster.local
-{{range $i, $e := until .Values.vault.server.ha.replicas}}
+{{range $i, $e := until (.Values.vault.server.ha.replicas | int)}}
     - vault-{{ $i }}.vault-internal
 {{end}}
 {{ with (first .Values.vault.server.ingress.hosts) }}
