@@ -52,7 +52,7 @@ vault:
     volumes: 
       - name: vault-tls
         secret:
-          secretName: vault-ssl
+          secretName: vault-tls
 
     #  - name: backups
     #    persistentVolumeClaim:
