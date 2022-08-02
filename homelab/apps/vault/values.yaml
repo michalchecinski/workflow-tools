@@ -42,9 +42,7 @@ vault:
             path = "/vault/data"
             retry_join {
               leader_api_addr = "https://vault-active.vault.svc.cluster.local:8200"
-              tls_cert_file = "/opt/vault/tls.crt"
-              tls_key_file = "/opt/vault/tls.key"
-              tls_client_ca_file = "/opt/vault/ca.crt"
+              tls_ca_cert_file = "/opt/vault/ca.crt"
             }
           }
 
@@ -71,7 +69,7 @@ vault_backup:
   enabled: true
 
 vault_manual_tls_certs:
-  enabled: true
+  enabled: false
 
 pre_install_hook:
   enabled: false
