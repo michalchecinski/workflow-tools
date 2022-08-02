@@ -40,6 +40,7 @@ in
     brave
     dmenu
     docker-client
+    docker-compose
     hledger
     joplin-desktop
     k9s
