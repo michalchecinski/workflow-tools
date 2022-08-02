@@ -1,29 +1,30 @@
 vault: 
   server:
     ingress:
-      enabled: false
+      enabled: 
       annotations:
         cert-manager.io/cluster-issuer: local-ca-issuer
       hosts:
-        - host: vault.k8s.lan
+        - host: &domain vault.k8s.lan
           paths:
             - /
       tls:
         - secretName: vault-ssl
           hosts:
-            - vault.k8s.lan
+            - *domain
 
     dataStorage:
       storageClass: nfs-synology
 
     extraEnvironmentVars:
-      VAULT_CACERT: /vault/userconfig/tls-ca/ca.crt
+      VAULT_CACERT: /vault/opt/ca.crt
+      VAULT_TLS_SERVER_NAME: *domain
 
-    extraVolumes:
-      - type: secret
-        name: tls-ca
-      - type: secret
-        name: tls-server
+    #extraVolumes:
+    #- type: secret
+    #  name: tls-ca
+    #- type: secret
+    #  name: tls-server
  
     standalone:
       enabled: false
@@ -36,53 +37,48 @@ vault:
         config: |
           ui = true
           listener "tcp" {
-            tls_disable = 1
+            #tls_disable = 1
             address = "[::]:8200"
             cluster_address = "[::]:8201"
-            tls_cert_file = "/vault/userconfig/tls-server/vault.crt"
-            tls_key_file = "/vault/userconfig/tls-server/vault.key"
-            tls_client_ca_file = "/vault/userconfig/tls-ca/ca.crt"
-            #tls_client_ca_file = "/vault/userconfig/tls-server/client-auth-ca.pem"
+            tls_cert_file = "/vault/opt/tls.crt"
+            tls_key_file = "/vault/opt/tls.key"
+            tls_client_ca_file = "/vault/opt/ca.crt"
           }
 
           storage "raft" {
             path = "/vault/data"
             retry_join {
-              leader_api_addr = "https://vault-0.vault-internal:8200"
-              leader_ca_cert_file = "/vault/userconfig/tls-ca/ca.crt"
-              leader_client_cert_file = "/vault/userconfig/tls-server/vault.crt"
-              leader_client_key_file = "/vault/userconfig/tls-server/vault.key"
+              leader_api_addr = "https://vault.vault.svc.cluster.local:8200"
+              tls_cert_file = "/vault/opt/tls.crt"
+              tls_key_file = "/vault/opt/tls.key"
+              tls_client_ca_file = "/vault/opt/ca.crt"
             }
-            retry_join {
-              leader_api_addr = "https://vault-1.vault-internal:8200"
-              leader_ca_cert_file = "/vault/userconfig/tls-ca/ca.crt"
-              leader_client_cert_file = "/vault/userconfig/tls-server/vault.crt"
-              leader_client_key_file = "/vault/userconfig/tls-server/vault.key"
-            }
-
-            retry_join {
-              leader_api_addr = "https://vault-2.vault-internal:8200"
-              leader_ca_cert_file = "/vault/userconfig/tls-ca/ca.crt"
-              leader_client_cert_file = "/vault/userconfig/tls-server/vault.crt"
-              leader_client_key_file = "/vault/userconfig/tls-server/vault.key"
-            }
-
           }
 
           service_registration "kubernetes" {}
 
-    #volumes: 
+    volumes: 
+      - name: vault-tls
+        secret:
+          secretName: vault-ssl
+
     #  - name: backups
     #    persistentVolumeClaim:
     #      claimName: vault-backups
 
-    #volumeMounts:
+    volumeMounts:
+      - name: vault-tls
+        mountPath: /opt/vault
+        readOnly: true
     #  - name: backups
     #    mountPath: /opt/vault
 
 
 vault_backup:
   enabled: true
+
+vault_manual_tls_certs:
+  enabled: false
 
 pre_install_hook:
   enabled: false

@@ -1,6 +1,3 @@
-# Initilization
-
-```
 # Install with ArgoCD
 
 ## Standalone mode
@@ -15,6 +12,7 @@ vault login
 
 
 ## HA with Raft
+```
 kubectl exec -ti -n vault vault-0 -- vault operator init
 kubectl exec -ti -n vault vault-0 -- vault operator unseal
 kubectl exec -ti -n vault vault-0 -- vault operator unseal
@@ -28,6 +26,18 @@ kubectl exec -ti -n vault vault-1 -- vault operator unseal
 kubectl exec -ti -n vault vault-2 -- vault operator raft join http://vault-0.vault-internal:8200
 kubectl exec -ti -n vault vault-2 -- vault operator unseal
 kubectl exec -ti -n vault vault-2 -- vault operator unseal
+kubectl exec -ti -n vault vault-2 -- vault operator unseal
+```
+
+## HA with Raft - Retry
+
+If I'm going to store all of the unseal keys in the same place, it doesn't make sense to make myself work extra hard to
+unseal the nodes
+
+```
+kubectl exec -ti -n vault vault-0 -- vault operator init --key-threshold=1 --key-shares=1
+kubectl exec -ti -n vault vault-0 -- vault operator unseal
+kubectl exec -ti -n vault vault-1 -- vault operator unseal
 kubectl exec -ti -n vault vault-2 -- vault operator unseal
 ```
 

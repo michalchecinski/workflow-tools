@@ -1,0 +1,19 @@
+{{ if .Values.vault_manual_tls_certs.enabled }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vault-certs
+spec:
+  secretName: vault-certs
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+  dnsNames: 
+    # Service Active FQDN
+    - vault.{{ .Release.Name }}.svc.cluster.local
+{{ with (first .Values.vault.server.ingress.hosts) }}
+    - {{ .host}}
+{{ end }}
+
+{{ end }}
