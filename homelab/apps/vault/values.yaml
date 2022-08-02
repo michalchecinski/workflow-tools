@@ -1,7 +1,7 @@
 vault: 
   server:
     ingress:
-      enabled: 
+      enabled: true
       hosts:
         - host: &domain vault.k8s.lan
           paths:
@@ -40,12 +40,6 @@ vault:
 
           storage "raft" {
             path = "/vault/data"
-            #retry_join {
-            #  leader_api_addr = "https://vault-active.vault.svc.cluster.local:8200"
-            #  leader_ca_cert_file = "/opt/vault/ca.crt"
-            #  leader_client_cert_file = "/opt/vault/tls.crt"
-            #  leader_client_key_file = "/opt/vault/tls.key"
-            #}
             retry_join {
               leader_api_addr = "https://vault-0.vault-internal:8200"
               leader_ca_cert_file = "/opt/vault/ca.crt"
@@ -87,9 +81,3 @@ vault:
 
 vault_backup:
   enabled: true
-
-vault_manual_tls_certs:
-  enabled: true
-
-pre_install_hook:
-  enabled: false

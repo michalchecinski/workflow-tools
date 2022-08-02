@@ -12,24 +12,6 @@ vault login
 
 
 ## HA with Raft
-```
-kubectl exec -ti -n vault vault-0 -- vault operator init
-kubectl exec -ti -n vault vault-0 -- vault operator unseal
-kubectl exec -ti -n vault vault-0 -- vault operator unseal
-kubectl exec -ti -n vault vault-0 -- vault operator unseal
-
-kubectl exec -ti -n vault vault-1 -- vault operator raft join http://vault-0.vault-internal:8200
-kubectl exec -ti -n vault vault-1 -- vault operator unseal
-kubectl exec -ti -n vault vault-1 -- vault operator unseal
-kubectl exec -ti -n vault vault-1 -- vault operator unseal
-
-kubectl exec -ti -n vault vault-2 -- vault operator raft join http://vault-0.vault-internal:8200
-kubectl exec -ti -n vault vault-2 -- vault operator unseal
-kubectl exec -ti -n vault vault-2 -- vault operator unseal
-kubectl exec -ti -n vault vault-2 -- vault operator unseal
-```
-
-## HA with Raft - Retry
 
 If I'm going to store all of the unseal keys in the same place, it doesn't make sense to make myself work extra hard to
 unseal the nodes
@@ -51,6 +33,10 @@ client`. Even with TLS disabled, this is the case.
 - Spent forever trying to get the tls certs set up. The cluster is now failing raft join (it didn't get this far
   previously) with this message. `dial tcp: lookup vault-1.vault-internal on 10.152.183.10:53: no such host"`. And the
   client is still having the above HTTP and HTTPS mismatch
+- After many more hours, I have an HA cluster talking to eachother. However, I'm now running into an issue with the
+  local vault: `x509: cannot validate certificate for 127.0.0.1` when using port forwarding to the `vault-active`
+  service. I'm guessing that I'll have to load the CA cert into my local machine. However, because this is the CA from
+  the `local-ca-issuer`, I should already have that one loaded...I guess this is because the cert isn't for `127.0.0.1`
 
 # Backups
 An NFS store has been set up specifically for backups. This volume is set to retain in the NFS provider. The volume will

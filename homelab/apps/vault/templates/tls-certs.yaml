@@ -1,4 +1,3 @@
-{{ if .Values.vault_manual_tls_certs.enabled }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -28,4 +27,3 @@ spec:
     name: local-ca-issuer
     kind: ClusterIssuer
     group: cert-manager.io
-{{ end }}
