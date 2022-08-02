@@ -3,7 +3,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: example-com
+  name: vault-tls
   namespace: {{ .Release.Namespace }}
 spec:
   # Secret names are always required.
