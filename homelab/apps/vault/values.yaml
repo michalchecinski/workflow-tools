@@ -81,3 +81,6 @@ vault:
 
 vault_backup:
   enabled: true
+
+cert_manager:
+  clusterIssuer: local-ca-issuer

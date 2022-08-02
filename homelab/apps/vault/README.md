@@ -1,3 +1,9 @@
+# Prereqs
+
+- ArgoCD installation and set up
+- Cert Manager set up
+
+
 # Install with ArgoCD
 
 ## Standalone mode

@@ -24,6 +24,6 @@ spec:
     - {{ .host}}
 {{ end }}
   issuerRef:
-    name: local-ca-issuer
+    name: {{ .Values.cert_manager.clusterIssuer }}
     kind: ClusterIssuer
     group: cert-manager.io
