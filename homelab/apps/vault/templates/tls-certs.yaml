@@ -1,19 +1,28 @@
 {{ if .Values.vault_manual_tls_certs.enabled }}
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: vault-certs
+  name: example-com
+  namespace: {{ .Release.Namespace }}
 spec:
-  secretName: vault-certs
-  issuerRef:
-    name: local-ca-issuer
-    kind: ClusterIssuer
-    group: cert-manager.io
-  dnsNames: 
-    # Service Active FQDN
+  # Secret names are always required.
+  secretName: vault-tls
+
+  duration: 8760h # 1y
+  renewBefore: 360h # 15d
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 4096
+  dnsNames:
     - vault.{{ .Release.Name }}.svc.cluster.local
 {{ with (first .Values.vault.server.ingress.hosts) }}
     - {{ .host}}
 {{ end }}
-
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
 {{ end }}

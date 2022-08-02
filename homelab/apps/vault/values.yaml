@@ -2,8 +2,6 @@ vault:
   server:
     ingress:
       enabled: 
-      annotations:
-        cert-manager.io/cluster-issuer: local-ca-issuer
       hosts:
         - host: &domain vault.k8s.lan
           paths:
@@ -78,7 +76,7 @@ vault_backup:
   enabled: true
 
 vault_manual_tls_certs:
-  enabled: false
+  enabled: true
 
 pre_install_hook:
   enabled: false
