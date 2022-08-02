@@ -15,7 +15,7 @@ vault:
       storageClass: nfs-synology
 
     extraEnvironmentVars:
-      VAULT_CACERT: /vault/opt/ca.crt
+      VAULT_CACERT: /opt/vault/ca.crt
       VAULT_TLS_SERVER_NAME: *domain
  
     standalone:
