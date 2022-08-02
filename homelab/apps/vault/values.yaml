@@ -46,6 +46,10 @@ vault:
               leader_client_cert_file = "/opt/vault/tls.crt"
               leader_client_key_file = "/opt/vault/tls.key"
             }
+
+            retry_join {
+              auto_join = "provider=k8s label_selector='app = vault'"
+            }
           }
 
           service_registration "kubernetes" {}
