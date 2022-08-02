@@ -30,7 +30,7 @@ vault:
         config: |
           ui = true
           listener "tcp" {
-            #tls_disable = 1
+            tls_disable = 0
             address = "[::]:8200"
             cluster_address = "[::]:8201"
             tls_cert_file = "/opt/vault/tls.crt"
@@ -42,7 +42,9 @@ vault:
             path = "/vault/data"
             retry_join {
               leader_api_addr = "https://vault-active.vault.svc.cluster.local:8200"
-              tls_ca_cert_file = "/opt/vault/ca.crt"
+              leader_ca_cert_file = "/opt/vault/ca.crt"
+              leader_client_cert_file = "/opt/vault/tls.crt"
+              leader_client_key_file = "/opt/vault/tls.key"
             }
           }
 
