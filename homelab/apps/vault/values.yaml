@@ -17,12 +17,6 @@ vault:
     extraEnvironmentVars:
       VAULT_CACERT: /vault/opt/ca.crt
       VAULT_TLS_SERVER_NAME: *domain
-
-    #extraVolumes:
-    #- type: secret
-    #  name: tls-ca
-    #- type: secret
-    #  name: tls-server
  
     standalone:
       enabled: false
@@ -46,7 +40,7 @@ vault:
           storage "raft" {
             path = "/vault/data"
             retry_join {
-              leader_api_addr = "https://vault.vault.svc.cluster.local:8200"
+              leader_api_addr = "https://vault-active.vault.svc.cluster.local:8200"
               tls_cert_file = "/vault/opt/tls.crt"
               tls_key_file = "/vault/opt/tls.key"
               tls_client_ca_file = "/vault/opt/ca.crt"

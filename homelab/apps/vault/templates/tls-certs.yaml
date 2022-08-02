@@ -17,7 +17,7 @@ spec:
     encoding: PKCS1
     size: 4096
   dnsNames:
-    - vault.{{ .Release.Name }}.svc.cluster.local
+    - vault.{{ .Release.Name }}-active.svc.cluster.local
 {{ with (first .Values.vault.server.ingress.hosts) }}
     - {{ .host}}
 {{ end }}
