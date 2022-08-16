@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deployment-config
+data:
+  MB_DB_TYPE: "postgres"
+  MB_DB_DBNAME: "nocodb"
+  MB_DB_PORT: "5432"
+  MB_DB_USER: "postgres"
+  MB_DB_HOST: "nocodb.nocodb.svc.cluster.local"

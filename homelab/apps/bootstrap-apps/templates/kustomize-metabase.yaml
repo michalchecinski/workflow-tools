@@ -1,0 +1,23 @@
+{{ if .Values.apps.metabase.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metabase
+  namespace: argo-cd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: metabase
+    server: {{ .Values.destination.server }}
+  source:
+    repoURL: git@github.com:joseph-flinn/workflow-tools.git
+    path: homelab/apps/metabase/overlays/microk8s
+    targetRevision: HEAD
+  project: apps
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+{{ end }}

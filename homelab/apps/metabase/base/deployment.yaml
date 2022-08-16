@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  labels: &labels
+    app: metabase
+    component: deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels: *labels
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      containers:
+        - name: metabase
+          image: metabase/metabase:v0.44.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          envFrom:
+            - configMapRef:
+              - name: deployment-config
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "512Mi"
+            requests:
+              cpu: "0.25"
+              memory: 256Mi
+          volumeMounts:
+            - name: data
+              mountPath: /metabase-data
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: metabase-data
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: metabase-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: nfs-synology

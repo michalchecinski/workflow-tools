@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: n8n-ingress
+  labels: &labels
+    app: n8n
+    component: ingress
+  annotations:
+    cert-manager.io/cluster-issuer: local-ca-issuer
+spec:
+  tls:
+    - hosts:
+        - n8n.k8s.lan
+      secretName: n8s-ssl-secret
+  rules:
+    - host: n8n.k8s.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: n8n-service
+                port:
+                  number: 80
