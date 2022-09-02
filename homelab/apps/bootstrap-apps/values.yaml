@@ -29,7 +29,7 @@ apps:
   nfs_provider_synology_backups:
     enabled: true
   nfs_test:
-    enabled: false
+    enabled: true
   nocodb:
     enabled: true
   node_red:
