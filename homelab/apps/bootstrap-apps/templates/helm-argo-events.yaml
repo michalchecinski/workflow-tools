@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: argo-events
   namespace: argo-cd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: argo-events
