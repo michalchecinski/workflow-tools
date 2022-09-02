@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: nfs-test
   namespace: argo-cd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: nfs-test
