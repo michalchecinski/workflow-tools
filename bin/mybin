@@ -50,7 +50,7 @@ lsbin() {
 # Returns: 
 #   Returned values other than the default exit status of the last command run.
 ##############################
-create-script() {
+create_script() {
     local new_script_name=""
     local bin_dir=""
 
@@ -68,7 +68,7 @@ command=$1
 
 case $command in 
     "ls") lsbin ;;
-    "new") create-script $2 ;;
+    "new") create_script $2 ;;
     "help") usage ;;
     "") usage ;;
     "*") echo "[!] Command not recognized"; usage ;;
