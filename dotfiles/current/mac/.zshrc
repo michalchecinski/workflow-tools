@@ -18,6 +18,7 @@ fi
 export DOTNET_ROOT="/usr/local/opt/dotnet/libexec"
 export GOPATH=$HOME/go
 export DOCKER_HOST=tcp://localhost:2375
+export GPG_TTY=$(tty)
 
 . ~/.env_setup
 
