@@ -1,0 +1,9 @@
+namespace: hello
+resources:
+  - crd.yaml
+  - controller.yaml
+  - webhook.yaml
+configMapGenerator:
+  - name: hello-controller
+    files:
+      - sync.py

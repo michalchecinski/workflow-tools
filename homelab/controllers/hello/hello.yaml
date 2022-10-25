@@ -1,0 +1,6 @@
+apiVersion: example.com/v1
+kind: HelloWorld
+metadata:
+  name: joseph-flinn
+spec:
+  who: Joseph Flinn (this is a test)
