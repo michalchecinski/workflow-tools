@@ -1,0 +1,17 @@
+apiVersion: apiextension.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: helloworlds.example.com
+spec:
+  group: example.com
+  names:
+    kind: HelloWorld
+    plural: helloworlds
+    singular: helloworld
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      subresources:
+        status: {}
