@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bw-secret-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bw-secret-controller
+  template:
+    metadata:
+      labels:
+        app: bw-secret-controller
+    spec:
+      containers:
+      - name: controller
+        image: python:3
+        command: ["python3", "/hooks/sync.py"]
+        volumeMounts:
+        - name: hooks
+          mountPath: /hooks
+      - name: bw-cli
+        image: registry.k8s.lan/bw-cli:0.1.0
+        env:
+          - name: BW_HOST
+            value: 127.0.0.1
+        envFrom:
+          - secretRef:
+              name: bw-secret-secrets
+      volumes:
+      - name: hooks
+        configMap:
+          name: bw-secret-webhook-script
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bw-secret-controller
+spec:
+  selector:
+    app: bw-secret-controller
+  ports:
+  - port: 80
+

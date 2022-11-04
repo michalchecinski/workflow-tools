@@ -1,0 +1,13 @@
+namespace: bw-secrets
+resources:
+  - crd.yaml
+  - controller.yaml
+  - webhook.yaml
+configMapGenerator:
+  - name: bw-secret-webhook-script
+    files:
+      - sync.py
+secretGenerator:
+  - name: bw-secret-secrets
+    envs:
+      - .env
