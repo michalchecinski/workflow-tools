@@ -14,7 +14,8 @@ cp .env.example .env
 
 
 # ===== Create the k8s resources =====
-kubectl create namespace hello
-kubectl -n hello apply -k .
-kubectl -n hello apply -f hello.yaml
+kubectl create namespace bw-secrets
+kubectl create namespace ee-test
+kubectl -n bw-secrets apply -k .
+kubectl -n ee-test apply -f test.yaml
 ```

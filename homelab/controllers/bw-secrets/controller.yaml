@@ -9,7 +9,7 @@ spec:
     resource: bitwardenclisecrets
   childResources:
   - apiVersion: v1
-    resource: pods
+    resource: secrets
     updateStrategy:
       method: Recreate
   hooks:

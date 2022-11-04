@@ -1,4 +1,6 @@
+from base64 import b64encode, b64decode
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
 import json
 import urllib.request
 
@@ -7,38 +9,32 @@ class Controller(BaseHTTPRequestHandler):
   def sync(self, parent, children):
     # Compute status based on observed state.
     desired_status = {
-      "pods": len(children["Pod.v1"])
+      "secrets": len(children["Secret.v1"])
     }
 
     # Generate the desired child object(s).
-    who = parent.get("spec", {}).get("who", "World")
-    desired_pods = [
+    item_id = parent.get("spec", {}).get("id", "d42cb757-a8ed-47d7-ab5e-af430133b868")
+    desired_secrets = [
       {
         "apiVersion": "v1",
-        "kind": "Pod",
+        "kind": "Secret",
+        "type": "Opaque",
         "metadata": {
-          "name": parent["metadata"]["name"]
+          "name": parent["metadata"]["name"],
+          "namespace": parent["metadata"]["namespace"]
         },
-        "spec": {
-          "restartPolicy": "OnFailure",
-          "containers": [
-            {
-              "name": "hello",
-              "image": "busybox",
-              "command": ["echo", "Hello, %s!" % who]
-            }
-          ]
+        "data": {
+          "secret": f"{b64encode('secret')}",
         }
       }
     ]
 
-    item_id = "ec6ba894-0ea0-44d1-bf8f-ad6e00eb4097"
-    request = urllib.request.Request(f"https://127.0.0.1:8087/object/item/{item_id}")
-    with urllib.request.urlopn(request) as response:
-      data = json.loads(response.read().decode("utf-8"))
-      print(f"BW CLI request successful: {data['success']}")
+    #request = urllib.request.Request(f"http://127.0.0.1:8087/object/item/{item_id}")
+    #with urllib.request.urlopn(request) as response:
+    #  data = json.loads(response.read().decode("utf-8"))
+    #  print(f"BW CLI request successful: {data['success']}")
 
-    return {"status": desired_status, "children": desired_pods}
+    return {"status": desired_status, "children": desired_secrets}
 
   def do_POST(self):
     # Serve the sync() function as a JSON webhook.
