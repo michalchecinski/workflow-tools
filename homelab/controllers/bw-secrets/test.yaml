@@ -1,6 +1,6 @@
 apiVersion: bitwarden.com/v1
 kind: BitwardenCLISecret
 metadata:
-  name: joseph-flinn
+  name: bw-cli-secret-test
 spec:
-  who: Joseph Flinn (this is a test)
+  id: "d42cb757-a8ed-47d7-ab5e-af430133b868"
