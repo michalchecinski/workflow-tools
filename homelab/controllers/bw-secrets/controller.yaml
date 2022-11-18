@@ -4,6 +4,7 @@ metadata:
   name: bw-secret-controller
 spec:
   generateSelector: true
+  resyncPeriodSeconds: 60
   parentResource:
     apiVersion: bitwarden.com/v1
     resource: bitwardenclisecrets

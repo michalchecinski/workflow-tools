@@ -3,4 +3,4 @@ kind: BitwardenCLISecret
 metadata:
   name: bw-cli-secret-test
 spec:
-  id: "d42cb757-a8ed-47d7-ab5e-af430133b868"
+  id: "4acdf48b-0584-42b6-80a5-af51013367f0"

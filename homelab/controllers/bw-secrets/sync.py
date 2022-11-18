@@ -13,13 +13,15 @@ class Controller(BaseHTTPRequestHandler):
         # Compute status based on observed state.
         desired_status = {"secrets": len(children["Secret.v1"])}
 
-        request = urllib.request.Request(f"http://127.0.0.1:8087/sync", method="POST")
-        with urllib.request.urlopen(request) as response:
-            pass
+        # This might need to be moved to a cronjob if we don't want to sync
+        # every minute for every secret
+        # request = urllib.request.Request(f"http://127.0.0.1:8087/sync", method="POST")
+        # with urllib.request.urlopen(request) as response:
+        #     pass
 
         # Generate the desired child object(s).
         item_id = parent.get("spec", {}).get(
-            "id", "d42cb757-a8ed-47d7-ab5e-af430133b868"
+            "id", "00000000-0000-0000-0000-000000000000"
         )
 
         request = urllib.request.Request(f"http://127.0.0.1:8087/object/item/{item_id}")
