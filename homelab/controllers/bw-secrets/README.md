@@ -4,6 +4,7 @@
 
 - kubectl
 - access to a k8s cluster
+- [Metacontroller](https://metacontroller.github.io/metacontroller/guide/install.html) installed on k8s
 - Bitwarden Account with an Api Key
 
 ```
