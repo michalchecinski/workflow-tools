@@ -1,4 +1,4 @@
-# Custom Hello Controller
+# Sync Bitwarden Item to K8s Secret Controller
 
 ## Prereqs
 
