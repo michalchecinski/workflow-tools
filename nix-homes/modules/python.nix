@@ -6,8 +6,10 @@ with lib; {
 
   config = mkIf config.modules.python.enable {
     home.packages = [ 
+      pkgs.python310
       pkgs.python310Packages.pyyaml
       pkgs.python310Packages.kubernetes
+      pkgs.python310Packages.setuptools
     ];
   };
 
